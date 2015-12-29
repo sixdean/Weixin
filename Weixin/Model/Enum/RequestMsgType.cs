@@ -1,6 +1,4 @@
-﻿using System;
-
-namespace Weixin.Model
+﻿namespace Weixin.Model.Enum
 {
     public enum RequestMsgType
     {
