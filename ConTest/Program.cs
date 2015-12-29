@@ -24,7 +24,7 @@ namespace ConTest
 
            
            Console.WriteLine(HttpHelper.GetResponse(url));
-           Console.WriteLine(HttpHelper.GetResponses(url));
+           Console.WriteLine(HttpHelper.GetResponse(url));
             //var postdata=@"{"menu":{"button":[{"type":"click","name":"六六一","key":"V1001_TODAY_MUSIC","sub_button":[]},{"type":"click","name":"歌手简介","key":"V1001_TODAY_SINGER","sub_button":[]},{"name":"菜单","sub_button":[{"type":"view","name":"搜索","url":"http://www.soso.com/","sub_button":[]},{"type":"view","name":"视频","url":"http://v.qq.com/","sub_button":[]},{"type":"click","name":"赞一下我们","key":"V1001_GOOD","sub_button":[]}]}]}}";
             Console.WriteLine();
 

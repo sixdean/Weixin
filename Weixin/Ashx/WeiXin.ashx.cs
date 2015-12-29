@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Configuration;
 using System.Text;
+using System.Threading;
 using System.Web;
 using System.Web.Configuration;
 using System.Web.Security;
@@ -27,11 +28,13 @@ namespace Weixin.Ashx
                     stream.Read(postBytes, 0, (int)stream.Length);
                     postString = Encoding.UTF8.GetString(postBytes);
                 }
-
+                HttpContext.Current.Response.ContentEncoding = Encoding.UTF8;
+                HttpContext.Current.Response.Write("success");
+                var threadname = Thread.CurrentThread.Name;
                 if (!string.IsNullOrEmpty(postString))
                 {
                     TextLogHelper.WriteLog(postString);
-                    Execute(postString);
+                    Execute(postString);//
                 }
                 HttpContext.Current.Response.ContentEncoding = Encoding.UTF8;
                 HttpContext.Current.Response.Write("66");
