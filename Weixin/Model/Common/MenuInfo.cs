@@ -13,8 +13,7 @@ namespace Weixin.Model.Common
         public MenuInfo()
         {
 
-        }
-
+        } 
         /// <summary>
         /// 参数化构造函数
         /// </summary>
