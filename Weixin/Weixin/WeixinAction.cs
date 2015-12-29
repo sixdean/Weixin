@@ -3,6 +3,7 @@ using System.IO;
 using Weixin.Common;
 using Weixin.IWeixin;
 using Weixin.Model;
+using Weixin.Model.Common;
 using Weixin.Model.Request;
 using Weixin.Model.Response;
 

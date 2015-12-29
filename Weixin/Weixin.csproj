@@ -13,6 +13,7 @@
     <RootNamespace>Weixin</RootNamespace>
     <AssemblyName>Weixin</AssemblyName>
     <TargetFrameworkVersion>v4.0</TargetFrameworkVersion>
+    <UseIISExpress>false</UseIISExpress>
   </PropertyGroup>
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
     <DebugSymbols>true</DebugSymbols>
@@ -134,15 +135,17 @@
     <Compile Include="IWeixin\IMenuApi.cs" />
     <Compile Include="IWeixin\IUserApi.cs" />
     <Compile Include="IWeixin\IWeixinAction.cs" />
-    <Compile Include="Model\ButtonType.cs" />
-    <Compile Include="Model\ErrorJsonResult.cs" />
-    <Compile Include="Model\Language.cs" />
-    <Compile Include="Model\MenuInfo.cs" />
-    <Compile Include="Model\ArticleEntity.cs" />
-    <Compile Include="Model\CommonResult.cs" />
-    <Compile Include="Model\RequestMsgType.cs" />
+    <Compile Include="Model\Enum\ButtonType.cs" />
+    <Compile Include="Model\Common\ErrorJsonResult.cs" />
+    <Compile Include="Model\Enum\Language.cs" />
+    <Compile Include="Model\Common\MenuInfo.cs" />
+    <Compile Include="Model\Common\ArticleEntity.cs" />
+    <Compile Include="Model\Common\CommonResult.cs" />
+    <Compile Include="Model\Enum\RequestEventType.cs" />
+    <Compile Include="Model\Enum\RequestMsgType.cs" />
+    <Compile Include="Model\Request\RequestEvent.cs" />
     <Compile Include="Model\Request\RequestLink.cs" />
-    <Compile Include="Model\ResponseMsgType.cs" />
+    <Compile Include="Model\Enum\ResponseMsgType.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Site.Master.cs">
       <DependentUpon>Site.Master</DependentUpon>
@@ -151,7 +154,7 @@
     <Compile Include="Site.Master.designer.cs">
       <DependentUpon>Site.Master</DependentUpon>
     </Compile>
-    <Compile Include="Model\BaseMessage.cs" />
+    <Compile Include="Model\Common\BaseMessage.cs" />
     <Compile Include="Model\Request\RequestImage.cs" />
     <Compile Include="Weixin\MenuApi.cs" />
     <Compile Include="Model\Request\RequestLocation.cs" />

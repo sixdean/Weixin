@@ -2,6 +2,8 @@
 using Weixin.Common;
 using Weixin.IWeixin;
 using Weixin.Model;
+using Weixin.Model.Common;
+using Weixin.Model.Enum;
 
 namespace Weixin.Weixin
 {

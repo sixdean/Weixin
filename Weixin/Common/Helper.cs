@@ -1,4 +1,5 @@
 ﻿using Weixin.Model;
+using Weixin.Model.Common;
 
 namespace Weixin.Common
 {

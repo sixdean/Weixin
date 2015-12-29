@@ -10,6 +10,8 @@ using Newtonsoft.Json;
 using Weixin.Common;
 using Weixin.IWeixin;
 using Weixin.Model;
+using Weixin.Model.Common;
+using Weixin.Model.Enum;
 using Weixin.Model.Response;
 using Weixin.Weixin;
 
@@ -20,12 +22,18 @@ namespace ConTest
         static void Main(string[] args)
         {
 
-            var url = "https://api.weixin.qq.com/cgi-bin/menu/get?access_token=IUH4zWNd8KXdZpdbRN075OsWxFPGaO3FvbUSFoPEmUiTtjSO8RWk44Cun_u_yQBGQyup7ZF-U01QxrahbjRT6TJHAfhmAEJobCCoSXRlD9oHXGdACAWMV ";
+            var token = "OcLzEjXYgWocjCwNDkn6ofmpQix_B6IcRhQMcZk9aPgMWF2pvhTJV9Ov09jt5P3_2bzTaURs96RkHwTlkzNrgdWuQ7qZhTdo-WW0vKEwTa4URSaAGACZA";
+            var url = "https://api.weixin.qq.com/cgi-bin/menu/get?access_token=" + token;
 
-           
-           Console.WriteLine(HttpHelper.GetResponse(url));
-           Console.WriteLine(HttpHelper.GetResponses(url));
-            //var postdata=@"{"menu":{"button":[{"type":"click","name":"六六一","key":"V1001_TODAY_MUSIC","sub_button":[]},{"type":"click","name":"歌手简介","key":"V1001_TODAY_SINGER","sub_button":[]},{"name":"菜单","sub_button":[{"type":"view","name":"搜索","url":"http://www.soso.com/","sub_button":[]},{"type":"view","name":"视频","url":"http://v.qq.com/","sub_button":[]},{"type":"click","name":"赞一下我们","key":"V1001_GOOD","sub_button":[]}]}]}}";
+
+            //Console.WriteLine(HttpHelper.GetResponse(url));
+            Console.WriteLine(HttpHelper.GetResponses(url));
+
+            var menu = HttpHelper.GetResponse<MenuListJson>(url);
+
+            var s = JsonConvert.SerializeObject(menu);
+            Console.WriteLine(s);
+            var mm=new MenuInfo("buttonname",ButtonType.click,"sss",null);
             Console.WriteLine();
 
             //var s=@"{"button":[{"type":"click","name":"六六一","key":"V1001_TODAY_MUSIC","sub_button":[]},{"type":"click","name":"歌手简介","key":"V1001_TODAY_SINGER","sub_button":[]},{"name":"菜单","sub_button":[{"type":"view","name":"搜索","url":"http","sub_button":[]},{"type":"view","name":"视频","url":"ht","sub_button":[]},{"type":"click","name":"赞一下我们","key":"V1001_GOOD","sub_button
