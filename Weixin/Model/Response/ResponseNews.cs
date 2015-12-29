@@ -1,4 +1,6 @@
 ﻿using System.Collections.Generic;
+using Weixin.Model.Common;
+using Weixin.Model.Enum;
 using Weixin.Weixin;
 
 namespace Weixin.Model.Response

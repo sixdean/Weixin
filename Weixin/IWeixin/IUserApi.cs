@@ -1,5 +1,7 @@
 ﻿using System.Collections.Generic;
 using Weixin.Model;
+using Weixin.Model.Common;
+using Weixin.Model.Enum;
 using Weixin.Weixin;
 
 namespace Weixin.IWeixin

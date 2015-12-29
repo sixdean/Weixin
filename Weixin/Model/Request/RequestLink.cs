@@ -1,4 +1,6 @@
 ﻿using System;
+using Weixin.Model.Common;
+using Weixin.Model.Enum;
 using Weixin.Weixin;
 
 namespace Weixin.Model.Request
@@ -7,7 +9,8 @@ namespace Weixin.Model.Request
     /// <summary>
     /// 接收链接消息
     /// </summary>
-    public class RequestLink:BaseMessage
+    [System.Xml.Serialization.XmlRoot(ElementName = "xml")]
+    public class RequestLink : BaseMessage
     {
         public RequestLink()
         {

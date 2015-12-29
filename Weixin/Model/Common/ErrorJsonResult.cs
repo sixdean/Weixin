@@ -1,4 +1,4 @@
-﻿namespace Weixin.Model
+﻿namespace Weixin.Model.Common
 {
     /// <summary>
     /// 微信返回Json结果的错误数据

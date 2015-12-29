@@ -1,4 +1,4 @@
-﻿namespace Weixin.Model
+﻿namespace Weixin.Model.Enum
 {
     /// <summary>
     /// 菜单按钮类型

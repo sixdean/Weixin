@@ -1,9 +1,8 @@
 ﻿using System;
-using System.Runtime.CompilerServices;
 using System.Xml.Serialization;
 using Weixin.Common;
 
-namespace Weixin.Weixin
+namespace Weixin.Model.Common
 {
     /// <summary>
     /// 基础消息内容
@@ -37,10 +36,7 @@ namespace Weixin.Weixin
         /// <summary>
         /// 消息类型
         /// </summary>
-        public string MsgType { get; set; }
-
-
-
+        public string MsgType { get; set; } 
 
         /// <summary>
         /// 转换为xml

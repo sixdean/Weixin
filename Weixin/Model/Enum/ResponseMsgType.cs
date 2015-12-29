@@ -1,4 +1,4 @@
-﻿namespace Weixin.Model
+﻿namespace Weixin.Model.Enum
 {
 
     /// <summary>

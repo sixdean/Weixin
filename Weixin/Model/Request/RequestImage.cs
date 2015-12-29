@@ -1,4 +1,6 @@
 ﻿using System;
+using Weixin.Model.Common;
+using Weixin.Model.Enum;
 using Weixin.Weixin;
 
 namespace Weixin.Model.Request
@@ -6,6 +8,7 @@ namespace Weixin.Model.Request
     /// <summary>
     /// 接收图片消息
     /// </summary>
+    [System.Xml.Serialization.XmlRoot(ElementName = "xml")]
     public class RequestImage : BaseMessage
     {
         public RequestImage()

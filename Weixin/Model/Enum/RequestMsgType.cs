@@ -1,11 +1,9 @@
-﻿using System;
-
-namespace Weixin.Model
+﻿namespace Weixin.Model.Enum
 {
     public enum RequestMsgType
     {
         Text,
-        Image ,
+        Image,
         Voice,
         Video,
         Shortvideo,

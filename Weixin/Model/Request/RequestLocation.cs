@@ -1,4 +1,6 @@
 ﻿using System;
+using Weixin.Model.Common;
+using Weixin.Model.Enum;
 using Weixin.Weixin;
 
 namespace Weixin.Model.Request
@@ -7,6 +9,7 @@ namespace Weixin.Model.Request
     /// <summary>
     /// 接收地理位置消息
     /// </summary>
+    [System.Xml.Serialization.XmlRoot(ElementName = "xml")]
     public class RequestLocation : BaseMessage
     {
         public RequestLocation()
