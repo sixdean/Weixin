@@ -13,7 +13,7 @@ namespace Weixin.Model.Request
     {
         public RequestImage()
         {
-            this.MsgType = RequestMsgType.Image.ToString().ToLower();
+            this.MsgType = RequestMsgType.image.ToString().ToLower();
         }
 
         public RequestImage(BaseMessage info)

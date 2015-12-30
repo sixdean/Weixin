@@ -13,7 +13,7 @@ namespace Weixin.Model.Request
     {
         public RequestVideo()
         {
-            this.MsgType = RequestMsgType.Video.ToString().ToLower();
+            this.MsgType = RequestMsgType.video.ToString().ToLower();
         }
         public RequestVideo(BaseMessage info)
             : this()

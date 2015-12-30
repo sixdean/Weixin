@@ -13,7 +13,7 @@ namespace Weixin.Model.Request
     {
         public RequestVoice()
         {
-            this.MsgType = RequestMsgType.Voice.ToString().ToLower();
+            this.MsgType = RequestMsgType.voice.ToString().ToLower();
         }
 
         public RequestVoice(BaseMessage info)

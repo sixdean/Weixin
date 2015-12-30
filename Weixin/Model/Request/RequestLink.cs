@@ -14,7 +14,7 @@ namespace Weixin.Model.Request
     {
         public RequestLink()
         {
-            this.MsgType = RequestMsgType.Link.ToString().ToLower();
+            this.MsgType = RequestMsgType.link.ToString().ToLower();
         }
 
         public RequestLink(BaseMessage info)

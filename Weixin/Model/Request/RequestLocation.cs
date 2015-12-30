@@ -14,7 +14,7 @@ namespace Weixin.Model.Request
     {
         public RequestLocation()
         {
-            this.MsgType = RequestMsgType.Location.ToString().ToLower();
+            this.MsgType = RequestMsgType.location.ToString().ToLower();
         }
         public RequestLocation(BaseMessage info)
             : this()

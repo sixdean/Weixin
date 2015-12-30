@@ -14,7 +14,7 @@ namespace Weixin.Model.Request
     {
         public RequestShortVideo()
         {
-            this.MsgType = RequestMsgType.Shortvideo.ToString().ToLower();
+            this.MsgType = RequestMsgType.shortvideo.ToString().ToLower();
         }
         public RequestShortVideo(BaseMessage info)
             : this()

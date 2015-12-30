@@ -26,20 +26,105 @@ namespace Weixin.Weixin
                 if (baseInfo != null)
                 {
                     var requestType = baseInfo.MsgType;
-                    if (requestType == RequestMsgType.Text.ToString().ToLower())
+                    if (requestType == RequestMsgType.text.ToString())
                     {
-                        RequestText info = XmlSerializerHelper.XmlToObject<RequestText>(postStr);
+                        var info = XmlSerializerHelper.XmlToObject<RequestText>(postStr);
                         response.Content = info.Content;
                     }
-                    else if (requestType == RequestMsgType.Image.ToString().ToLower())
+                    else if (requestType == RequestMsgType.image.ToString())
                     {
-                        RequestImage info = XmlSerializerHelper.XmlToObject<RequestImage>(postStr);
+                        var info = XmlSerializerHelper.XmlToObject<RequestImage>(postStr);
                         response.Content = info.PicUrl + ":" + info.MediaId + ";" + info.MsgId;
                     }
-                    else if (requestType==RequestMsgType.Location.ToString().ToLower())
+                    else if (requestType == RequestMsgType.voice.ToString())
                     {
-                        RequestLocation info = XmlSerializerHelper.XmlToObject<RequestLocation>(postStr);
-                        response.Content = info.Label;
+                        var info = XmlSerializerHelper.XmlToObject<RequestVoice>(postStr);
+
+                    }
+                    else if (requestType == RequestMsgType.video.ToString())
+                    {
+                        var info = XmlSerializerHelper.XmlToObject<RequestVideo>(postStr);
+
+                    }
+                    else if (requestType == RequestMsgType.shortvideo.ToString())
+                    {
+                        var info = XmlSerializerHelper.XmlToObject<RequestShortVideo>(postStr);
+
+                    }
+                    else if (requestType == RequestMsgType.location.ToString())
+                    {
+                        var info = XmlSerializerHelper.XmlToObject<RequestLocation>(postStr);
+
+                    }
+                    else if (requestType == RequestMsgType.link.ToString())
+                    {
+                        var info = XmlSerializerHelper.XmlToObject<RequestLink>(postStr);
+
+                    }
+                    else if (requestType == RequestMsgType.Event.ToString().ToLower())
+                    {
+                        var info = XmlSerializerHelper.XmlToObject<RequestEvent>(postStr);
+
+                    }
+                    else if (requestType == RequestEventType.subscribe.ToString())
+                    {
+                        var info = XmlSerializerHelper.XmlToObject<RequestEventSubscribe>(postStr);
+
+                    }
+                    else if (requestType == RequestEventType.unsubscribe.ToString())
+                    {
+                        var info = XmlSerializerHelper.XmlToObject<RequestEventUnSubscribe>(postStr);
+
+                    }
+                    else if (requestType == RequestEventType.SCAN.ToString())
+                    {
+                        var info = XmlSerializerHelper.XmlToObject<RequestEventScan>(postStr);
+
+                    }
+                    else if (requestType == RequestEventType.LOCATION.ToString())
+                    {
+                        var info = XmlSerializerHelper.XmlToObject<RequestEventLocation>(postStr);
+
+                    }
+                    else if (requestType == RequestEventType.CLICK.ToString())
+                    {
+                        var info = XmlSerializerHelper.XmlToObject<RequestEventClick>(postStr);
+
+                    }
+                    else if (requestType == RequestEventType.VIEW.ToString())
+                    {
+                        var info = XmlSerializerHelper.XmlToObject<RequestEventView>(postStr);
+
+                    }
+                    else if (requestType == RequestEventType.scancode_push.ToString())
+                    {
+                        var info = XmlSerializerHelper.XmlToObject<RequestEventScancode_push>(postStr);
+
+                    }
+                    else if (requestType == RequestEventType.scancode_waitmsg.ToString())
+                    {
+                        var info = XmlSerializerHelper.XmlToObject<RequestEventScancode_waitmsg>(postStr);
+
+                    }
+                    else if (requestType == RequestEventType.pic_sysphoto.ToString())
+                    {
+                        var info = XmlSerializerHelper.XmlToObject<RequestEventPic_sysphoto>(postStr);
+
+                    }
+                    else if (requestType == RequestEventType.pic_photo_or_album.ToString())
+                    {
+                        var info = XmlSerializerHelper.XmlToObject<RequestEventPic_photo_or_album>(postStr);
+
+                    }
+                    else if (requestType == RequestEventType.pic_weixin.ToString())
+                    {
+                        var info = XmlSerializerHelper.XmlToObject<RequestEventPic_weixin>(postStr);
+
+                    }
+                    else if (requestType == RequestEventType.location_select.ToString())
+                    {
+                        var info = XmlSerializerHelper.XmlToObject<RequestEventLocation_select>(postStr);
+
                     }
                     else
                     {

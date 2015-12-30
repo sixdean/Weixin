@@ -12,7 +12,7 @@ namespace Weixin.Model.Response
     {
         public ResponseText()
         {
-            this.MsgType = ResponseMsgType.Text.ToString().ToLower();
+            this.MsgType = ResponseMsgType.text.ToString().ToLower();
         }
 
         public ResponseText(BaseMessage info)

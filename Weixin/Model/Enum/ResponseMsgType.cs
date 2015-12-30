@@ -6,12 +6,12 @@
     /// </summary>
     public enum ResponseMsgType
     {
-        Text,
-        Image,
-        Voice,
-        Video,
-        Music,
-        News,
-        Transfer_Customer_Service
+        text,
+        image,
+        voice,
+        video,
+        music,
+        news,
+        transfer_customer_service
     }
 }

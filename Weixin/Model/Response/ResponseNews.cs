@@ -13,7 +13,7 @@ namespace Weixin.Model.Response
     {
         public ResponseNews()
         {
-            this.MsgType = ResponseMsgType.News.ToString().ToLower();
+            this.MsgType = ResponseMsgType.news.ToString().ToLower();
 
             this.Articles = new List<ArticleEntity>();
         }

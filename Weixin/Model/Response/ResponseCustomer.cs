@@ -13,7 +13,7 @@ namespace Weixin.Model.Response
     {
         public ResponseCustomer()
         {
-            this.MsgType = ResponseMsgType.Transfer_Customer_Service.ToString().ToLower();
+            this.MsgType = ResponseMsgType.transfer_customer_service.ToString().ToLower();
         }
 
         public ResponseCustomer(BaseMessage info)

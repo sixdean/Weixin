@@ -13,7 +13,7 @@ namespace Weixin.Model.Request
     {
         public RequestText()
         {
-            this.MsgType = RequestMsgType.Text.ToString().ToLower();
+            this.MsgType = RequestMsgType.text.ToString().ToLower();
         }
         public RequestText(BaseMessage info)
             : this()

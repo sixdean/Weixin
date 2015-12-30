@@ -2,13 +2,13 @@
 {
     public enum RequestMsgType
     {
-        Text,
-        Image,
-        Voice,
-        Video,
-        Shortvideo,
-        Location,
-        Link,
+        text,
+        image,
+        voice,
+        video,
+        shortvideo,
+        location,
+        link,
         Event
     }
 
