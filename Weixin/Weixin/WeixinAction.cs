@@ -18,10 +18,6 @@ namespace Weixin.Weixin
         {
             try
             {
-
-
-                TextLogHelper.WriteLog("2");
-
                 var baseinfo = XmlSerializerHelper.XmlToObject<BaseMessage>(postStr);
                 if (baseinfo != null)
                 {
