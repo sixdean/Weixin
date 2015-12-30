@@ -1,0 +1,18 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<ordesignerObjectsDiagram dslVersion="1.0.0.0" absoluteBounds="0, 0, 11, 8.5" name="Weixin">
+  <DataContextMoniker Name="/WeixinDataContext" />
+  <nestedChildShapes>
+    <classShape Id="a93f8868-465f-4371-a234-9cdc09c13bac" absoluteBounds="2.75, 1.875, 2, 2.3356245930989585">
+      <DataClassMoniker Name="/WeixinDataContext/Menu" />
+      <nestedChildShapes>
+        <elementListCompartment Id="ef8b0003-7a6a-4ca3-b53f-57210f5ca994" absoluteBounds="2.765, 2.335, 1.9700000000000002, 1.7756245930989585" name="DataPropertiesCompartment" titleTextColor="Black" itemTextColor="Black" />
+      </nestedChildShapes>
+    </classShape>
+    <classShape Id="4ca7cad5-25d9-4ca0-a44a-e3598f1e4842" absoluteBounds="2.125, 5.375, 2, 1.7625655110677081">
+      <DataClassMoniker Name="/WeixinDataContext/SysUser" />
+      <nestedChildShapes>
+        <elementListCompartment Id="535620b2-be0f-48f9-af35-f6f86d3e9193" absoluteBounds="2.14, 5.835, 1.9700000000000002, 1.2025655110677083" name="DataPropertiesCompartment" titleTextColor="Black" itemTextColor="Black" />
+      </nestedChildShapes>
+    </classShape>
+  </nestedChildShapes>
+</ordesignerObjectsDiagram>
