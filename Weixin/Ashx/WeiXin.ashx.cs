@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Configuration;
 using System.Text;
+using System.Threading;
 using System.Web;
 using System.Web.Configuration;
 using System.Web.Security;
@@ -18,6 +19,7 @@ namespace Weixin.Ashx
     {
         public void ProcessRequest(HttpContext context)
         {
+            TextLogHelper.WriteLog("----开始----");
             if (HttpContext.Current.Request.HttpMethod.ToUpper() == "POST")
             {
                 string postString;
@@ -27,23 +29,18 @@ namespace Weixin.Ashx
                     stream.Read(postBytes, 0, (int)stream.Length);
                     postString = Encoding.UTF8.GetString(postBytes);
                 }
-
                 if (!string.IsNullOrEmpty(postString))
                 {
                     TextLogHelper.WriteLog(postString);
-                    Execute(postString);
+                    Execute(postString);//
                 }
-                HttpContext.Current.Response.ContentEncoding = Encoding.UTF8;
-                HttpContext.Current.Response.Write("66");
             }
             else
             {
 
-                TextLogHelper.WriteLog("----开始----");
                 Auth();
-                TextLogHelper.WriteLog("----结束----");
-
             }
+            TextLogHelper.WriteLog("----结束----");
         }
         /// <summary>
         /// 处理各种请求信息并应答（通过POST的请求）
@@ -51,12 +48,8 @@ namespace Weixin.Ashx
         /// <param name="postStr">POST方式提交的数据</param>
         private void Execute(string postStr)
         {
-            TextLogHelper.WriteLog("1");
-
             IWeixinAction weixinAction = new WeixinAction();
             string responseContent = weixinAction.Handle(postStr);
-            TextLogHelper.WriteLog("5");
-
             HttpContext.Current.Response.ContentEncoding = Encoding.UTF8;
             HttpContext.Current.Response.Write(responseContent);
         }

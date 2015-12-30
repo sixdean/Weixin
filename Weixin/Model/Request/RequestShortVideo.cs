@@ -9,6 +9,7 @@ namespace Weixin.Model.Request
     /// <summary>
     /// 接收小视频消息
     /// </summary>
+    [System.Xml.Serialization.XmlRoot(ElementName = "xml")]
     public class RequestShortVideo : BaseMessage
     {
         public RequestShortVideo()

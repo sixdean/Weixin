@@ -1,4 +1,5 @@
-﻿using System.IO;
+﻿using System;
+using System.IO;
 using System.Runtime.Serialization.Formatters.Binary;
 using System.Text;
 using System.Xml;
@@ -7,7 +8,7 @@ using System.Xml.Serialization;
 namespace Weixin.Common
 {
     public class XmlSerializerHelper
-    { 
+    {
 
         /// <summary>
         ///  将object对象序列化成XML
@@ -42,6 +43,15 @@ namespace Weixin.Common
             using (var stream = new MemoryStream(Encoding.UTF8.GetBytes(source)))
             {
                 return (T)mySerializer.Deserialize(stream);
+            }
+        }
+
+        public static object XmlToObject(string source, Type type)
+        {
+            var mySerializer = new XmlSerializer(type);
+            using (var stream = new MemoryStream(Encoding.UTF8.GetBytes(source)))
+            {
+                return mySerializer.Deserialize(stream);
             }
         }
 

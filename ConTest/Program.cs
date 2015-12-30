@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.IO;
 using System.Linq;
 using System.Net;
+using System.Reflection;
 using System.Text;
 using System.Xml;
 using System.Xml.Serialization;
@@ -14,7 +15,7 @@ using Weixin.Model.Common;
 using Weixin.Model.Enum;
 using Weixin.Model.Response;
 using Weixin.Weixin;
-
+using Weixin.Model.Request;
 namespace ConTest
 {
     class Program
@@ -22,27 +23,49 @@ namespace ConTest
         static void Main(string[] args)
         {
 
-            var token = "OcLzEjXYgWocjCwNDkn6ofmpQix_B6IcRhQMcZk9aPgMWF2pvhTJV9Ov09jt5P3_2bzTaURs96RkHwTlkzNrgdWuQ7qZhTdo-WW0vKEwTa4URSaAGACZA";
-            var url = "https://api.weixin.qq.com/cgi-bin/menu/get?access_token=" + token;
+            //var token = "QzIvNahpmUbfRotF43xuZdUnNEnERBtTbCuo29ouxVdRn5tZv4JRYoPVDUKvJz6EJ9VbJ-ANbopSKdg3Vyy7jZpBQthzvVAL7H67RAqwyOkYTJaAGAFAQ";
+            //var url = "https://api.weixin.qq.com/cgi-bin/menu/get?access_token=" + token;
+            //var menu = HttpHelper.GetResponse<MenuListJson>(url);
+            //var mm = HttpHelper.GetResponse(url);
+            //var s = JsonConvert.SerializeObject(menu);
+            //Console.WriteLine(s);
+            //var mm=new MenuInfo("buttonname",ButtonType.click,"sss",null);
+
+            var xml = @"<xml><ToUserName><![CDATA[gh_2461d20dda43]]></ToUserName>
+<FromUserName><![CDATA[o9WULuDOA1s5S9dagWTvLpeit4aY]]></FromUserName>
+<CreateTime>1451401800</CreateTime>
+<MsgType><![CDATA[text]]></MsgType>
+<Content><![CDATA[1234566]]></Content>
+<MsgId>6233723264757904295</MsgId>
+</xml>";
+            BaseMessage bm = new BaseMessage();
+            //bm.MsgType = "type";
+            //bm.ToUserName = "me";
+            //bm.FromUserName = "you";
+            var p = new object[] { bm };
+
+            RequestEvent evEvent = new RequestEvent(bm);
+            //Assembly assembly = Assembly.GetExecutingAssembly(); // 获取当前程序集 
+            Assembly assembly = Assembly.Load("Weixin");
 
 
-            //Console.WriteLine(HttpHelper.GetResponse(url));
-            Console.WriteLine(HttpHelper.GetResponses(url));
-
-            var menu = HttpHelper.GetResponse<MenuListJson>(url);
-
-            var s = JsonConvert.SerializeObject(menu);
-            Console.WriteLine(s);
-            var mm=new MenuInfo("buttonname",ButtonType.click,"sss",null);
-            Console.WriteLine();
-
-            //var s=@"{"button":[{"type":"click","name":"六六一","key":"V1001_TODAY_MUSIC","sub_button":[]},{"type":"click","name":"歌手简介","key":"V1001_TODAY_SINGER","sub_button":[]},{"name":"菜单","sub_button":[{"type":"view","name":"搜索","url":"http","sub_button":[]},{"type":"view","name":"视频","url":"ht","sub_button":[]},{"type":"click","name":"赞一下我们","key":"V1001_GOOD","sub_button
-            //":[]}]}]}";
-            //   var s= JsonConvert.DeserializeObject<MenuInfo>(s);
-
+            Type type = assembly.GetType("Weixin.Model.Request.RequestText");
+            var mySerializer = new XmlSerializer(type);
+            using (var stream = new MemoryStream(Encoding.UTF8.GetBytes(xml)))
+            {
+                var tt = mySerializer.Deserialize(stream);
+            }
+            object obj = assembly.CreateInstance("Weixin.Model.Request.RequestEvent", true, BindingFlags.Default, null, p, null, null); //类的完全限定名（即包括命名空间）
+            string n = "grayworm";
+            Type t = n.GetType();
+            foreach (MemberInfo mi in t.GetMembers())
+            {
+                Console.WriteLine("{0}      {1}", mi.MemberType, mi.Name);
+            }
             Console.ReadLine();
 
         }
+
 
         public static string GetPage(string posturl)
         {
@@ -110,6 +133,44 @@ namespace ConTest
 
                 var s = e.Message;
             }
+        }
+    }
+    class Test
+    {
+        private string _strId;
+        public string ID
+        {
+            get { return _strId; }
+            set { _strId = value; }
+        }
+
+        public Test()
+        {
+            this._strId = "666";
+        }
+
+        public Test(string s)
+        {
+            this._strId = s;
+        }
+    }
+    class Test1
+    {
+        private string _strId;
+        public string ID
+        {
+            get { return _strId; }
+            set { _strId = value; }
+        }
+
+        public Test1()
+        {
+            this._strId = "666";
+        }
+
+        public Test1(string s)
+        {
+            this._strId = s;
         }
     }
 }

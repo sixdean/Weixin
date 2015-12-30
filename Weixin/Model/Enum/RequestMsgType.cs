@@ -3,7 +3,7 @@
     public enum RequestMsgType
     {
         Text,
-        Image ,
+        Image,
         Voice,
         Video,
         Shortvideo,
