@@ -13,20 +13,25 @@ namespace Weixin.Account
 
         protected void Page_Load(object sender, EventArgs e)
         {
-            RegisterUser.ContinueDestinationPageUrl = Request.QueryString["ReturnUrl"];
         }
 
-        protected void RegisterUser_CreatedUser(object sender, EventArgs e)
+
+
+        protected void FormView1_OnItemInserted(object sender, FormViewInsertedEventArgs e)
         {
-            FormsAuthentication.SetAuthCookie(RegisterUser.UserName, false /* createPersistentCookie */);
-
-            string continueUrl = RegisterUser.ContinueDestinationPageUrl;
-            if (String.IsNullOrEmpty(continueUrl))
+            if (e.Exception == null)
             {
-                continueUrl = "~/";
+                Response.Redirect("Login.aspx");
+
             }
-            Response.Redirect(continueUrl);
+            else
+            {
+            }
         }
 
+        protected void ObjectDataSource1_OnInserted(object sender, ObjectDataSourceStatusEventArgs e)
+        {
+            var s = "dfasfjk";
+        }
     }
 }

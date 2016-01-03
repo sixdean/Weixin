@@ -2,16 +2,22 @@
 <ordesignerObjectsDiagram dslVersion="1.0.0.0" absoluteBounds="0, 0, 11, 8.5" name="Weixin">
   <DataContextMoniker Name="/WeixinDataContext" />
   <nestedChildShapes>
-    <classShape Id="a93f8868-465f-4371-a234-9cdc09c13bac" absoluteBounds="2.75, 1.875, 2, 2.3356245930989585">
-      <DataClassMoniker Name="/WeixinDataContext/Menu" />
-      <nestedChildShapes>
-        <elementListCompartment Id="ef8b0003-7a6a-4ca3-b53f-57210f5ca994" absoluteBounds="2.765, 2.335, 1.9700000000000002, 1.7756245930989585" name="DataPropertiesCompartment" titleTextColor="Black" itemTextColor="Black" />
-      </nestedChildShapes>
-    </classShape>
-    <classShape Id="4ca7cad5-25d9-4ca0-a44a-e3598f1e4842" absoluteBounds="2.125, 5.375, 2, 1.7625655110677081">
+    <classShape Id="c2f59049-142c-4b3b-81d6-28d62faa1b4d" absoluteBounds="5.875, 2.25, 2, 1.9535852050781251">
       <DataClassMoniker Name="/WeixinDataContext/SysUser" />
       <nestedChildShapes>
-        <elementListCompartment Id="535620b2-be0f-48f9-af35-f6f86d3e9193" absoluteBounds="2.14, 5.835, 1.9700000000000002, 1.2025655110677083" name="DataPropertiesCompartment" titleTextColor="Black" itemTextColor="Black" />
+        <elementListCompartment Id="dfec465b-516f-4ed3-9b37-3e685fb2bac7" absoluteBounds="5.89, 2.71, 1.9700000000000002, 1.393585205078125" name="DataPropertiesCompartment" titleTextColor="Black" itemTextColor="Black" />
+      </nestedChildShapes>
+    </classShape>
+    <classShape Id="cbb29c86-d553-4c65-b64c-84652f2f7841" absoluteBounds="1.75, 5.125, 2, 1.9535852050781251">
+      <DataClassMoniker Name="/WeixinDataContext/SysMenu" />
+      <nestedChildShapes>
+        <elementListCompartment Id="d0a56628-ed19-4eb3-a41d-6270dc436645" absoluteBounds="1.7650000000000001, 5.585, 1.9700000000000002, 1.393585205078125" name="DataPropertiesCompartment" titleTextColor="Black" itemTextColor="Black" />
+      </nestedChildShapes>
+    </classShape>
+    <classShape Id="73afe89f-c301-4f37-bc5b-8ace43638579" absoluteBounds="1.625, 1.375, 2, 3.0997033691406251">
+      <DataClassMoniker Name="/WeixinDataContext/Menu" />
+      <nestedChildShapes>
+        <elementListCompartment Id="25c16b51-f38f-45a7-8945-52b8987e4b83" absoluteBounds="1.6400000000000001, 1.835, 1.9700000000000002, 2.539703369140625" name="DataPropertiesCompartment" titleTextColor="Black" itemTextColor="Black" />
       </nestedChildShapes>
     </classShape>
   </nestedChildShapes>

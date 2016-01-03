@@ -3,9 +3,15 @@
 <!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
 <html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en">
 <head runat="server">
-<meta http-equiv="Content-Type" content="text/html; charset=utf-8"/>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
     <title></title>
     <link href="~/Styles/Site.css" rel="stylesheet" type="text/css" />
+    <link rel="stylesheet" type="text/css" href="Scripts/jquery-easyui-1.4.4/themes/default/easyui.css" />
+    <link href="Scripts/jquery-easyui-1.4.4/themes/icon.css" rel="stylesheet" type="text/css" />
+    <link href="Scripts/jquery-easyui-1.4.4/demo/demo.css" rel="stylesheet" type="text/css" />
+    <script src="Scripts/jquery-easyui-1.4.4/jquery.min.js" type="text/javascript"></script>
+    <script src="Scripts/jquery-easyui-1.4.4/jquery.easyui.min.js" type="text/javascript"></script>
+    <script src="Scripts/Common.js" type="text/javascript"></script>
     <asp:ContentPlaceHolder ID="HeadContent" runat="server">
     </asp:ContentPlaceHolder>
 </head>
@@ -21,31 +27,35 @@
             <div class="loginDisplay">
                 <asp:LoginView ID="HeadLoginView" runat="server" EnableViewState="false">
                     <AnonymousTemplate>
-                        [ <a href="~/Account/Login.aspx" ID="HeadLoginStatus" runat="server">登录</a> ]
+                        [ <a href="~/Account/Login.aspx" id="HeadLoginStatus" runat="server">登录</a> ]
                     </AnonymousTemplate>
                     <LoggedInTemplate>
-                        欢迎使用 <span class="bold"><asp:LoginName ID="HeadLoginName" runat="server" /></span>!
-                        [ <asp:LoginStatus ID="HeadLoginStatus" runat="server" LogoutAction="Redirect" LogoutText="注销" LogoutPageUrl="~/"/> ]
+                        欢迎使用 <span class="bold">
+                            <asp:LoginName ID="HeadLoginName" runat="server" />
+                        </span>! [
+                        <asp:LoginStatus ID="HeadLoginStatus" runat="server" LogoutAction="Redirect" LogoutText="注销"
+                            LogoutPageUrl="~/" />
+                        ]
                     </LoggedInTemplate>
                 </asp:LoginView>
             </div>
             <div class="clear hideSkiplink">
-                <asp:Menu ID="NavigationMenu" runat="server" CssClass="menu" EnableViewState="false" IncludeStyleBlock="false" Orientation="Horizontal">
+              <%--  <asp:Menu ID="NavigationMenu" runat="server" CssClass="menu" EnableViewState="false"
+                    IncludeStyleBlock="false" Orientation="Horizontal">
                     <Items>
-                        <asp:MenuItem NavigateUrl="~/Default.aspx" Text="主页"/>
-                        <asp:MenuItem NavigateUrl="~/About.aspx" Text="关于"/>
+                        <asp:MenuItem NavigateUrl="~/Default.aspx" Text="微信管理" />
+                        <asp:MenuItem NavigateUrl="~/About.aspx" Text="系统管理" />
                     </Items>
-                </asp:Menu>
+                </asp:Menu>--%>
             </div>
         </div>
         <div class="main">
-            <asp:ContentPlaceHolder ID="MainContent" runat="server"/>
+            <asp:ContentPlaceHolder ID="MainContent" runat="server" />
         </div>
         <div class="clear">
         </div>
     </div>
     <div class="footer">
-        
     </div>
     </form>
 </body>

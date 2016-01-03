@@ -4,14 +4,84 @@
 <asp:Content ID="HeaderContent" runat="server" ContentPlaceHolderID="HeadContent">
 </asp:Content>
 <asp:Content ID="BodyContent" runat="server" ContentPlaceHolderID="MainContent">
+    <script type="text/javascript">
+        $(function () {
+
+            CreateMainMenu();
+        });
+        function CreateMainMenu() {
+            $("#mainMenu").tree({
+                url: "Ashx/GetData.ashx?type=GetSysMenu",
+                animate: true,
+                lines: true,
+                onClick: function (n) {
+                    CreateMainTal(n);
+                }
+
+            });
+        }
+
+        function CreateMainTal(n) {
+            var selectIndex = null;
+            $($("#mainTabs").tabs('tabs')).each(function (i, t) {
+                if (t.panel('options').id == n.id) {
+                    selectIndex = t.panel('options').index;
+                }
+            });
+            if (selectIndex != null) {
+                $("#mainTabs").tabs('select', selectIndex);
+            } else {
+                $("#mainTabs").tabs('add', {
+                    title: n.text,
+                    id: n.id,
+                    href: n.Url,
+                    closable: true
+                });
+            }
+        } 
+
+        //        $(function () {
+        //            $("#mainDataGrid").datagrid({
+        //                url: "../Ashx/GetData.ashx?type=GetMenu",
+        //                colums: [[
+        //                                        { field: 'Id', title: 'Id' },
+        //                                        { field: 'Name', title: 'Name' },
+        //                                        { field: 'Type', title: 'Type' },
+        //                                        { field: 'Key', title: 'Key' },
+        //                                        { field: 'Url', title: 'Url' },
+        //                                        { field: 'Media_id', title: 'Media_id' },
+        //                                        { field: 'ParentId', title: 'ParentId' },
+        //                                        { field: 'UpdateUser', title: 'UpdateUser' },
+        //                                        { field: 'UpdateDate', title: 'UpdateDate' },
+        //                                        { field: 'CreateUser', title: 'CreateUser' },
+        //                                        { field: 'CreateDate', title: 'CreateDate' }
+        //                                        ]]
+        //                //            url: 'datagrid_data1.json'
+        //            });
+
+        //            //        $("#mainDataGrid").datagrid({
+        //            //            data: [
+        //            //            { itemid: '2112', productid: 'fdasfad' }
+        //            //            ]
+        //            //        });
+        //        })
+    </script>
     <h2>
-        欢迎使用 ASP.NET!
-    </h2>
-    <p>
-        若要了解关于 ASP.NET 的详细信息，请访问 <a href="http://www.asp.net/cn" title="ASP.NET 网站">www.asp.net/cn</a>。
-    </p>
-    <p>
-        您还可以找到 <a href="http://go.microsoft.com/fwlink/?LinkID=152368"
-            title="MSDN ASP.NET 文档">MSDN 上有关 ASP.NET 的文档</a>。
-    </p>
+        Basic Layout</h2>
+    <div style="margin: 20px 0;">
+    </div>
+    <div class="easyui-layout" style="width: 95%; height: 500px;">
+        <div data-options="region:'north'" style="height: 50px">
+        </div>
+        <div data-options="region:'south',split:true" style="height: 50px;">
+        </div>
+        <div data-options="region:'west',split:true" title="导航" style="width: 150px;">
+            <ul id="mainMenu">
+            </ul>
+        </div>
+        <div data-options="region:'center'">
+            <div id="mainTabs" class="easyui-tabs">
+            </div>
+        </div>
+    </div>
 </asp:Content>

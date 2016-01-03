@@ -8,7 +8,9 @@ using System.Text;
 using System.Xml;
 using System.Xml.Serialization;
 using Newtonsoft.Json;
+using Weixin.BLL;
 using Weixin.Common;
+using Weixin.DAL;
 using Weixin.IWeixin;
 using Weixin.Model;
 using Weixin.Model.Common;
@@ -23,6 +25,11 @@ namespace ConTest
         static void Main(string[] args)
         {
 
+
+            var date = DateTime.Now;
+
+
+
             //var token = "QzIvNahpmUbfRotF43xuZdUnNEnERBtTbCuo29ouxVdRn5tZv4JRYoPVDUKvJz6EJ9VbJ-ANbopSKdg3Vyy7jZpBQthzvVAL7H67RAqwyOkYTJaAGAFAQ";
             //var url = "https://api.weixin.qq.com/cgi-bin/menu/get?access_token=" + token;
             //var menu = HttpHelper.GetResponse<MenuListJson>(url);
@@ -31,37 +38,41 @@ namespace ConTest
             //Console.WriteLine(s);
             //var mm=new MenuInfo("buttonname",ButtonType.click,"sss",null);
 
-            var xml = @"<xml><ToUserName><![CDATA[gh_2461d20dda43]]></ToUserName>
-<FromUserName><![CDATA[o9WULuDOA1s5S9dagWTvLpeit4aY]]></FromUserName>
-<CreateTime>1451401800</CreateTime>
-<MsgType><![CDATA[text]]></MsgType>
-<Content><![CDATA[1234566]]></Content>
-<MsgId>6233723264757904295</MsgId>
-</xml>";
-            BaseMessage bm = new BaseMessage();
-            //bm.MsgType = "type";
-            //bm.ToUserName = "me";
-            //bm.FromUserName = "you";
-            var p = new object[] { bm };
+            //            var xml = @"<xml><ToUserName><![CDATA[gh_2461d20dda43]]></ToUserName>
+            //<FromUserName><![CDATA[o9WULuDOA1s5S9dagWTvLpeit4aY]]></FromUserName>
+            //<CreateTime>1451401800</CreateTime>
+            //<MsgType><![CDATA[text]]></MsgType>
+            //<Content><![CDATA[1234566]]></Content>
+            //<MsgId>6233723264757904295</MsgId>
+            //</xml>";
+            //            BaseMessage bm = new BaseMessage();
+            //            //bm.MsgType = "type";
+            //            //bm.ToUserName = "me";
+            //            //bm.FromUserName = "you";
+            //            var p = new object[] { bm };
 
-            RequestEvent evEvent = new RequestEvent(bm);
-            //Assembly assembly = Assembly.GetExecutingAssembly(); // 获取当前程序集 
-            Assembly assembly = Assembly.Load("Weixin");
+            //            RequestEvent evEvent = new RequestEvent(bm);
+            //            //Assembly assembly = Assembly.GetExecutingAssembly(); // 获取当前程序集 
+            //            Assembly assembly = Assembly.Load("Weixin");
 
 
-            Type type = assembly.GetType("Weixin.Model.Request.RequestText");
-            var mySerializer = new XmlSerializer(type);
-            using (var stream = new MemoryStream(Encoding.UTF8.GetBytes(xml)))
-            {
-                var tt = mySerializer.Deserialize(stream);
-            }
-            object obj = assembly.CreateInstance("Weixin.Model.Request.RequestEvent", true, BindingFlags.Default, null, p, null, null); //类的完全限定名（即包括命名空间）
-            string n = "grayworm";
-            Type t = n.GetType();
-            foreach (MemberInfo mi in t.GetMembers())
-            {
-                Console.WriteLine("{0}      {1}", mi.MemberType, mi.Name);
-            }
+            //            Type type = assembly.GetType("Weixin.Model.Request.RequestText");
+            //            var mySerializer = new XmlSerializer(type);
+            //            using (var stream = new MemoryStream(Encoding.UTF8.GetBytes(xml)))
+            //            {
+            //                var tt = mySerializer.Deserialize(stream);
+            //            }
+            //            object obj = assembly.CreateInstance("Weixin.Model.Request.RequestEvent", true, BindingFlags.Default, null, p, null, null); //类的完全限定名（即包括命名空间）
+            //            string n = "grayworm";
+            //            Type t = n.GetType();
+            //            foreach (MemberInfo mi in t.GetMembers())
+            //            {
+            //                Console.WriteLine("{0}      {1}", mi.MemberType, mi.Name);
+            //            }
+            Menu menu = FactoryBll<MenuBll>.Instance.GetmenuById("05d0b0f5-a067-402e-9949-b5123dc7234c");
+             
+            FactoryBll<MenuBll>.Instance.Delete(menu);
+            
             Console.ReadLine();
 
         }

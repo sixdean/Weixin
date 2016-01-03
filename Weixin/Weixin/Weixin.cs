@@ -370,5 +370,22 @@ namespace Weixin.Weixin
         //        return string.Empty;
         //    }
         //}
+
+
+//        using System.IO;      日志功能
+
+ 
+
+//NorthwindDataContext ctx = new NorthwindDataContext("server=xxx;database=Northwind;uid=xxx;pwd=xxx");
+
+//StreamWriter sw = new StreamWriter(Server.MapPath("log.txt"), true); // Append
+
+//ctx.Log = sw;
+
+//GridView1.DataSource = from c in ctx.Customers where c.CustomerID.StartsWith("A") select new { 顾客ID = c.CustomerID, 顾客名 = c.Name, 城市 = c.City };
+
+//GridView1.DataBind();
+
+//sw.Close();
     }
 }
