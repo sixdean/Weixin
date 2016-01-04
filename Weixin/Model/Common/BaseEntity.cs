@@ -1,11 +1,19 @@
 ﻿using System;
+using System.Linq;
+using System.Reflection;
 
 namespace Weixin.Model.Common
 {
     [Serializable]
-    public abstract class BaseEntity
+    public abstract class BaseEntity<T>
     {
-        public abstract string ID { get; set; }
-        public abstract string DisplayName { get; } 
+        public virtual T UpdateDbEntity(T dbEntity,T entity)
+        {
+            foreach (var property in typeof(T).GetProperties().Where(property => property.PropertyType.IsValueType || property.PropertyType.Name.StartsWith("String")))
+            {
+                property.SetValue(dbEntity,property.GetValue(entity, null),null);
+            }
+            return dbEntity;
+        }
     }
 }

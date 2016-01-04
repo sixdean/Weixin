@@ -20,6 +20,7 @@ namespace Weixin.BLL
         public void AddMenu(Menu menu)
         {
             menu.Id = CreateEntityId();
+            menu.MenuId = CreateEntityId();
             menu.CreateDate = DateTime.Now;
             menu.UpdateDate = DateTime.Now;
             Add(menu);
@@ -27,14 +28,8 @@ namespace Weixin.BLL
 
         public void UpdateMenu(Menu menu)
         {
-            Update(menu);
+            var dbEntity = GetById(menu.Id);
+            UpdateDbEntity(dbEntity, menu);
         }
-
-        public void DeleteMenu(Menu menu)
-        {
-            Delete(menu);
-        }
-
-
     }
 }

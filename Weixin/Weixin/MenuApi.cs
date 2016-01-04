@@ -1,11 +1,14 @@
-﻿using Weixin.Common;
+﻿using System;
+using System.Collections.Generic;
+using Weixin.Common;
+using Weixin.DAL;
 using Weixin.IWeixin;
 using Weixin.Model;
 using Weixin.Model.Common;
 
 namespace Weixin.Weixin
 {
-    public class MenuApi:IMenuApi
+    public class MenuApi : IMenuApi
     {
         /// <summary>
         /// 获取菜单数据
@@ -50,6 +53,40 @@ namespace Weixin.Weixin
 
             return Helper.GetExecuteResult(url);
         }
-         
+
+        public List<Menu> GetListMenus(string accessToken)
+        {
+            List<Menu> listmMenus = new List<Menu>();
+            var listmMenuInfos = GetMenu(accessToken).button;
+            return AddMenus(listmMenus, listmMenuInfos, "");
+        }
+
+        public List<Menu> AddMenus(List<Menu> listmMenus, List<MenuInfo> listmMenuInfos, string parentid)
+        {
+            foreach (MenuInfo info in listmMenuInfos)
+            {
+                var menu = new Menu
+                {
+                    Id = Guid.NewGuid().ToString(),
+                    MenuId = Guid.NewGuid().ToString(),
+                    Type = info.type,
+                    Media_id = info.media_id,
+                    Key = info.key,
+                    Name = info.name,
+                    Url = info.url,
+                    ParentId = parentid,
+                    CreateDate = DateTime.Now,
+                    UpdateDate = DateTime.Now,
+                    CreateUser = "66",
+                    UpdateUser = "66"
+                };
+                listmMenus.Add(menu);
+                if (info.sub_button.Count > 0)
+                {
+                    AddMenus(listmMenus, info.sub_button, menu.MenuId);
+                }
+            }
+            return listmMenus;
+        }
     }
 }

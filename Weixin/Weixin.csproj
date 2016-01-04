@@ -797,6 +797,7 @@
     <Compile Include="BLL\MenuBll.cs" />
     <Compile Include="BLL\SysMenuBll.cs" />
     <Compile Include="BLL\SysUserBll.cs" />
+    <Compile Include="Common\Common.cs" />
     <Compile Include="Common\ExtendHelper.cs" />
     <Compile Include="Common\Helper.cs" />
     <Compile Include="Common\HttpHelper.cs" />
@@ -850,6 +851,9 @@
     <Compile Include="Model\Request\RequestEvent.cs" />
     <Compile Include="Model\Request\RequestLink.cs" />
     <Compile Include="Model\Enum\ResponseMsgType.cs" />
+    <Compile Include="Pages\BasePage.cs">
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
     <Compile Include="Pages\Menu.aspx.cs">
       <DependentUpon>Menu.aspx</DependentUpon>
       <SubType>ASPXCodeBehind</SubType>

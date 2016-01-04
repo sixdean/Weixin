@@ -39,7 +39,7 @@ namespace Weixin.Common
         public static T ConvertJson(string url)
         {
             string content = HttpHelper.GetResponse(url);
-            VerifyErrorCode(content);
+            //VerifyErrorCode(content);
 
             T result = JsonConvert.DeserializeObject<T>(content);
             return result;

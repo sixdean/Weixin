@@ -34,9 +34,9 @@ namespace Weixin.Ashx
                 case "GetMenu":
                     {
                         var listMenu = FactoryBll<MenuBll>.Instance.GetMenus();
-                        object obj = new { total = listMenu.Count(), rows = listMenu };
+                        var obj = new { total = listMenu.Count(), rows = listMenu };
                         result = JsonConvert.SerializeObject(obj);
-                    }
+                    }               
                     break;
             }
             context.Response.Write(result);

@@ -33,10 +33,18 @@ namespace Weixin.Common
 
         public static string GetResponse(string url)
         {
-            var httpClient = new HttpClient();
-            httpClient.DefaultRequestHeaders.Accept.Add(new MediaTypeWithQualityHeaderValue("application/json"));
-            var response = httpClient.GetAsync(url).Result;
-            return response.IsSuccessStatusCode ? response.Content.ReadAsStringAsync().Result : null;
+            try
+            {
+                var httpClient = new HttpClient();
+                httpClient.DefaultRequestHeaders.Accept.Add(new MediaTypeWithQualityHeaderValue("application/json"));
+                var response = httpClient.GetAsync(url).Result;
+                return response.IsSuccessStatusCode ? response.Content.ReadAsStringAsync().Result : null;
+            }
+            catch (Exception e)
+            {
+                return "";
+            }
+
         }
 
         public static T GetResponse<T>(string url)

@@ -8,7 +8,7 @@ using Weixin.Model.Common;
 
 namespace Weixin.BLL
 {
-    public abstract class BaseBll<T> where T : BaseEntity, new()
+    public abstract class BaseBll<T> where T : class
     {
         //数据库连接串
         private string _connectionString = string.Empty;
@@ -74,12 +74,15 @@ namespace Weixin.BLL
         }
 
 
-        public virtual void Update(T entity)
+
+        public virtual void UpdateDbEntity(T dbEntity, T entity)
         {
-            DataContext.GetTable<T>().Attach(entity);
+            foreach (var property in typeof(T).GetProperties().Where(property => property.PropertyType.IsValueType || property.PropertyType.Name.StartsWith("String")))
+            {
+                property.SetValue(dbEntity, property.GetValue(entity, null), null);
+            }
             DataContext.SubmitChanges();
         }
-
 
         public virtual void Delete(T entity)
         {

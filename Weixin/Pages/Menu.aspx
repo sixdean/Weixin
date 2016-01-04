@@ -16,19 +16,21 @@
                 columns: [
                     [
                         { field: 'Id', checkbox: true },
-                        {
-                            field: 'ParentId',
-                            title: '父菜单',
-                            editor: {
-                                type: 'combobox',
-                                options: {
-                                    valueField: 'ParentId',
-                                    textField: 'ParentId',
-                                    required: true
-                                }
-                            }
-                        },
-                        { field: 'Name', title: '名称', editor: 'text' },
+                        { field: 'MenuId', hidden: true },
+                        { field: 'ParentId', title: '父菜单', editor: 'text' },
+                //                        {
+                //                            field: 'ParentId',
+                //                            title: '父菜单',
+                //                            editor: {
+                //                                type: 'combobox',
+                //                                options: {
+                //                                    valueField: 'ParentId',
+                //                                    textField: 'ParentId',
+                //                                    required: true
+                //                                }
+                //                            }
+                //                        },
+                        {field: 'Name', title: '名称', editor: 'text' },
                         { field: 'Type', title: '菜单类型', editor: 'text' },
                         { field: 'Key', title: '菜单KEY值', editor: 'text' },
                         { field: 'Url', title: '网页链接', editor: 'text' },
@@ -85,6 +87,13 @@
                         text: '更新微信菜单',
                         handler: function () {
                             updateWeixinMenu();
+                        }
+
+                    }, '-', {
+                        iconCls: 'icon-reload',
+                        text: '获取微信菜单',
+                        handler: function () {
+                            GetWeixinMenu();
                         }
 
                     }, '-'
@@ -272,6 +281,27 @@
                         success: function (result) {
                             console.info("1");
                             console.info(result.d);
+                        },
+                        error: function (msg) {
+                            console.info(msg);
+                            console.info("2");
+                        }
+                    });
+                }
+            });
+        }
+
+        function GetWeixinMenu() {
+            $.messager.confirm('获取微信菜单', '确定要重新从微信服务器上获取菜单数据吗?', function (action) {
+                if (action) {
+                    $.ajax({
+                        type: 'post',
+                        url: 'Pages/Menu.aspx/GetWeixinMenu',
+                        dataType: 'json',
+                        contentType: "application/json;charset=utf-8",
+                        success: function (result) {
+                            console.info($.parseJSON(result.d));
+                            $('#mainDataGrid').datagrid('loadData', $.parseJSON(result.d));
                         },
                         error: function (msg) {
                             console.info(msg);

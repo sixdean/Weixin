@@ -88,45 +88,45 @@ namespace Weixin.Weixin
         //    return ToJsonContent(result);
         //}
 
-        ///// <summary>
-        ///// 生成微信菜单的Json数据
-        ///// </summary>
-        ///// <returns></returns>
-        //private MenuListJson GetWeixinMenu()
-        //{
-        //    MenuListJson menuJson = new MenuListJson();
+         /// <summary>
+         /// 生成微信菜单的Json数据
+         /// </summary>
+         /// <returns></returns>
+         //private MenuListJson GetWeixinMenu()
+         //{
+         //    MenuListJson menuJson = new MenuListJson();
 
-        //    List<MenuNodeInfo> menuList = BLLFactory<Menu>.Instance.GetTree();
-        //    foreach (MenuNodeInfo info in menuList)
-        //    {
-        //        ButtonType type = (info.Type == "click") ? ButtonType.click : ButtonType.view;
-        //        string value = (type == ButtonType.click) ? info.Key : info.Url;
+         //    List<MenuNodeInfo> menuList = BLLFactory<Menu>.Instance.GetTree();
+         //    foreach (MenuNodeInfo info in menuList)
+         //    {
+         //        ButtonType type = (info.Type == "click") ? ButtonType.click : ButtonType.view;
+         //        string value = (type == ButtonType.click) ? info.Key : info.Url;
 
-        //        MenuJson weiInfo = new MenuJson(info.Name, type, value);
-        //        AddSubMenuButton(weiInfo, info.Children);
+         //        MenuJson weiInfo = new MenuJson(info.Name, type, value);
+         //        AddSubMenuButton(weiInfo, info.Children);
 
-        //        menuJson.button.Add(weiInfo);
-        //    }
-        //    return menuJson;
-        //}
+         //        menuJson.button.Add(weiInfo);
+         //    }
+         //    return menuJson;
+         //}
 
-        //private void AddSubMenuButton(MenuJson menu, List<MenuNodeInfo> menuList)
-        //{
-        //    if (menuList.Count > 0)
-        //    {
-        //        menu.sub_button = new List<MenuJson>();
-        //    }
-        //    foreach (MenuNodeInfo info in menuList)
-        //    {
-        //        ButtonType type = (info.Type == "click") ? ButtonType.click : ButtonType.view;
-        //        string value = (type == ButtonType.click) ? info.Key : info.Url;
+         //private void AddSubMenuButton(MenuJson menu, List<MenuNodeInfo> menuList)
+         //{
+         //    if (menuList.Count > 0)
+         //    {
+         //        menu.sub_button = new List<MenuJson>();
+         //    }
+         //    foreach (MenuNodeInfo info in menuList)
+         //    {
+         //        ButtonType type = (info.Type == "click") ? ButtonType.click : ButtonType.view;
+         //        string value = (type == ButtonType.click) ? info.Key : info.Url;
 
-        //        MenuJson weiInfo = new MenuJson(info.Name, type, value);
-        //        menu.sub_button.Add(weiInfo);
+         //        MenuJson weiInfo = new MenuJson(info.Name, type, value);
+         //        menu.sub_button.Add(weiInfo);
 
-        //        AddSubMenuButton(weiInfo, info.Children);
-        //    }
-        //}
+         //        AddSubMenuButton(weiInfo, info.Children);
+         //    }
+         //}
 
 
         ///// <summary>
