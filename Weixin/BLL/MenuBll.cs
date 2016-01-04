@@ -4,33 +4,37 @@ using Weixin.DAL;
 
 namespace Weixin.BLL
 {
-    public class MenuBll : BaseBll
+    public class MenuBll : BaseBll<Menu>
     {
-        public Menu GetmenuById(string id)
+
+        public override Menu GetById(string id)
         {
             return DataContext.Menu.FirstOrDefault(m => m.Id == id);
         }
+
         public IQueryable<Menu> GetMenus()
         {
             return DataContext.Menu;
         }
 
-        public void Add(Menu menu)
+        public void AddMenu(Menu menu)
         {
-            menu.Id = CreateEntityID();
+            menu.Id = CreateEntityId();
             menu.CreateDate = DateTime.Now;
             menu.UpdateDate = DateTime.Now;
-            Add<Menu>(menu);
+            Add(menu);
         }
 
-        public void Update(Menu menu)
+        public void UpdateMenu(Menu menu)
         {
-            Update<Menu>(menu);
+            Update(menu);
         }
 
-        public void Delete(Menu menu)
+        public void DeleteMenu(Menu menu)
         {
-            Delete<Menu>(menu);
+            Delete(menu);
         }
+
+
     }
 }

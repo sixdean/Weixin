@@ -42,7 +42,7 @@
         </FooterTemplate>
     </asp:FormView>
     <asp:ObjectDataSource ID="ObjectDataSource1" DataObjectTypeName="Weixin.DAL.SysUser"
-        InsertMethod="Add" TypeName="Weixin.BLL.SysUserBll" OnInserted="ObjectDataSource1_OnInserted"
+        InsertMethod="AddSysUser" TypeName="Weixin.BLL.SysUserBll" OnInserted="ObjectDataSource1_OnInserted"
         runat="server"></asp:ObjectDataSource>
     </form>
 </asp:Content>

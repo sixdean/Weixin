@@ -47,11 +47,11 @@ namespace Weixin.Pages
             DAL.Menu menu = JsonConvert.DeserializeObject<DAL.Menu>(d);
             if (menu.Id == "")
             {
-                FactoryBll<MenuBll>.Instance.Add(menu);
+                FactoryBll<MenuBll>.Instance.AddMenu(menu);
             }
             else
             {
-                FactoryBll<MenuBll>.Instance.Update(menu);
+                FactoryBll<MenuBll>.Instance.UpdateMenu(menu);
 
             }
             return JsonConvert.SerializeObject("ok");

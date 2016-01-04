@@ -1,4 +1,7 @@
-﻿namespace Weixin.DAL
+﻿using System;
+using Weixin.Model.Common;
+
+namespace Weixin.DAL
 {
     partial class WeixinDataContext
     {
@@ -10,8 +13,18 @@
 
     }
 
-    partial class Menu
+    partial class Menu : BaseEntity
     {
 
+        public override string ID
+        {
+            get { return _Id; }
+            set { _Id = value; }
+        }
+
+        public override string DisplayName
+        {
+            get { return _Name; }
+        }
     }
 }

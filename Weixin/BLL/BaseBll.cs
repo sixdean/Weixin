@@ -1,11 +1,14 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Configuration;
+using System.Linq;
+using System.Reflection;
 using Weixin.DAL;
+using Weixin.Model.Common;
 
 namespace Weixin.BLL
 {
-    public class BaseBll
+    public abstract class BaseBll<T> where T : BaseEntity, new()
     {
         //数据库连接串
         private string _connectionString = string.Empty;
@@ -48,19 +51,21 @@ namespace Weixin.BLL
             }
         }
 
+        public abstract T GetById(string id);
+
         /// <summary>
         ///     新增
         /// </summary>
         /// <param name="entity"></param>
-        public virtual void Add<T>(T entity)
+        public virtual void Add(T entity)
         {
-            DataContext.GetTable(typeof(T)).InsertOnSubmit(entity);
+            DataContext.GetTable<T>().InsertOnSubmit(entity);
             DataContext.SubmitChanges();
         }
 
-        public virtual void Add<T>(List<T> entityList)
+        public virtual void Add(List<T> entityList)
         {
-            var table = DataContext.GetTable(typeof(T));
+            var table = DataContext.GetTable<T>();
             foreach (var entity in entityList)
             {
                 table.InsertOnSubmit(entity);
@@ -69,22 +74,22 @@ namespace Weixin.BLL
         }
 
 
-        public virtual void Update<T>(T entity)
+        public virtual void Update(T entity)
         {
-            DataContext.GetTable(typeof(T)).Attach(entity);
+            DataContext.GetTable<T>().Attach(entity);
             DataContext.SubmitChanges();
         }
 
 
-        public virtual void Delete<T>(T entity)
+        public virtual void Delete(T entity)
         {
-            DataContext.GetTable(typeof(T)).DeleteOnSubmit(entity);
+            DataContext.GetTable<T>().DeleteOnSubmit(entity);
             DataContext.SubmitChanges();
         }
 
-        public virtual void Delete<T>(List<T> entityList)
+        public virtual void Delete(List<T> entityList)
         {
-            var table = DataContext.GetTable(typeof(T));
+            var table = DataContext.GetTable<T>();
             foreach (var entity in entityList)
             {
                 table.DeleteOnSubmit(entity);
@@ -118,7 +123,7 @@ namespace Weixin.BLL
             }
         }
 
-        protected virtual string CreateEntityID()
+        protected virtual string CreateEntityId()
         {
             return Guid.NewGuid().ToString();
         }
