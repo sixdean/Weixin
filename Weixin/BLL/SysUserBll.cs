@@ -6,22 +6,21 @@ using Weixin.DAL;
 
 namespace Weixin.BLL
 {
-    public class SysUserBll : BaseBll
+    public class SysUserBll : BaseBll<SysUser>
     {
         #region 公共
-        public SysUser GetSysUserById(string id)
+        public override SysUser GetById(string id)
         {
             return DataContext.SysUser.FirstOrDefault(s => s.Id == id);
         }
-
-        public void Add(SysUser sysUser)
+        public void AddSysUser(SysUser sysUser)
         {
-            sysUser.Id = CreateEntityID();
+            sysUser.Id = CreateEntityId();
             sysUser.Password = FormsAuthentication.HashPasswordForStoringInConfigFile(sysUser.Password,
                 FormsAuthPasswordFormat.MD5.ToString());
             sysUser.CreateDate = DateTime.Now;
             sysUser.UpdateDate = DateTime.Now;
-            this.Add(sysUser);
+            Add(sysUser);
         }
 
         public bool CheckLogin(string name, string passWord)
@@ -37,5 +36,7 @@ namespace Weixin.BLL
         #region 私有
 
         #endregion
+
+       
     }
 }

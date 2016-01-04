@@ -69,10 +69,27 @@ namespace ConTest
             //            {
             //                Console.WriteLine("{0}      {1}", mi.MemberType, mi.Name);
             //            }
-            Menu menu = FactoryBll<MenuBll>.Instance.GetmenuById("05d0b0f5-a067-402e-9949-b5123dc7234c");
-             
-            FactoryBll<MenuBll>.Instance.Delete(menu);
-            
+
+            Menu menu = new Menu
+            {
+                Id = "id",
+                Key = "key",
+                Type = "type",
+                CreateDate = DateTime.Now,
+                UpdateDate = DateTime.Now,
+                CreateUser = "666",
+                ID = ""
+            };
+            foreach (PropertyInfo property in typeof(Menu).GetProperties())
+            {
+                var name = property.Name;
+                var value = property.GetValue(menu, null);
+                if (property.PropertyType.IsValueType || property.PropertyType.Name.StartsWith("String"))
+                {
+                    Console.WriteLine(string.Format("{0}:{1},type:{2}", name, value, property.PropertyType.Name));
+                }
+            }
+            FactoryBll<MenuBll>.Instance.UpdateMenu(menu);
             Console.ReadLine();
 
         }

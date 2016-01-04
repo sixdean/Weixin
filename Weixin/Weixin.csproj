@@ -825,6 +825,7 @@
     <Compile Include="IWeixin\IMenuApi.cs" />
     <Compile Include="IWeixin\IUserApi.cs" />
     <Compile Include="IWeixin\IWeixinAction.cs" />
+    <Compile Include="Model\Common\BaseEntity.cs" />
     <Compile Include="Model\Enum\ButtonType.cs" />
     <Compile Include="Model\Common\ErrorJsonResult.cs" />
     <Compile Include="Model\Enum\Language.cs" />
