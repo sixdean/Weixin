@@ -72,6 +72,7 @@
                         iconCls: 'icon-save',
                         text: '保存数据',
                         handler: function () {
+                            console.info("save");
                             save();
                         }
 
@@ -230,34 +231,57 @@
                     $('#mainDataGrid').datagrid('acceptChanges');
 
                     var data = $('#mainDataGrid').datagrid('getChecked');
+                    var m = "{d:'" + JSON.stringify(data[0]) + "'}";
+
+                    var params = [["d", JSON.stringify(data[0])]];
+
+                    var k = true;
+                    var paramStr = "{";
+                    $(params).each(function (index) {
+                        var str;
+                        if (k) {
+                            str = params[index][0] + ":'" + params[index][1] + "'";
+                            paramStr += str;
+                            k = false;
+                        }
+                        else {
+                            str = "," + params[index][0] + ":'" + params[index][1] + "'";
+                            paramStr += str;
+                        }
+                    });
+                    paramStr += "}";
+                    console.info(JSON.stringify(data[0]));
+                    console.info("p:" + paramStr);
+
                     if (data.length != 0) {
                         var obj = {};
                         obj.d = JSON.stringify(data[0]);
                         console.info(obj);
-                        //                        $.ajax({
-                        //                            type: 'post',
-                        //                            url: 'Pages/Menu.aspx/SaveWeixinMenu',
-                        //                            dataType: 'json',
-                        //                            data: { d: "2" },
-                        //                            contentType: "application/json;charset=utf-8",
-                        //                            success: function (result) {
-                        //                                console.info("1");
-                        //                                console.info(result.d);
-                        //                                $('#mainDataGrid').datagrid('endEdit', editIndex);
+                        $.ajax({
+                            type: "Post",
+                            url: "Pages/Menu.aspx/SaveWeixinMenu",
+                            data: "{d:'" + JSON.stringify(data[0]) + "'}",
+                            contentType: "application/json;charset=utf-8",
+                            dataType: "json",
+                            async: false,
+                            success: function (result) {
+                                console.info("1");
+                                console.info(result.d);
+                                $('#mainDataGrid').datagrid('endEdit', editIndex);
 
-                        //                                $('#mainDataGrid').datagrid('acceptChanges');
-                        //                                editIndex = undefined;
-                        //                            },
-                        //                            error: function (msg) {
-                        //                                console.info(msg);
-                        //                                console.info("2");
-                        //                            }
-                        //                        });
+                                $('#mainDataGrid').datagrid('acceptChanges');
+                                editIndex = undefined;
+                            },
+                            error: function (msg) {
+                                console.info(msg);
+                                console.info("2");
+                            }
+                        });
 
-                        var url = "Pages/Menu.aspx/SaveWeixinMenu";
-                        var params = [["d", JSON.stringify(data[0])]];
-                        var str = self_ajax(url, params);
-                        console.info(str);
+                        //                        var url = "Pages/Menu.aspx/SaveWeixinMenu";
+                        //                        var params = [["d", JSON.stringify(data[0])]];
+                        //                        var str = self_ajax(url, params);
+                        //                        console.info(str);
                     }
 
                 } else {
@@ -292,7 +316,7 @@
         }
 
         function GetWeixinMenu() {
-            $.messager.confirm('获取微信菜单', '确定要重新从微信服务器上获取菜单数据吗?', function (action) {
+            $.messager.confirm('获取微信菜单', '确定要删除本地数据从新从微信服务器上获取菜单数据吗?', function (action) {
                 if (action) {
                     $.ajax({
                         type: 'post',

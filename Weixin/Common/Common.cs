@@ -1,6 +1,8 @@
 ﻿using System;
 using System.Collections.Generic;
 using Newtonsoft.Json;
+using Newtonsoft.Json.Converters;
+using Formatting = System.Xml.Formatting;
 
 namespace Weixin.Common
 {
@@ -35,8 +37,10 @@ namespace Weixin.Common
 
         public static string GetDatagridJsonString<T>(List<T> list)
         {
+            IsoDateTimeConverter timeFormat = new IsoDateTimeConverter();
+            timeFormat.DateTimeFormat = "yyyy-MM-dd HH:mm:ss";
             var obj = new { total = list.Count, rows = list };
-            return JsonConvert.SerializeObject(obj);
+            return JsonConvert.SerializeObject(obj, Newtonsoft.Json.Formatting.Indented, timeFormat);
         }
     }
 

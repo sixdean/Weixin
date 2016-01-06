@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Collections.Generic;
 using System.Linq;
 using Weixin.DAL;
 
@@ -23,7 +24,23 @@ namespace Weixin.BLL
             menu.MenuId = CreateEntityId();
             menu.CreateDate = DateTime.Now;
             menu.UpdateDate = DateTime.Now;
+            menu.CreateUser = "66";
+            menu.UpdateUser = "66";
             Add(menu);
+        }
+
+        public void AddListMenu(List<Menu> list)
+        {
+            foreach (var t in list)
+            {
+                t.Id = CreateEntityId();
+                t.MenuId = CreateEntityId();
+                t.CreateDate = DateTime.Now;
+                t.UpdateDate = DateTime.Now;
+                t.CreateUser = "66";
+                t.UpdateUser = "66";
+            }
+            Add(list);
         }
 
         public void UpdateMenu(Menu menu)

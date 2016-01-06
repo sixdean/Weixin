@@ -48,17 +48,17 @@ namespace Weixin.Pages
         [WebMethod]
         public static string SaveWeixinMenu(string d)
         {
-            DAL.Menu menu = JsonConvert.DeserializeObject<DAL.Menu>(d);
-            MenuBll mbBll = new MenuBll();
-            if (string.IsNullOrEmpty(menu.Id.ToString()))
-            {
-                mbBll.AddMenu(menu);
-            }
-            else
-            {
-                mbBll.UpdateMenu(menu);
+            //DAL.Menu menu = JsonConvert.DeserializeObject<DAL.Menu>(d);
+            //MenuBll mbBll = new MenuBll();
+            //if (string.IsNullOrEmpty(menu.Id.ToString()))
+            //{
+            //    mbBll.AddMenu(menu);
+            //}
+            //else
+            //{
+            //    mbBll.UpdateMenu(menu);
 
-            }
+            //}
             return JsonConvert.SerializeObject("ok");
         }
 
@@ -70,9 +70,19 @@ namespace Weixin.Pages
         public static string GetWeixinMenu()
         {
             var accessToken = ConfigurationManager.AppSettings["access_token"];
-            MenuApi menu = new MenuApi();
-            var listMenu = menu.GetListMenus(accessToken);
-            return Common.Common.GetDatagridJsonString(listMenu);
+            MenuApi menuApi = new MenuApi();
+            var listMenu = menuApi.GetListMenus(accessToken);
+            if (listMenu != null)
+            {
+                MenuBll menuBll = new MenuBll();
+                menuBll.Delete<DAL.Menu>();
+                menuBll.AddListMenu(listMenu);
+                return Common.Common.GetDatagridJsonString(listMenu);
+            }
+            else
+            {
+                return JsonConvert.SerializeObject("err");
+            }
         }
     }
 }

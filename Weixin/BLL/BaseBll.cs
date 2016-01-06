@@ -100,6 +100,11 @@ namespace Weixin.BLL
             DataContext.SubmitChanges();
         }
 
+        public virtual void Delete<T>() where T : class
+        {
+            DataContext.ExecuteCommand(string.Format(@"delete from {0}", DataContext.GetTable<T>().Context.Mapping.GetTable(typeof(T)).TableName));
+        }
+
         /// <summary>
         ///     初始化DataContext
         /// </summary>
