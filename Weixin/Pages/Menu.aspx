@@ -17,20 +17,25 @@
                     [
                         { field: 'Id', checkbox: true },
                         { field: 'MenuId', hidden: true },
-                        { field: 'ParentId', title: '父菜单', editor: 'text' },
-                //                        {
-                //                            field: 'ParentId',
-                //                            title: '父菜单',
-                //                            editor: {
-                //                                type: 'combobox',
-                //                                options: {
-                //                                    valueField: 'ParentId',
-                //                                    textField: 'ParentId',
-                //                                    required: true
-                //                                }
-                //                            }
-                //                        },
-                        {field: 'Name', title: '名称', editor: 'text' },
+                                        {
+                                            field: 'ParentId',
+                                            title: '父菜单',
+                                            width: 30,
+                                            formatter: function (value, rowData, rowIndex) {
+                                                return rowData["ParentName"];
+                                            },
+                                            editor: {
+                                                type: 'combobox',
+                                                options: {
+                                                    url: 'Ashx/GetData.ashx?type=GetParentRows',
+                                                    valueField: 'MenuId',
+                                                    textField: 'Name',
+                                                    required: true,
+                                                    method: 'get' 
+                                                }
+                                            }
+                                        },
+                        { field: 'Name', title: '名称', editor: 'text' },
                         { field: 'Type', title: '菜单类型', editor: 'text' },
                         { field: 'Key', title: '菜单KEY值', editor: 'text' },
                         { field: 'Url', title: '网页链接', editor: 'text' },
@@ -98,6 +103,14 @@
                         }
 
                     }, '-'
+                    , '-', {
+                        iconCls: 'icon-reload',
+                        text: '测试按钮',
+                        handler: function () {
+                            test();
+                        }
+
+                    }, '-'
                 ],
                 onCheck: function (i, d) {
                     if (editIndex != undefined && i != editIndex) {
@@ -109,10 +122,13 @@
                         $('#mainDataGrid').datagrid('checkRow', i);
                     }
                 },
-                selectOnCheck: false
+                selectOnCheck: false,
+                onLoadSuccess: function (d) {
+
+                }
+
             });
         });
-
 
 
 
@@ -128,6 +144,15 @@
             } else {
                 return false;
             }
+        }
+
+        function test() {
+            //            if (editIndex == undefined) { return true }
+            //            var ed = $('#mainDataGrid').datagrid('getEditor', { index: editIndex, field: 'ParentId' });
+
+            //            $(ed.target).combobox('loadData', parentRows);
+            //            console.info(parentRows);
+          
         }
         function onClickRow(index) {
             if (editIndex != index) {
@@ -227,68 +252,29 @@
         function save() {
             if (editIndex != undefined) {
                 if ($('#mainDataGrid').datagrid('validateRow', editIndex)) {
-
                     $('#mainDataGrid').datagrid('acceptChanges');
+                    $.ajax({
+                        type: "Post",
+                        url: "Pages/Menu.aspx/SaveWeixinMenu",
+                        data: "{d:'" + JSON.stringify($('#mainDataGrid').datagrid('getChecked')[0]) + "'}",
+                        contentType: "application/json;charset=utf-8",
+                        dataType: "json",
+                        async: false,
+                        success: function (result) {
+                            console.info("1");
+                            console.info(result.d);
+                            $('#mainDataGrid').datagrid('endEdit', editIndex);
 
-                    var data = $('#mainDataGrid').datagrid('getChecked');
-                    var m = "{d:'" + JSON.stringify(data[0]) + "'}";
-
-                    var params = [["d", JSON.stringify(data[0])]];
-
-                    var k = true;
-                    var paramStr = "{";
-                    $(params).each(function (index) {
-                        var str;
-                        if (k) {
-                            str = params[index][0] + ":'" + params[index][1] + "'";
-                            paramStr += str;
-                            k = false;
-                        }
-                        else {
-                            str = "," + params[index][0] + ":'" + params[index][1] + "'";
-                            paramStr += str;
+                            $('#mainDataGrid').datagrid('acceptChanges');
+                            editIndex = undefined;
+                        },
+                        error: function (msg) {
+                            console.info(msg);
+                            console.info("2");
                         }
                     });
-                    paramStr += "}";
-                    console.info(JSON.stringify(data[0]));
-                    console.info("p:" + paramStr);
-
-                    if (data.length != 0) {
-                        var obj = {};
-                        obj.d = JSON.stringify(data[0]);
-                        console.info(obj);
-                        $.ajax({
-                            type: "Post",
-                            url: "Pages/Menu.aspx/SaveWeixinMenu",
-                            data: "{d:'" + JSON.stringify(data[0]) + "'}",
-                            contentType: "application/json;charset=utf-8",
-                            dataType: "json",
-                            async: false,
-                            success: function (result) {
-                                console.info("1");
-                                console.info(result.d);
-                                $('#mainDataGrid').datagrid('endEdit', editIndex);
-
-                                $('#mainDataGrid').datagrid('acceptChanges');
-                                editIndex = undefined;
-                            },
-                            error: function (msg) {
-                                console.info(msg);
-                                console.info("2");
-                            }
-                        });
-
-                        //                        var url = "Pages/Menu.aspx/SaveWeixinMenu";
-                        //                        var params = [["d", JSON.stringify(data[0])]];
-                        //                        var str = self_ajax(url, params);
-                        //                        console.info(str);
-                    }
-
                 } else {
-                    $('#mainDataGrid').datagrid('acceptChanges');
-
                     $.messager.alert('Warning', '请将数据填写完整再保存!');
-
                 }
 
             }
@@ -343,7 +329,7 @@
 
         //刷新
         function reload() {
-            $('#mainDataGrid').datagrid('load', {
+            $('#mainDataGrid').datagrid('reload', {
         });
         editIndex = undefined;
     }

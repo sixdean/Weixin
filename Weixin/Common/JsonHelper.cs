@@ -32,9 +32,9 @@ namespace Weixin.Common
         }
 
         /// <summary>
-        /// 转换Json字符串到具体的对象
+        /// 通过url地址get到json字符串并将字符串转换为具体对象
         /// </summary>
-        /// <param name="url">返回Json数据的链接地址</param>
+        /// <param name="url"></param>
         /// <returns></returns>
         public static T ConvertJson(string url)
         {
@@ -45,18 +45,16 @@ namespace Weixin.Common
             return result;
         }
 
+
         /// <summary>
-        /// 转换Json字符串到具体的对象
+        /// post数据并将返回json字符串转换为具体对象
         /// </summary>
-        /// <param name="url">返回Json数据的链接地址</param>
-        /// <param name="postData">POST提交的数据</param>
+        /// <param name="url">url地址</param>
+        /// <param name="postData">post提交的数据</param>
         /// <returns></returns>
         public static T ConvertJson(string url, string postData)
         {
-
             string content = HttpHelper.PostResponse(url, postData);
-            VerifyErrorCode(content);
-
             T result = JsonConvert.DeserializeObject<T>(content);
             return result;
         }

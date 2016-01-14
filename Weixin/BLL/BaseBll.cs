@@ -53,6 +53,11 @@ namespace Weixin.BLL
 
         public abstract T GetById(string id);
 
+        public virtual IQueryable<T> GetAll()
+        {
+            return DataContext.GetTable<T>();
+        }
+
         /// <summary>
         ///     新增
         /// </summary>
@@ -100,9 +105,9 @@ namespace Weixin.BLL
             DataContext.SubmitChanges();
         }
 
-        public virtual void Delete<T>() where T : class
+        public virtual void DeleteAll<K>() where K : class
         {
-            DataContext.ExecuteCommand(string.Format(@"delete from {0}", DataContext.GetTable<T>().Context.Mapping.GetTable(typeof(T)).TableName));
+            DataContext.ExecuteCommand(string.Format(@"delete from {0}", DataContext.GetTable<K>().Context.Mapping.GetTable(typeof(K)).TableName));
         }
 
         /// <summary>

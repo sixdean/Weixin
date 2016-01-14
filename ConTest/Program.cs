@@ -69,8 +69,8 @@ namespace ConTest
             //            {
             //                Console.WriteLine("{0}      {1}", mi.MemberType, mi.Name);
             //            }
+            var s = Common.GetAccessToken("wx2647e739be267f22", "d4624c36b6795d1d99dcf0547af5443d");
 
-            
             Console.ReadKey();
 
         }

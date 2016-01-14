@@ -44,6 +44,7 @@
     <Reference Include="System.Data.DataSetExtensions" />
     <Reference Include="System.Data.Linq" />
     <Reference Include="System.Net.Http, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a, processorArchitecture=MSIL" />
+    <Reference Include="System.Runtime.Caching" />
     <Reference Include="System.Web.Extensions" />
     <Reference Include="System.Xml.Linq" />
     <Reference Include="System.Drawing" />
@@ -63,6 +64,7 @@
     <Content Include="Account\Login.aspx" />
     <Content Include="Account\Register.aspx" />
     <Content Include="Pages\Menu.aspx" />
+    <Content Include="Pages\UserInfo.aspx" />
     <Content Include="Scripts\Common.js" />
     <Content Include="Scripts\jquery-easyui-1.4.4\changelog.txt" />
     <Content Include="Scripts\jquery-easyui-1.4.4\demo-mobile\accordion\basic.html" />
@@ -734,6 +736,7 @@
     <Content Include="Scripts\jquery-easyui-1.4.4\themes\metro\validatebox.css" />
     <Content Include="Scripts\jquery-easyui-1.4.4\themes\metro\window.css" />
     <Content Include="Scripts\jquery-easyui-1.4.4\themes\mobile.css" />
+    <Content Include="Styles\common.css" />
     <Content Include="Styles\Site.css" />
     <Content Include="Default.aspx" />
     <Content Include="Global.asax" />
@@ -794,14 +797,17 @@
     </Compile>
     <Compile Include="BLL\BaseBll.cs" />
     <Compile Include="BLL\FactoryBll.cs" />
+    <Compile Include="BLL\GroupInfoBll.cs" />
     <Compile Include="BLL\MenuBll.cs" />
     <Compile Include="BLL\SysMenuBll.cs" />
     <Compile Include="BLL\SysUserBll.cs" />
+    <Compile Include="BLL\UserInfoBll.cs" />
     <Compile Include="Common\Common.cs" />
     <Compile Include="Common\ExtendHelper.cs" />
     <Compile Include="Common\Helper.cs" />
     <Compile Include="Common\HttpHelper.cs" />
     <Compile Include="Common\JsonHelper.cs" />
+    <Compile Include="Common\T.cs" />
     <Compile Include="Common\TextLogHelper.cs" />
     <Compile Include="Common\XmlSerializerHelper.cs" />
     <Compile Include="DAL\WeixinDB.cs">
@@ -826,7 +832,9 @@
     <Compile Include="IWeixin\IMenuApi.cs" />
     <Compile Include="IWeixin\IUserApi.cs" />
     <Compile Include="IWeixin\IWeixinAction.cs" />
+    <Compile Include="Model\Common\AccessToken.cs" />
     <Compile Include="Model\Common\BaseEntity.cs" />
+    <Compile Include="Model\Common\UserInfo.cs" />
     <Compile Include="Model\Enum\ButtonType.cs" />
     <Compile Include="Model\Common\ErrorJsonResult.cs" />
     <Compile Include="Model\Enum\Language.cs" />
@@ -860,6 +868,13 @@
     </Compile>
     <Compile Include="Pages\Menu.aspx.designer.cs">
       <DependentUpon>Menu.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="Pages\UserInfo.aspx.cs">
+      <DependentUpon>UserInfo.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="Pages\UserInfo.aspx.designer.cs">
+      <DependentUpon>UserInfo.aspx</DependentUpon>
     </Compile>
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Site.Master.cs">

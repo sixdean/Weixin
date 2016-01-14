@@ -13,4 +13,9 @@ namespace Weixin.DAL
     partial class Menu
     {
     }
+
+    partial class GroupInfo
+    {
+
+    }
 }

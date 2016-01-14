@@ -13,9 +13,28 @@ namespace Weixin.BLL
             return DataContext.Menu.FirstOrDefault(m => m.Id == id);
         }
 
-        public IQueryable<Menu> GetMenus()
+        public IQueryable<object> GetMenus()
         {
-            return DataContext.Menu;
+            var obj = from a in DataContext.Menu
+                      join b in DataContext.Menu on a.ParentId equals b.MenuId into c
+                      from d in c.DefaultIfEmpty()
+                      select new
+                      {
+                          a.Id,
+                          a.MenuId,
+                          a.Name,
+                          a.Key,
+                          a.Media_id,
+                          a.UpdateDate,
+                          a.UpdateUser,
+                          a.CreateUser,
+                          a.CreateDate,
+                          a.Type,
+                          a.Sort,
+                          a.Url,
+                          ParentName = d.Name
+                      };
+            return obj;
         }
 
         public void AddMenu(Menu menu)
@@ -46,7 +65,14 @@ namespace Weixin.BLL
         public void UpdateMenu(Menu menu)
         {
             var dbEntity = GetById(menu.Id);
+            menu.UpdateDate = DateTime.Now;
+            menu.UpdateUser = "77";
             UpdateDbEntity(dbEntity, menu);
+        }
+
+        public IQueryable<Menu> GetParentRows(string parentId)
+        {
+            return DataContext.Menu.Where(o => o.ParentId == parentId);
         }
     }
 }

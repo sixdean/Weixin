@@ -1,49 +1,32 @@
-﻿using Weixin.Model;
+﻿using System;
+using Weixin.Model;
 using Weixin.Model.Common;
 
 namespace Weixin.Common
 {
     public static class Helper
     {
-          
+
 
         /// <summary>
-        /// 通用的操作结果
+        /// 
         /// </summary>
-        /// <param name="url">网页地址</param>
-        /// <param name="postData">提交的数据内容</param>
+        /// <param name="url"></param>
+        /// <param name="postData"></param>
         /// <returns></returns>
-        public static CommonResult GetExecuteResult(string url, string postData = null)
+        public static ErrorJsonResult GetExecuteResult(string url, string postData = null)
         {
-            CommonResult success = new CommonResult();
+            var result = new ErrorJsonResult();
             try
             {
-                ErrorJsonResult result;
-                if (postData != null)
-                {
-                    result = JsonHelper<ErrorJsonResult>.ConvertJson(url, postData);
-                }
-                else
-                {
-                    result = JsonHelper<ErrorJsonResult>.ConvertJson(url);
-                }
-
-                if (result != null)
-                {
-                    //success.Success = (result.errcode == ReturnCode.请求成功);
-                    //success.ErrorMessage = result.errmsg;
-                }
+                result = postData != null ? JsonHelper<ErrorJsonResult>.ConvertJson(url, postData) : JsonHelper<ErrorJsonResult>.ConvertJson(url);
             }
-            catch
+            catch (Exception e)
             {
+                TextLogHelper.WriteLog("GetExecuteResult:" + e.Message);
             }
-            //catch (WeixinException ex)
-            //{
-            //    success.ErrorMessage = ex.Message;
-            //}
 
-            return success;
-        }  
+            return result;
+        }
     }
-    }
- 
+}

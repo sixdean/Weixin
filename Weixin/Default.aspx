@@ -20,7 +20,7 @@
 
             });
         }
-
+ 
         function CreateMainTal(n) {
             var selectIndex = null;
             $($("#mainTabs").tabs('tabs')).each(function (i, t) {
@@ -39,32 +39,7 @@
                 });
             }
         } 
-
-        //        $(function () {
-        //            $("#mainDataGrid").datagrid({
-        //                url: "../Ashx/GetData.ashx?type=GetMenu",
-        //                colums: [[
-        //                                        { field: 'Id', title: 'Id' },
-        //                                        { field: 'Name', title: 'Name' },
-        //                                        { field: 'Type', title: 'Type' },
-        //                                        { field: 'Key', title: 'Key' },
-        //                                        { field: 'Url', title: 'Url' },
-        //                                        { field: 'Media_id', title: 'Media_id' },
-        //                                        { field: 'ParentId', title: 'ParentId' },
-        //                                        { field: 'UpdateUser', title: 'UpdateUser' },
-        //                                        { field: 'UpdateDate', title: 'UpdateDate' },
-        //                                        { field: 'CreateUser', title: 'CreateUser' },
-        //                                        { field: 'CreateDate', title: 'CreateDate' }
-        //                                        ]]
-        //                //            url: 'datagrid_data1.json'
-        //            });
-
-        //            //        $("#mainDataGrid").datagrid({
-        //            //            data: [
-        //            //            { itemid: '2112', productid: 'fdasfad' }
-        //            //            ]
-        //            //        });
-        //        })
+ 
     </script>
     <h2>
         Basic Layout</h2>

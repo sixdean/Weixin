@@ -1,5 +1,6 @@
 ﻿using System.Collections.Generic;
 using Weixin.Common;
+using Weixin.DAL;
 using Weixin.IWeixin;
 using Weixin.Model;
 using Weixin.Model.Common;
@@ -33,7 +34,7 @@ namespace Weixin.Weixin
 
             return list;
         }
-         
+
 
         /// <summary>
         /// 获取用户基本信息
@@ -41,12 +42,12 @@ namespace Weixin.Weixin
         /// <param name="accessToken">调用接口凭证</param>
         /// <param name="openId">普通用户的标识，对当前公众号唯一</param>
         /// <param name="lang">返回国家地区语言版本，zh_CN 简体，zh_TW 繁体，en 英语</param>
-        public UserJson GetUserDetail(string accessToken, string openId, Language lang = Language.zh_CN)
+        public UserInfo GetUserDetail(string accessToken, string openId, Language lang = Language.zh_CN)
         {
             string url = string.Format("https://api.weixin.qq.com/cgi-bin/user/info?access_token={0}&openid={1}&lang={2}",
                    accessToken, openId, lang.ToString());
 
-            UserJson result = JsonHelper<UserJson>.ConvertJson(url);
+            UserInfo result = JsonHelper<UserInfo>.ConvertJson(url);
             return result;
         }
 
@@ -129,7 +130,7 @@ namespace Weixin.Weixin
         /// <param name="id">分组id，由微信分配</param>
         /// <param name="name">分组名字（30个字符以内）</param>
         /// <returns></returns>
-        public CommonResult UpdateGroupName(string accessToken, int id, string name)
+        public ErrorJsonResult UpdateGroupName(string accessToken, int id, string name)
         {
             string url = string.Format("https://api.weixin.qq.com/cgi-bin/groups/update?access_token={0}", accessToken);
             var data = new
@@ -152,7 +153,7 @@ namespace Weixin.Weixin
         /// <param name="openid">用户的OpenID</param>
         /// <param name="to_groupid">分组id</param>
         /// <returns></returns>
-        public CommonResult MoveUserToGroup(string accessToken, string openid, int to_groupid)
+        public ErrorJsonResult MoveUserToGroup(string accessToken, string openid, int to_groupid)
         {
             string url = string.Format("https://api.weixin.qq.com/cgi-bin/groups/members/update?access_token={0}", accessToken);
             var data = new
@@ -163,6 +164,18 @@ namespace Weixin.Weixin
             string postData = data.ToJson();
 
             return Helper.GetExecuteResult(url, postData);
+        }
+
+
+        /// <summary>
+        /// 查询所有分组
+        /// </summary>
+        /// <param name="accessToken"></param>
+        /// <returns></returns>
+        public GroupListJson GetWeixinGroupData(string accessToken)
+        {
+            string url = string.Format("https://api.weixin.qq.com/cgi-bin/groups/get?access_token={0}", accessToken);
+            return HttpHelper.GetResponse<GroupListJson>(url);
         }
     }
 }
