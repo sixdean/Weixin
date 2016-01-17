@@ -1,0 +1,9 @@
+﻿<wpf:ResourceDictionary xml:space="preserve" xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml" xmlns:s="clr-namespace:System;assembly=mscorlib" xmlns:ss="urn:shemas-jetbrains-com:settings-storage-xaml" xmlns:wpf="http://schemas.microsoft.com/winfx/2006/xaml/presentation">
+	<s:String x:Key="/Default/CodeInspection/WebPathMapping/IgnoredPaths/=ICONS_005CICON_002DALL_002ECSS/@EntryIndexedValue">icons\icon-all.css</s:String>
+	<s:String x:Key="/Default/CodeInspection/WebPathMapping/IgnoredPaths/=JEASYUI_002DEXTENSIONS_005CJEASYUI_002EEXTENSIONS_002ECSS/@EntryIndexedValue">jeasyui-extensions\jeasyui.extensions.css</s:String>
+	<s:String x:Key="/Default/CodeInspection/WebPathMapping/IgnoredPaths/=JQUERY_002DEASYUI_002DTHEME/@EntryIndexedValue">jquery-easyui-theme</s:String>
+	<s:String x:Key="/Default/CodeInspection/WebPathMapping/MappedPaths/=PAGES_005CPAGES_005CUSERINFO_002EASPX/@EntryIndexedValue"></s:String>
+	<s:String x:Key="/Default/CodeInspection/WebPathMapping/PathsInCorrectCasing/=ICONS_005CICON_002DALL_002ECSS/@EntryIndexedValue">icons\icon-all.css</s:String>
+	<s:String x:Key="/Default/CodeInspection/WebPathMapping/PathsInCorrectCasing/=JEASYUI_002DEXTENSIONS_005CJEASYUI_002EEXTENSIONS_002ECSS/@EntryIndexedValue">jeasyui-extensions\jeasyui.extensions.css</s:String>
+	<s:String x:Key="/Default/CodeInspection/WebPathMapping/PathsInCorrectCasing/=JQUERY_002DEASYUI_002DTHEME/@EntryIndexedValue">jquery-easyui-theme</s:String>
+	<s:String x:Key="/Default/CodeInspection/WebPathMapping/PathsInCorrectCasing/=PAGES_005CPAGES_005CUSERINFO_002EASPX/@EntryIndexedValue">Pages\Pages\UserInfo.aspx</s:String></wpf:ResourceDictionary>
