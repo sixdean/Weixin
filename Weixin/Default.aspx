@@ -8,19 +8,21 @@
         $(function () {
 
             CreateMainMenu();
+
         });
         function CreateMainMenu() {
             $("#mainMenu").tree({
                 url: "Ashx/GetData.ashx?type=GetSysMenu",
                 animate: true,
-                lines: true,
+                //                lines: true,
                 onClick: function (n) {
+                    console.info(n);
                     CreateMainTal(n);
                 }
 
             });
         }
- 
+
         function CreateMainTal(n) {
             var selectIndex = null;
             $($("#mainTabs").tabs('tabs')).each(function (i, t) {
@@ -45,7 +47,7 @@
         Basic Layout</h2>
     <div style="margin: 20px 0;">
     </div>
-    <div class="easyui-layout" style="width: 95%; height: 500px;">
+    <div class="easyui-layout" style="width: 95%; height: 90%;">
         <div data-options="region:'north'" style="height: 50px">
         </div>
         <div data-options="region:'south',split:true" style="height: 50px;">
@@ -54,8 +56,8 @@
             <ul id="mainMenu">
             </ul>
         </div>
-        <div data-options="region:'center'">
-            <div id="mainTabs" class="easyui-tabs">
+        <div data-options="region:'center'" style="height: 100%">
+            <div id="mainTabs" class="easyui-tabs" >
             </div>
         </div>
     </div>

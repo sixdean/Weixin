@@ -34,7 +34,7 @@ namespace Weixin.Ashx
                 case "GetMenu":
                     {
                         var listMenu = FactoryBll<MenuBll>.Instance.GetMenus();
-                        result = Common.Common.GetDatagridJsonString<object>(listMenu.ToList());
+                        result = BLL.Common.Common.GetDatagridJsonString<object>(listMenu.ToList());
                     }
                     break;
                 case "GetParentRows":
@@ -46,7 +46,7 @@ namespace Weixin.Ashx
                 case "GetGroupDataGrid":
                     {
                         var list = FactoryBll<GroupInfoBll>.Instance.GetGouptInfos();
-                        result = Common.Common.GetDatagridJsonString<GroupInfo>(list.ToList());
+                        result = BLL.Common.Common.GetDatagridJsonString<GroupInfo>(list.ToList());
 
                     }
                     break;
@@ -55,7 +55,7 @@ namespace Weixin.Ashx
                         var a = new { id = "fdal" };
                         var list=new List<object>();
                         list.Add(a);
-                        result = Common.Common.GetDatagridJsonString<object>(list);
+                        result = BLL.Common.Common.GetDatagridJsonString<object>(list);
                     }
                     break;
 

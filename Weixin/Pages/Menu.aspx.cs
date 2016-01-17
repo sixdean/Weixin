@@ -3,7 +3,8 @@ using System.Configuration;
 using System.Web.Services;
 using Newtonsoft.Json;
 using Weixin.BLL;
-using Weixin.Weixin;
+using Weixin.BLL.Weixin;
+
 
 namespace Weixin.Pages
 {
@@ -63,7 +64,7 @@ namespace Weixin.Pages
         }
 
         /// <summary>
-        ///     从微信服务器上获取菜单数据
+        ///  从微信服务器上获取菜单数据
         /// </summary>
         /// <returns></returns>
         [WebMethod]
@@ -76,7 +77,7 @@ namespace Weixin.Pages
                 var menuBll = new MenuBll();
                 menuBll.DeleteAll<DAL.Menu>();
                 menuBll.Add(listMenu);
-                return Common.Common.GetDatagridJsonString(listMenu);
+                return BLL.Common.Common.GetDatagridJsonString(listMenu);
             }
             return JsonConvert.SerializeObject("err");
         }

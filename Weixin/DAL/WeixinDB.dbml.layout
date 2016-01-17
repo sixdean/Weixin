@@ -14,12 +14,6 @@
         <elementListCompartment Id="d7c1e692-9fd5-498c-8165-a01b70583883" absoluteBounds="2.89, 6.585, 1.9700000000000002, 1.393585205078125" name="DataPropertiesCompartment" titleTextColor="Black" itemTextColor="Black" />
       </nestedChildShapes>
     </classShape>
-    <classShape Id="d016c266-e986-4e33-bdac-912ddd3777e3" absoluteBounds="3, 0.625, 2, 1.3805261230468751">
-      <DataClassMoniker Name="/WeixinDataContext/GroupInfo" />
-      <nestedChildShapes>
-        <elementListCompartment Id="87a1218e-f30b-48e6-958c-94a549c1cefb" absoluteBounds="3.015, 1.085, 1.9700000000000002, 0.820526123046875" name="DataPropertiesCompartment" titleTextColor="Black" itemTextColor="Black" />
-      </nestedChildShapes>
-    </classShape>
     <classShape Id="7136b984-8cd0-4fb8-a27d-60808a8aa135" absoluteBounds="0.5, 0.5, 2, 3.2907230631510416">
       <DataClassMoniker Name="/WeixinDataContext/Menu" />
       <nestedChildShapes>
@@ -30,6 +24,12 @@
       <DataClassMoniker Name="/WeixinDataContext/UserInfo" />
       <nestedChildShapes>
         <elementListCompartment Id="956e8b69-2712-40af-ac31-2a3c27d8f9e3" absoluteBounds="5.7650000000000006, 1.085, 1.9700000000000002, 2.7307230631510415" name="DataPropertiesCompartment" titleTextColor="Black" itemTextColor="Black" />
+      </nestedChildShapes>
+    </classShape>
+    <classShape Id="0fcac022-c0c1-4d85-9039-9dabdefe2560" absoluteBounds="3.5, 1.5, 2, 2.3356245930989585">
+      <DataClassMoniker Name="/WeixinDataContext/GroupInfo" />
+      <nestedChildShapes>
+        <elementListCompartment Id="2ecf47b1-b643-4cef-80bd-3f721ce47029" absoluteBounds="3.515, 1.96, 1.9700000000000002, 1.7756245930989585" name="DataPropertiesCompartment" titleTextColor="Black" itemTextColor="Black" />
       </nestedChildShapes>
     </classShape>
   </nestedChildShapes>

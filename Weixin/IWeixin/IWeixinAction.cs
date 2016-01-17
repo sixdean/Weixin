@@ -1,5 +1,4 @@
 ﻿using Weixin.Model.Request;
-using Weixin.Weixin;
 
 namespace Weixin.IWeixin
 {

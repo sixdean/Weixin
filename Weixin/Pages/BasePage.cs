@@ -13,11 +13,12 @@ namespace Weixin.Pages
         {
             get
             {
+                return "fy8Nn2tE2KvAGehLHOBCd4laTD1MVvwXKW-qUMKXwagSNK1G881Gvzjb4sa7iGV5S3ht7bq_2YYSxuXrEND_uc7AHhKkQSArvDbplzbAneUFIKiACASVX";
                 if (cache.Contains("AccessToken"))
                 {
                     return (string)cache.Get("AccessToken");
                 }
-                return Common.Common.GetAccessToken(appid, secret);
+                return BLL.Common.Common.GetAccessToken(appid, secret);
             }
         }
 

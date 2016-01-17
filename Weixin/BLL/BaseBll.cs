@@ -78,7 +78,10 @@ namespace Weixin.BLL
             DataContext.SubmitChanges();
         }
 
-
+        public virtual void Update()
+        {
+            DataContext.SubmitChanges();
+        }
 
         public virtual void UpdateDbEntity(T dbEntity, T entity)
         {

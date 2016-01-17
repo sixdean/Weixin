@@ -31,7 +31,7 @@
                                                     valueField: 'MenuId',
                                                     textField: 'Name',
                                                     required: true,
-                                                    method: 'get' 
+                                                    method: 'get'
                                                 }
                                             }
                                         },
@@ -75,9 +75,8 @@
                         }
                     }, '-', {
                         iconCls: 'icon-save',
-                        text: '保存数据',
+                        text: '<a href="#" title="将新增或修改的数据保存到本地" class="easyui-tooltip">保存</a>',
                         handler: function () {
-                            console.info("save");
                             save();
                         }
 
@@ -89,25 +88,17 @@
                         }
 
                     }, '-', {
-                        iconCls: 'icon-save',
-                        text: '更新微信菜单',
+                        iconCls: 'icon-hamburg-publish',
+                        text: '<a href="#" title="将本地的数据更新到微信服务器,并修改本地数据状态" class="easyui-tooltip">更新数据</a>',
                         handler: function () {
                             updateWeixinMenu();
                         }
 
                     }, '-', {
-                        iconCls: 'icon-reload',
-                        text: '获取微信菜单',
+                        iconCls: 'icon-hamburg-down',
+                        text: '<a href="#" title="从微信服务器上获取数据更新到本地,并删除本地原来数据" class="easyui-tooltip">同步数据</a>',
                         handler: function () {
                             GetWeixinMenu();
-                        }
-
-                    }, '-'
-                    , '-', {
-                        iconCls: 'icon-reload',
-                        text: '测试按钮',
-                        handler: function () {
-                            test();
                         }
 
                     }, '-'
@@ -146,14 +137,6 @@
             }
         }
 
-        function test() {
-            //            if (editIndex == undefined) { return true }
-            //            var ed = $('#mainDataGrid').datagrid('getEditor', { index: editIndex, field: 'ParentId' });
-
-            //            $(ed.target).combobox('loadData', parentRows);
-            //            console.info(parentRows);
-          
-        }
         function onClickRow(index) {
             if (editIndex != index) {
                 if (endEditing()) {
@@ -281,7 +264,7 @@
         }
 
         function updateWeixinMenu() {
-            $.messager.confirm('更新微信菜单', '确定要将菜单提交到微信服务器吗?', function (action) {
+            $.messager.confirm('更新数据', '确定要将本地微信菜单数据更新到微信服务器上吗?', function (action) {
                 if (action) {
                     $.ajax({
                         type: 'post',
@@ -302,7 +285,7 @@
         }
 
         function GetWeixinMenu() {
-            $.messager.confirm('获取微信菜单', '确定要删除本地数据从新从微信服务器上获取菜单数据吗?', function (action) {
+            $.messager.confirm('同步数据', '确定要删除本地数据重新从微信服务器上获取菜单数据吗?', function (action) {
                 if (action) {
                     $.ajax({
                         type: 'post',

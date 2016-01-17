@@ -36,12 +36,12 @@ namespace Weixin.DAL
     partial void InsertSysUser(SysUser instance);
     partial void UpdateSysUser(SysUser instance);
     partial void DeleteSysUser(SysUser instance);
-    partial void InsertGroupInfo(GroupInfo instance);
-    partial void UpdateGroupInfo(GroupInfo instance);
-    partial void DeleteGroupInfo(GroupInfo instance);
     partial void InsertMenu(Menu instance);
     partial void UpdateMenu(Menu instance);
     partial void DeleteMenu(Menu instance);
+    partial void InsertGroupInfo(GroupInfo instance);
+    partial void UpdateGroupInfo(GroupInfo instance);
+    partial void DeleteGroupInfo(GroupInfo instance);
     #endregion
 		
 		public WeixinDataContext() : 
@@ -90,14 +90,6 @@ namespace Weixin.DAL
 			}
 		}
 		
-		public System.Data.Linq.Table<GroupInfo> GroupInfo
-		{
-			get
-			{
-				return this.GetTable<GroupInfo>();
-			}
-		}
-		
 		public System.Data.Linq.Table<Menu> Menu
 		{
 			get
@@ -111,6 +103,14 @@ namespace Weixin.DAL
 			get
 			{
 				return this.GetTable<UserInfo>();
+			}
+		}
+		
+		public System.Data.Linq.Table<GroupInfo> GroupInfo
+		{
+			get
+			{
+				return this.GetTable<GroupInfo>();
 			}
 		}
 	}
@@ -478,116 +478,6 @@ namespace Weixin.DAL
 					this._CreateDate = value;
 					this.SendPropertyChanged("CreateDate");
 					this.OnCreateDateChanged();
-				}
-			}
-		}
-		
-		public event PropertyChangingEventHandler PropertyChanging;
-		
-		public event PropertyChangedEventHandler PropertyChanged;
-		
-		protected virtual void SendPropertyChanging()
-		{
-			if ((this.PropertyChanging != null))
-			{
-				this.PropertyChanging(this, emptyChangingEventArgs);
-			}
-		}
-		
-		protected virtual void SendPropertyChanged(String propertyName)
-		{
-			if ((this.PropertyChanged != null))
-			{
-				this.PropertyChanged(this, new PropertyChangedEventArgs(propertyName));
-			}
-		}
-	}
-	
-	[global::System.Data.Linq.Mapping.TableAttribute(Name="dbo.GroupInfo")]
-	public partial class GroupInfo : INotifyPropertyChanging, INotifyPropertyChanged
-	{
-		
-		private static PropertyChangingEventArgs emptyChangingEventArgs = new PropertyChangingEventArgs(String.Empty);
-		
-		private string _id;
-		
-		private string _name;
-		
-		private System.Nullable<int> _count;
-		
-    #region 可扩展性方法定义
-    partial void OnLoaded();
-    partial void OnValidate(System.Data.Linq.ChangeAction action);
-    partial void OnCreated();
-    partial void OnidChanging(string value);
-    partial void OnidChanged();
-    partial void OnnameChanging(string value);
-    partial void OnnameChanged();
-    partial void OncountChanging(System.Nullable<int> value);
-    partial void OncountChanged();
-    #endregion
-		
-		public GroupInfo()
-		{
-			OnCreated();
-		}
-		
-		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_id", DbType="NVarChar(50) NOT NULL", CanBeNull=false, IsPrimaryKey=true)]
-		public string id
-		{
-			get
-			{
-				return this._id;
-			}
-			set
-			{
-				if ((this._id != value))
-				{
-					this.OnidChanging(value);
-					this.SendPropertyChanging();
-					this._id = value;
-					this.SendPropertyChanged("id");
-					this.OnidChanged();
-				}
-			}
-		}
-		
-		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_name", DbType="NVarChar(50) NOT NULL", CanBeNull=false)]
-		public string name
-		{
-			get
-			{
-				return this._name;
-			}
-			set
-			{
-				if ((this._name != value))
-				{
-					this.OnnameChanging(value);
-					this.SendPropertyChanging();
-					this._name = value;
-					this.SendPropertyChanged("name");
-					this.OnnameChanged();
-				}
-			}
-		}
-		
-		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_count", DbType="Int")]
-		public System.Nullable<int> count
-		{
-			get
-			{
-				return this._count;
-			}
-			set
-			{
-				if ((this._count != value))
-				{
-					this.OncountChanging(value);
-					this.SendPropertyChanging();
-					this._count = value;
-					this.SendPropertyChanged("count");
-					this.OncountChanged();
 				}
 			}
 		}
@@ -1202,6 +1092,236 @@ namespace Weixin.DAL
 				{
 					this._groupid = value;
 				}
+			}
+		}
+	}
+	
+	[global::System.Data.Linq.Mapping.TableAttribute(Name="dbo.GroupInfo")]
+	public partial class GroupInfo : INotifyPropertyChanging, INotifyPropertyChanged
+	{
+		
+		private static PropertyChangingEventArgs emptyChangingEventArgs = new PropertyChangingEventArgs(String.Empty);
+		
+		private string _id;
+		
+		private System.Nullable<int> _groupId;
+		
+		private string _name;
+		
+		private System.Nullable<short> _count;
+		
+		private short _IsDelete;
+		
+		private short _IsUpdate;
+		
+		private short _IsAdd;
+		
+		private short _IsSync;
+		
+    #region 可扩展性方法定义
+    partial void OnLoaded();
+    partial void OnValidate(System.Data.Linq.ChangeAction action);
+    partial void OnCreated();
+    partial void OnidChanging(string value);
+    partial void OnidChanged();
+    partial void OngroupIdChanging(System.Nullable<int> value);
+    partial void OngroupIdChanged();
+    partial void OnnameChanging(string value);
+    partial void OnnameChanged();
+    partial void OncountChanging(System.Nullable<short> value);
+    partial void OncountChanged();
+    partial void OnIsDeleteChanging(short value);
+    partial void OnIsDeleteChanged();
+    partial void OnIsUpdateChanging(short value);
+    partial void OnIsUpdateChanged();
+    partial void OnIsAddChanging(short value);
+    partial void OnIsAddChanged();
+    partial void OnIsSyncChanging(short value);
+    partial void OnIsSyncChanged();
+    #endregion
+		
+		public GroupInfo()
+		{
+			OnCreated();
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_id", DbType="NVarChar(50) NOT NULL", CanBeNull=false, IsPrimaryKey=true)]
+		public string id
+		{
+			get
+			{
+				return this._id;
+			}
+			set
+			{
+				if ((this._id != value))
+				{
+					this.OnidChanging(value);
+					this.SendPropertyChanging();
+					this._id = value;
+					this.SendPropertyChanged("id");
+					this.OnidChanged();
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_groupId", DbType="Int")]
+		public System.Nullable<int> groupId
+		{
+			get
+			{
+				return this._groupId;
+			}
+			set
+			{
+				if ((this._groupId != value))
+				{
+					this.OngroupIdChanging(value);
+					this.SendPropertyChanging();
+					this._groupId = value;
+					this.SendPropertyChanged("groupId");
+					this.OngroupIdChanged();
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_name", DbType="NVarChar(50) NOT NULL", CanBeNull=false)]
+		public string name
+		{
+			get
+			{
+				return this._name;
+			}
+			set
+			{
+				if ((this._name != value))
+				{
+					this.OnnameChanging(value);
+					this.SendPropertyChanging();
+					this._name = value;
+					this.SendPropertyChanged("name");
+					this.OnnameChanged();
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_count", DbType="SmallInt")]
+		public System.Nullable<short> count
+		{
+			get
+			{
+				return this._count;
+			}
+			set
+			{
+				if ((this._count != value))
+				{
+					this.OncountChanging(value);
+					this.SendPropertyChanging();
+					this._count = value;
+					this.SendPropertyChanged("count");
+					this.OncountChanged();
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_IsDelete", DbType="SmallInt NOT NULL")]
+		public short IsDelete
+		{
+			get
+			{
+				return this._IsDelete;
+			}
+			set
+			{
+				if ((this._IsDelete != value))
+				{
+					this.OnIsDeleteChanging(value);
+					this.SendPropertyChanging();
+					this._IsDelete = value;
+					this.SendPropertyChanged("IsDelete");
+					this.OnIsDeleteChanged();
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_IsUpdate", DbType="SmallInt NOT NULL")]
+		public short IsUpdate
+		{
+			get
+			{
+				return this._IsUpdate;
+			}
+			set
+			{
+				if ((this._IsUpdate != value))
+				{
+					this.OnIsUpdateChanging(value);
+					this.SendPropertyChanging();
+					this._IsUpdate = value;
+					this.SendPropertyChanged("IsUpdate");
+					this.OnIsUpdateChanged();
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_IsAdd", DbType="SmallInt NOT NULL")]
+		public short IsAdd
+		{
+			get
+			{
+				return this._IsAdd;
+			}
+			set
+			{
+				if ((this._IsAdd != value))
+				{
+					this.OnIsAddChanging(value);
+					this.SendPropertyChanging();
+					this._IsAdd = value;
+					this.SendPropertyChanged("IsAdd");
+					this.OnIsAddChanged();
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_IsSync", DbType="SmallInt NOT NULL")]
+		public short IsSync
+		{
+			get
+			{
+				return this._IsSync;
+			}
+			set
+			{
+				if ((this._IsSync != value))
+				{
+					this.OnIsSyncChanging(value);
+					this.SendPropertyChanging();
+					this._IsSync = value;
+					this.SendPropertyChanged("IsSync");
+					this.OnIsSyncChanged();
+				}
+			}
+		}
+		
+		public event PropertyChangingEventHandler PropertyChanging;
+		
+		public event PropertyChangedEventHandler PropertyChanged;
+		
+		protected virtual void SendPropertyChanging()
+		{
+			if ((this.PropertyChanging != null))
+			{
+				this.PropertyChanging(this, emptyChangingEventArgs);
+			}
+		}
+		
+		protected virtual void SendPropertyChanged(String propertyName)
+		{
+			if ((this.PropertyChanged != null))
+			{
+				this.PropertyChanged(this, new PropertyChangedEventArgs(propertyName));
 			}
 		}
 	}

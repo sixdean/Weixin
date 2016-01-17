@@ -1,6 +1,6 @@
 ﻿using System;
 using System.Xml.Serialization;
-using Weixin.Common;
+using Weixin.BLL.Common;
 
 namespace Weixin.Model.Common
 {
