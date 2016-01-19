@@ -8,7 +8,7 @@ using Weixin.Model.Common;
 
 namespace Weixin.BLL
 {
-    public abstract class BaseBll<T> where T : BaseEntity, new()
+    public abstract class BaseBll<T> where T : class
     {
         //数据库连接串
         private string _connectionString = string.Empty;
@@ -59,6 +59,7 @@ namespace Weixin.BLL
         /// <param name="entity"></param>
         public virtual void Add(T entity)
         {
+            
             DataContext.GetTable<T>().InsertOnSubmit(entity);
             DataContext.SubmitChanges();
         }
