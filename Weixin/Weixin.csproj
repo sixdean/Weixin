@@ -3928,6 +3928,7 @@
     <Compile Include="IWeixin\IUserApi.cs" />
     <Compile Include="IWeixin\IWeixinAction.cs" />
     <Compile Include="Model\Common\AccessToken.cs" />
+    <Compile Include="Model\Common\AjaxResult.cs" />
     <Compile Include="Model\Common\BaseEntity.cs" />
     <Compile Include="Model\Common\UserInfo.cs" />
     <Compile Include="Model\Enum\ButtonType.cs" />
@@ -3947,8 +3948,8 @@
     <Compile Include="Model\Request\RequestEventView.cs" />
     <Compile Include="Model\Request\RequestEventClick.cs" />
     <Compile Include="Model\Request\RequestEventLocation.cs" />
-    <Compile Include="Model\Request\RequestEventScan.cs" />
     <Compile Include="Model\Request\RequestEventScanSubscribe.cs" />
+    <Compile Include="Model\Request\RequestEventScanUnSubscribe.cs" />
     <Compile Include="Model\Request\RequestEventUnSubscribe.cs" />
     <Compile Include="Model\Request\RequestEventSubscribe.cs" />
     <Compile Include="Model\Request\RequestEvent.cs" />

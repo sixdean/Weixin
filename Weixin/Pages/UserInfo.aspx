@@ -4,7 +4,7 @@
     <script type="text/javascript">
         $(function () {
             CreateGroupDataGrid();
-            CreateUsersDataGrid("1");
+            CreateUsersDataGrid("0");
         });
 
         function CreateGroupDataGrid() {
@@ -105,23 +105,8 @@
                     handler: function () {
                         $.messager.show({ icon: "error", msg: "点击发送开了房间爱师傅的骄傲是代理费", timeout: 444444444, position: "topCenter", showType: 'fade', title: 'ceshifalfjalskf' });
                     }
-                }, '-', {
-                    text: '测试4',
-                    iconCls: "icon-cancel",
-                    handler: function () {
-                        $.messager.show({ icon: "error", msg: "点击发送开了房间爱师傅的骄傲是代理费", timeout: 444444444, position: "topCenter", showType: 'fade', title: 'ceshifalfjalskf' });
-                    }
-                }, '-', {
-                    text: '测试5',
-                    iconCls: "icon-cancel",
-                    handler: function () {
-                        $.messager.show({ icon: "error", msg: "点击发送开了房间爱师傅的骄傲是代理费", timeout: 444444444, position: "topCenter", showType: 'fade', title: 'ceshifalfjalskf' });
-                    }
-                }
-            ],
-                onClick: function (n) {
-                    CreateUsersDataGrid(n.id);
-                }
+                }, '-'
+            ]
 
             });
         }
@@ -188,7 +173,8 @@
         }
 
         function SelectGroup(row) {
-            CreateUsersDataGrid(row.id);
+            console.info(row);
+            CreateUsersDataGrid(row.groupId);
         }
 
         function AddGroup() {
@@ -267,7 +253,7 @@
 
         function CreateUsersDataGrid(id) {
             $('#usersDataGrid').datagrid({
-                url: 'Ashx/GetData.ashx?type=GetUsersDataGrid&id' + id,
+                url: 'Ashx/GetData.ashx?type=GetUsersDataGrid&id=' + id,
                 method: 'get',
                 title: '用户列表',
                 iconCls: 'icon-save',
@@ -279,11 +265,89 @@
                 loadMsg: '在使劲加载中...',
                 columns: [
                 [
-                    { field: 'id', title: '名称', editor: 'text' }
+                        { field: 'Id', checkbox: true },
+                    { field: 'nickname', title: '昵称', width: 30 },
+                    { field: 'openid', title: '用户标识', width: 30 },
+                    { field: 'subscribe', title: '是否订阅', formatter: function (value, rowdata, rowindex) {
+                        var result = "否";
+                        if (value == 1) {
+                            result = "是";
+                        }
+                        else if (value == "0") {
+                            result = "否";
+                        }
+                        return result;
+                    }
+                    },
+                    { field: 'sex', title: '性别', formatter: function (value, rowdata, rowindex) {
+                        var result = "未知";
+                        if (value == 1) {
+                            result = "男";
+                        } else if (value == 2) {
+                            result = "女";
+                        }
+                        else if (value == 0) {
+                            result = "未知";
+                        }
+                        return result;
+                    }
+                    },
+                    { field: 'country', title: '国家' },
+                    { field: 'province', title: '省份' },
+                    { field: 'city', title: '城市' },
+                    { field: 'language', title: '语言', formatter: function (value, rowdata, rowindex) {
+                        var result = "简体";
+                        if (value == "zh_TW") {
+                            result = "繁体";
+                        }
+                        else if (value == "en") {
+                            result = "英语";
+                        }
+                        else if (value == "zh_CN") {
+                            result = "简体";
+                        }
+                        return result;
+                    }
+                    },
+                    { field: 'headimgurl', title: '用户头像', formatter: function (value, rowdata, rowindex) {
+                        return "<img height='50px' width='50px' src='" + value + "' />";
+                    }
+                    },
+                    { field: 'subscribe_time', title: '关注时间', formatter: function (value, rowdata, rowindex) {
+                        return (new Date(value * 1000)).Format('yyyy-MM-dd hh:mm:ss');
+                    }
+                    },
+                    { field: 'unionid', title: 'unionid' },
+                    { field: 'groupid', title: '用户分组' },
+                    { field: 'remark', title: '备注', editor: 'text' }
+                //                    { field: 'text', title: '名称', editor: 'text' },
+                //                    { field: 'text', title: '名称', editor: 'text' },
+                //                    { field: 'text', title: '名称', editor: 'text' },
+                //                    { field: 'text', title: '名称', editor: 'text' },
+                //                    { field: 'text', title: '名称', editor: 'text' },
+                //                    { field: 'text', title: '名称', editor: 'text' }
+
                 ]
             ],
                 toolbar: [
                 {
+                    text: '<a href="#" title="从微信服务器上获取数据更新到本地,并删除本地原来数据" class="easyui-tooltip">同步列表</a>',
+                    iconCls: "icon-hamburg-down",
+                    handler: function () {
+                        GetWeixinUserListData(this);
+                    }
+                }, '-', {
+                    text: '<a href="#" title="根据本地用户列表数据获取用户详细信息" class="easyui-tooltip">同步信息</a>',
+                    iconCls: "icon-hamburg-down",
+                    handler: function () {
+                        GetWeixinUserInfoData(this);
+                    }
+                }, '-', {
+                    iconCls: 'icon-add',
+                    text: '新增',
+                    handler: function () {
+                    }
+                }, '-', {
                     iconCls: 'icon-add',
                     text: '新增',
                     handler: function () {
@@ -344,22 +408,54 @@
         }
 
 
-        function GetWeixinUserInfoData() {
+        function GetWeixinUserListData(target) {
             $.messager.confirm('获取用户列表', '确定要删除本地数据从新从微信服务器上获取用户列表数据吗?', function (action) {
+                $(target).linkbutton('disable');
                 if (action) {
                     $.ajax({
                         type: 'post',
-                        url: 'Pages/UserInfo.aspx/GetWeixinUserInfoData',
+                        url: 'Pages/UserInfo.aspx/GetWeixinUserListData',
                         dataType: 'json',
                         contentType: "application/json;charset=utf-8",
-                        success: function (result) {
-                            console.info(result);
-                            return true;
+                        success: function (data) {
+                            var result = JSON.parse(data.d);
+                            if (result.result == "ok") {
+                                messagerShowTop('提示', '同步数据成功');
+                                $("#usersDataGrid").datagrid('reload');
+                            } else if (result.result == "err") {
+                                messagerShowTop('提示', '同步数据失败:' + result.msg);
+                            }
+                            $(target).linkbutton('enable');
                         },
                         error: function (msg) {
-                            console.info(msg);
+                            messagerShowTop('提示', msg);
+                            $(target).linkbutton('enable');
                         }
                     });
+                }
+            });
+        }
+
+        function GetWeixinUserInfoData(target) {
+            $(target).linkbutton('disable');
+            $.ajax({
+                type: 'post',
+                url: 'Pages/UserInfo.aspx/GetWeixinUserInfoData',
+                dataType: 'json',
+                contentType: "application/json;charset=utf-8",
+                success: function (data) {
+                    var result = JSON.parse(data.d);
+                    if (result.result == "ok") {
+                        messagerShowTop('提示', '同步数据成功');
+                        $("#usersDataGrid").datagrid('reload');
+                    } else if (result.result == "err") {
+                        messagerShowTop('提示', '同步数据失败:' + result.msg);
+                    }
+                    $(target).linkbutton('enable');
+                },
+                error: function (msg) {
+                    messagerShowTop('提示', msg);
+                    $(target).linkbutton('enable');
                 }
             });
         }

@@ -212,19 +212,19 @@ namespace Weixin.BLL.Weixin
         /// <param name="accessToken"></param>
         /// <param name="list"></param>
         /// <returns></returns>
-        public List<UserInfo> GetListUserDetail(string accessToken, List<GetListUserJson> list)
+        public List<UserJson> GetListUserDetail(string accessToken, List<GetListUserJson> list)
         {
             var url = string.Format("https://api.weixin.qq.com/cgi-bin/user/info/batchget?access_token={0}", accessToken);
             var data = new
             {
                 user_list = list
             };
-            var listUserInfo = new List<UserInfo>();
+            var listUserInfo = new List<UserJson>();
             var postData = data.ToJson();
             var result = JsonHelper<UserDetailListJsonResult>.ConvertJson(url, postData);
             if (result != null && result.user_info_list != null)
             {
-                listUserInfo.AddRange(result.user_info_list.Select(o => new UserInfo(o)));
+                listUserInfo = result.user_info_list;
             }
             return listUserInfo;
         }
@@ -237,7 +237,7 @@ namespace Weixin.BLL.Weixin
         /// <param name="accessToken">调用接口凭证</param>
         /// <param name="nextOpenId">第一个拉取的OPENID，不填默认从头开始拉取</param>
         /// <returns></returns>
-        public List<string> GetUserList(string accessToken, string nextOpenId = null)
+        public UserListJsonResult GetUserList(string accessToken, string nextOpenId = null)
         {
             List<string> list = new List<string>();
 
@@ -248,12 +248,8 @@ namespace Weixin.BLL.Weixin
             }
 
             UserListJsonResult result = JsonHelper<UserListJsonResult>.ConvertJson(url);
-            if (result != null && result.data != null)
-            {
-                list.AddRange(result.data.openid);
-            }
-
-            return list;
+            
+            return result;
         }
         #endregion
         ///---------------------------------------------------------------------------------------------

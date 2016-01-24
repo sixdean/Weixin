@@ -3,14 +3,14 @@
 namespace Weixin.Model.Request
 {
     /// <summary>
-    /// 扫描带参数二维码事件,用户已关注时的事件推送
+    /// 扫描带参数二维码事件,用户未关注时
     /// </summary>
     [System.Xml.Serialization.XmlRoot(ElementName = "xml")]
-    public class RequestEventScan : RequestEvent
+    public class RequestEventScanUnSubscribe : RequestEvent
     {
-        public RequestEventScan()
+        public RequestEventScanUnSubscribe()
         {
-            this.Event = RequestEventType.SCAN.ToString();
+            this.Event = RequestEventType.subscribe.ToString();
         }
 
         /// <summary>
@@ -23,5 +23,4 @@ namespace Weixin.Model.Request
         /// </summary>
         public string Ticket { get; set; }
     }
-
 }

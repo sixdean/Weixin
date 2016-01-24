@@ -1,10 +1,14 @@
 ﻿using System;
+using System.Collections.Generic;
 using System.Linq;
+using System.Threading;
+using System.Web.DynamicData;
 using System.Web.Services;
 using Newtonsoft.Json;
 using Weixin.BLL;
 using Weixin.BLL.Weixin;
 using Weixin.DAL;
+using Weixin.Model.Common;
 
 namespace Weixin.Pages
 {
@@ -35,21 +39,72 @@ namespace Weixin.Pages
                 result = "err";
                 msg = e.Message;
             }
-            return JsonConvert.SerializeObject(new { result, msg });
+            return JsonConvert.SerializeObject(new AjaxResult(result, msg));
         }
 
 
         [WebMethod]
-        public static string GetWeixinUserInfoData()
+        public static string GetWeixinUserListData()
         {
-            var userApi = new UserApi();
-            var userList = userApi.GetUserList(accessToken);
-            //UserInfoBll userInfoBll = new UserInfoBll();
-            //userInfoBll.DeleteAll<GroupInfo>();
-            //userInfoBll.Add(groupList.groups);
-            return JsonConvert.SerializeObject(userList);
+            var result = "ok";
+            var msg = "";
+            try
+            {
+                var userApi = new UserApi();
+                UserInfoBll userInfoBll = new UserInfoBll();
+                var total = 0;
+                var count = 0;
+                var nextopenid = string.Empty;
+                var userList = new List<DAL.UserInfo>();
+                userInfoBll.DeleteAll<DAL.UserInfo>();
+                do
+                {
+                    var userListJsonResult = userApi.GetUserList(accessToken, nextopenid);
+                    if (userListJsonResult != null && userListJsonResult.data != null)
+                    {
+                        total = userListJsonResult.total;
+                        count = userListJsonResult.count;
+                        nextopenid = userListJsonResult.next_openid;
+                        userList.AddRange(userListJsonResult.data.openid.Select(o => new DAL.UserInfo(o)));
+                        userInfoBll.Add(userList);
+                    }
+
+                } while (total > count);
+            }
+            catch (Exception e)
+            {
+                result = "err";
+                msg = e.Message;
+            }
+            return JsonConvert.SerializeObject(new AjaxResult(result, msg));
         }
 
+        [WebMethod]
+        public static string GetWeixinUserInfoData()
+        {
+            var result = "ok";
+            var msg = "";
+            try
+            {
+                var userApi = new UserApi();
+                UserInfoBll userInfoBll = new UserInfoBll();
+                var openList = userInfoBll.GetNeedSyncUserOpenidList();
+                var startIndex = 0;
+                do
+                {
+                    var list = openList.Take(100).Skip(startIndex).ToList();
+                    var userDetailList = userApi.GetListUserDetail(accessToken, list);
+                    userInfoBll.UpdateUserInfoByUserJson(userDetailList);
+                    startIndex = startIndex + 100;
+                } while (openList.Count() > startIndex + 100);
+            }
+            catch (Exception e)
+            {
+                result = "err";
+                msg = e.Message;
+            }
+            return JsonConvert.SerializeObject(new AjaxResult(result, msg));
+        }
         [WebMethod]
         public static string GroupFormSubmit(string d, string type)
         {
@@ -85,7 +140,9 @@ namespace Weixin.Pages
                 result = "err";
                 msg = e.Message;
             }
-            return JsonConvert.SerializeObject(new { result, msg });
+            var ss = new AjaxResult(result, msg);
+            var a = JsonConvert.SerializeObject(ss);
+            return a;
         }
 
         [WebMethod]
@@ -147,7 +204,7 @@ namespace Weixin.Pages
                 result = "err";
                 msg = e.Message;
             }
-            return JsonConvert.SerializeObject(new { result, msg });
+            return JsonConvert.SerializeObject(new AjaxResult(result, msg));
         }
     }
 }

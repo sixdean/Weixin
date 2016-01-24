@@ -19,6 +19,7 @@ namespace Weixin.DAL
     {
         public GroupInfo(GroupJson groupJson)
         {
+            id = Guid.NewGuid().ToString();
             _groupId = groupJson.id;
             _name = groupJson.name;
             _count = groupJson.count;
@@ -42,6 +43,7 @@ namespace Weixin.DAL
     {
         public UserInfo(UserJson userJson)
         {
+            _Id = Guid.NewGuid().ToString();
             _openid = userJson.openid;
             _subscribe = userJson.subscribe;
             _nickname = userJson.nickname;
@@ -55,6 +57,12 @@ namespace Weixin.DAL
             _unionid = userJson.unionid;
             _remark = userJson.remark;
             _groupid = userJson.groupid;
+        }
+
+        public UserInfo(string openid)
+        {
+            _Id = Guid.NewGuid().ToString();
+            _openid = openid;
         }
     }
 }

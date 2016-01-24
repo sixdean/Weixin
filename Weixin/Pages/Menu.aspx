@@ -20,7 +20,7 @@
                                         {
                                             field: 'ParentId',
                                             title: '父菜单',
-                                            width: 30,
+                                            width: 10,
                                             formatter: function (value, rowData, rowIndex) {
                                                 return rowData["ParentName"];
                                             },

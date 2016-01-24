@@ -42,6 +42,9 @@ namespace Weixin.DAL
     partial void InsertGroupInfo(GroupInfo instance);
     partial void UpdateGroupInfo(GroupInfo instance);
     partial void DeleteGroupInfo(GroupInfo instance);
+    partial void InsertUserInfo(UserInfo instance);
+    partial void UpdateUserInfo(UserInfo instance);
+    partial void DeleteUserInfo(UserInfo instance);
     #endregion
 		
 		public WeixinDataContext() : 
@@ -98,19 +101,19 @@ namespace Weixin.DAL
 			}
 		}
 		
-		public System.Data.Linq.Table<UserInfo> UserInfo
-		{
-			get
-			{
-				return this.GetTable<UserInfo>();
-			}
-		}
-		
 		public System.Data.Linq.Table<GroupInfo> GroupInfo
 		{
 			get
 			{
 				return this.GetTable<GroupInfo>();
+			}
+		}
+		
+		public System.Data.Linq.Table<UserInfo> UserInfo
+		{
+			get
+			{
+				return this.GetTable<UserInfo>();
 			}
 		}
 	}
@@ -853,249 +856,6 @@ namespace Weixin.DAL
 		}
 	}
 	
-	[global::System.Data.Linq.Mapping.TableAttribute(Name="dbo.UserInfo")]
-	public partial class UserInfo
-	{
-		
-		private string _openid;
-		
-		private string _subscribe;
-		
-		private string _nickname;
-		
-		private string _sex;
-		
-		private string _city;
-		
-		private string _country;
-		
-		private string _province;
-		
-		private string _language;
-		
-		private string _headimgurl;
-		
-		private string _subscribe_time;
-		
-		private string _unionid;
-		
-		private string _remark;
-		
-		private string _groupid;
-		
-		public UserInfo()
-		{
-		}
-		
-		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_openid", DbType="NVarChar(50) NOT NULL", CanBeNull=false)]
-		public string openid
-		{
-			get
-			{
-				return this._openid;
-			}
-			set
-			{
-				if ((this._openid != value))
-				{
-					this._openid = value;
-				}
-			}
-		}
-		
-		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_subscribe", DbType="NChar(10) NOT NULL", CanBeNull=false)]
-		public string subscribe
-		{
-			get
-			{
-				return this._subscribe;
-			}
-			set
-			{
-				if ((this._subscribe != value))
-				{
-					this._subscribe = value;
-				}
-			}
-		}
-		
-		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_nickname", DbType="NVarChar(50)")]
-		public string nickname
-		{
-			get
-			{
-				return this._nickname;
-			}
-			set
-			{
-				if ((this._nickname != value))
-				{
-					this._nickname = value;
-				}
-			}
-		}
-		
-		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_sex", DbType="NChar(10)")]
-		public string sex
-		{
-			get
-			{
-				return this._sex;
-			}
-			set
-			{
-				if ((this._sex != value))
-				{
-					this._sex = value;
-				}
-			}
-		}
-		
-		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_city", DbType="NVarChar(50)")]
-		public string city
-		{
-			get
-			{
-				return this._city;
-			}
-			set
-			{
-				if ((this._city != value))
-				{
-					this._city = value;
-				}
-			}
-		}
-		
-		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_country", DbType="NVarChar(50)")]
-		public string country
-		{
-			get
-			{
-				return this._country;
-			}
-			set
-			{
-				if ((this._country != value))
-				{
-					this._country = value;
-				}
-			}
-		}
-		
-		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_province", DbType="NVarChar(50)")]
-		public string province
-		{
-			get
-			{
-				return this._province;
-			}
-			set
-			{
-				if ((this._province != value))
-				{
-					this._province = value;
-				}
-			}
-		}
-		
-		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_language", DbType="NVarChar(50)")]
-		public string language
-		{
-			get
-			{
-				return this._language;
-			}
-			set
-			{
-				if ((this._language != value))
-				{
-					this._language = value;
-				}
-			}
-		}
-		
-		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_headimgurl", DbType="NVarChar(255)")]
-		public string headimgurl
-		{
-			get
-			{
-				return this._headimgurl;
-			}
-			set
-			{
-				if ((this._headimgurl != value))
-				{
-					this._headimgurl = value;
-				}
-			}
-		}
-		
-		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_subscribe_time", DbType="NVarChar(50)")]
-		public string subscribe_time
-		{
-			get
-			{
-				return this._subscribe_time;
-			}
-			set
-			{
-				if ((this._subscribe_time != value))
-				{
-					this._subscribe_time = value;
-				}
-			}
-		}
-		
-		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_unionid", DbType="NVarChar(50)")]
-		public string unionid
-		{
-			get
-			{
-				return this._unionid;
-			}
-			set
-			{
-				if ((this._unionid != value))
-				{
-					this._unionid = value;
-				}
-			}
-		}
-		
-		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_remark", DbType="NVarChar(50)")]
-		public string remark
-		{
-			get
-			{
-				return this._remark;
-			}
-			set
-			{
-				if ((this._remark != value))
-				{
-					this._remark = value;
-				}
-			}
-		}
-		
-		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_groupid", DbType="NVarChar(50)")]
-		public string groupid
-		{
-			get
-			{
-				return this._groupid;
-			}
-			set
-			{
-				if ((this._groupid != value))
-				{
-					this._groupid = value;
-				}
-			}
-		}
-	}
-	
 	[global::System.Data.Linq.Mapping.TableAttribute(Name="dbo.GroupInfo")]
 	public partial class GroupInfo : INotifyPropertyChanging, INotifyPropertyChanged
 	{
@@ -1301,6 +1061,380 @@ namespace Weixin.DAL
 					this._IsSync = value;
 					this.SendPropertyChanged("IsSync");
 					this.OnIsSyncChanged();
+				}
+			}
+		}
+		
+		public event PropertyChangingEventHandler PropertyChanging;
+		
+		public event PropertyChangedEventHandler PropertyChanged;
+		
+		protected virtual void SendPropertyChanging()
+		{
+			if ((this.PropertyChanging != null))
+			{
+				this.PropertyChanging(this, emptyChangingEventArgs);
+			}
+		}
+		
+		protected virtual void SendPropertyChanged(String propertyName)
+		{
+			if ((this.PropertyChanged != null))
+			{
+				this.PropertyChanged(this, new PropertyChangedEventArgs(propertyName));
+			}
+		}
+	}
+	
+	[global::System.Data.Linq.Mapping.TableAttribute(Name="dbo.UserInfo")]
+	public partial class UserInfo : INotifyPropertyChanging, INotifyPropertyChanged
+	{
+		
+		private static PropertyChangingEventArgs emptyChangingEventArgs = new PropertyChangingEventArgs(String.Empty);
+		
+		private string _Id;
+		
+		private string _openid;
+		
+		private string _subscribe;
+		
+		private string _nickname;
+		
+		private string _sex;
+		
+		private string _city;
+		
+		private string _country;
+		
+		private string _province;
+		
+		private string _language;
+		
+		private string _headimgurl;
+		
+		private string _subscribe_time;
+		
+		private string _unionid;
+		
+		private string _remark;
+		
+		private string _groupid;
+		
+    #region 可扩展性方法定义
+    partial void OnLoaded();
+    partial void OnValidate(System.Data.Linq.ChangeAction action);
+    partial void OnCreated();
+    partial void OnIdChanging(string value);
+    partial void OnIdChanged();
+    partial void OnopenidChanging(string value);
+    partial void OnopenidChanged();
+    partial void OnsubscribeChanging(string value);
+    partial void OnsubscribeChanged();
+    partial void OnnicknameChanging(string value);
+    partial void OnnicknameChanged();
+    partial void OnsexChanging(string value);
+    partial void OnsexChanged();
+    partial void OncityChanging(string value);
+    partial void OncityChanged();
+    partial void OncountryChanging(string value);
+    partial void OncountryChanged();
+    partial void OnprovinceChanging(string value);
+    partial void OnprovinceChanged();
+    partial void OnlanguageChanging(string value);
+    partial void OnlanguageChanged();
+    partial void OnheadimgurlChanging(string value);
+    partial void OnheadimgurlChanged();
+    partial void Onsubscribe_timeChanging(string value);
+    partial void Onsubscribe_timeChanged();
+    partial void OnunionidChanging(string value);
+    partial void OnunionidChanged();
+    partial void OnremarkChanging(string value);
+    partial void OnremarkChanged();
+    partial void OngroupidChanging(string value);
+    partial void OngroupidChanged();
+    #endregion
+		
+		public UserInfo()
+		{
+			OnCreated();
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_Id", DbType="NVarChar(50) NOT NULL", CanBeNull=false, IsPrimaryKey=true)]
+		public string Id
+		{
+			get
+			{
+				return this._Id;
+			}
+			set
+			{
+				if ((this._Id != value))
+				{
+					this.OnIdChanging(value);
+					this.SendPropertyChanging();
+					this._Id = value;
+					this.SendPropertyChanged("Id");
+					this.OnIdChanged();
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_openid", DbType="NVarChar(50) NOT NULL", CanBeNull=false)]
+		public string openid
+		{
+			get
+			{
+				return this._openid;
+			}
+			set
+			{
+				if ((this._openid != value))
+				{
+					this.OnopenidChanging(value);
+					this.SendPropertyChanging();
+					this._openid = value;
+					this.SendPropertyChanged("openid");
+					this.OnopenidChanged();
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_subscribe", DbType="NChar(10)")]
+		public string subscribe
+		{
+			get
+			{
+				return this._subscribe;
+			}
+			set
+			{
+				if ((this._subscribe != value))
+				{
+					this.OnsubscribeChanging(value);
+					this.SendPropertyChanging();
+					this._subscribe = value;
+					this.SendPropertyChanged("subscribe");
+					this.OnsubscribeChanged();
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_nickname", DbType="NVarChar(50)")]
+		public string nickname
+		{
+			get
+			{
+				return this._nickname;
+			}
+			set
+			{
+				if ((this._nickname != value))
+				{
+					this.OnnicknameChanging(value);
+					this.SendPropertyChanging();
+					this._nickname = value;
+					this.SendPropertyChanged("nickname");
+					this.OnnicknameChanged();
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_sex", DbType="NChar(10)")]
+		public string sex
+		{
+			get
+			{
+				return this._sex;
+			}
+			set
+			{
+				if ((this._sex != value))
+				{
+					this.OnsexChanging(value);
+					this.SendPropertyChanging();
+					this._sex = value;
+					this.SendPropertyChanged("sex");
+					this.OnsexChanged();
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_city", DbType="NVarChar(50)")]
+		public string city
+		{
+			get
+			{
+				return this._city;
+			}
+			set
+			{
+				if ((this._city != value))
+				{
+					this.OncityChanging(value);
+					this.SendPropertyChanging();
+					this._city = value;
+					this.SendPropertyChanged("city");
+					this.OncityChanged();
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_country", DbType="NVarChar(50)")]
+		public string country
+		{
+			get
+			{
+				return this._country;
+			}
+			set
+			{
+				if ((this._country != value))
+				{
+					this.OncountryChanging(value);
+					this.SendPropertyChanging();
+					this._country = value;
+					this.SendPropertyChanged("country");
+					this.OncountryChanged();
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_province", DbType="NVarChar(50)")]
+		public string province
+		{
+			get
+			{
+				return this._province;
+			}
+			set
+			{
+				if ((this._province != value))
+				{
+					this.OnprovinceChanging(value);
+					this.SendPropertyChanging();
+					this._province = value;
+					this.SendPropertyChanged("province");
+					this.OnprovinceChanged();
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_language", DbType="NVarChar(50)")]
+		public string language
+		{
+			get
+			{
+				return this._language;
+			}
+			set
+			{
+				if ((this._language != value))
+				{
+					this.OnlanguageChanging(value);
+					this.SendPropertyChanging();
+					this._language = value;
+					this.SendPropertyChanged("language");
+					this.OnlanguageChanged();
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_headimgurl", DbType="NVarChar(255)")]
+		public string headimgurl
+		{
+			get
+			{
+				return this._headimgurl;
+			}
+			set
+			{
+				if ((this._headimgurl != value))
+				{
+					this.OnheadimgurlChanging(value);
+					this.SendPropertyChanging();
+					this._headimgurl = value;
+					this.SendPropertyChanged("headimgurl");
+					this.OnheadimgurlChanged();
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_subscribe_time", DbType="NVarChar(50)")]
+		public string subscribe_time
+		{
+			get
+			{
+				return this._subscribe_time;
+			}
+			set
+			{
+				if ((this._subscribe_time != value))
+				{
+					this.Onsubscribe_timeChanging(value);
+					this.SendPropertyChanging();
+					this._subscribe_time = value;
+					this.SendPropertyChanged("subscribe_time");
+					this.Onsubscribe_timeChanged();
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_unionid", DbType="NVarChar(50)")]
+		public string unionid
+		{
+			get
+			{
+				return this._unionid;
+			}
+			set
+			{
+				if ((this._unionid != value))
+				{
+					this.OnunionidChanging(value);
+					this.SendPropertyChanging();
+					this._unionid = value;
+					this.SendPropertyChanged("unionid");
+					this.OnunionidChanged();
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_remark", DbType="NVarChar(50)")]
+		public string remark
+		{
+			get
+			{
+				return this._remark;
+			}
+			set
+			{
+				if ((this._remark != value))
+				{
+					this.OnremarkChanging(value);
+					this.SendPropertyChanging();
+					this._remark = value;
+					this.SendPropertyChanged("remark");
+					this.OnremarkChanged();
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_groupid", DbType="NVarChar(50)")]
+		public string groupid
+		{
+			get
+			{
+				return this._groupid;
+			}
+			set
+			{
+				if ((this._groupid != value))
+				{
+					this.OngroupidChanging(value);
+					this.SendPropertyChanging();
+					this._groupid = value;
+					this.SendPropertyChanged("groupid");
+					this.OngroupidChanged();
 				}
 			}
 		}
