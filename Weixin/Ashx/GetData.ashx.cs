@@ -52,10 +52,8 @@ namespace Weixin.Ashx
                     break;
                 case "GetUsersDataGrid":
                     {
-                        var a = new { id = "fdal" };
-                        var list=new List<object>();
-                        list.Add(a);
-                        result = BLL.Common.Common.GetDatagridJsonString<object>(list);
+                        var list = FactoryBll<UserInfoBll>.Instance.GetUserInfosByGroupId(id);
+                        result = BLL.Common.Common.GetDatagridJsonString<UserInfo>(list.ToList());
                     }
                     break;
 

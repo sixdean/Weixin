@@ -43,10 +43,10 @@ namespace Weixin.BLL
         /// <param name="list"></param>
         public void AddListGroupInfo(List<GroupInfo> list)
         {
-            foreach (var groupInfo in list)
-            {
-                groupInfo.id = string.IsNullOrEmpty(groupInfo.id) ? CreateEntityId() : groupInfo.id;
-            }
+            //foreach (var groupInfo in list)
+            //{
+            //    groupInfo.id = string.IsNullOrEmpty(groupInfo.id) ? CreateEntityId() : groupInfo.id;
+            //}
             Add(list);
         }
 

@@ -53,6 +53,10 @@
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>
+    <ProjectReference Include="..\WeatherApi\WeatherApi.csproj">
+      <Project>{E9898FAB-765E-4A73-9F2F-4AFB9AA6CFF9}</Project>
+      <Name>WeatherApi</Name>
+    </ProjectReference>
     <ProjectReference Include="..\Weixin\Weixin.csproj">
       <Project>{6822E3F1-D3F5-4642-BF98-63AD5F23D687}</Project>
       <Name>Weixin</Name>

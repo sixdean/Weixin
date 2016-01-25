@@ -18,7 +18,7 @@ namespace Weixin.IWeixin
         /// <param name="accessToken">调用接口凭证</param>
         /// <param name="nextOpenId">第一个拉取的OPENID，不填默认从头开始拉取</param>
         /// <returns></returns>
-        List<string> GetUserList(string accessToken, string nextOpenId = null);
+        UserListJsonResult GetUserList(string accessToken, string nextOpenId = null);
 
         /// <summary>
         /// 获取用户基本信息
@@ -72,4 +72,3 @@ namespace Weixin.IWeixin
     }
 }
 
-   

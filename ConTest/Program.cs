@@ -1,9 +1,12 @@
 ﻿using System;
 using System.IO;
 using System.Net;
+using System.Runtime.Remoting.Messaging;
 using System.Text;
+using System.Threading;
 using System.Xml.Serialization;
 using Newtonsoft.Json;
+using WeatherApi;
 using Weixin.BLL.Common;
 using Weixin.BLL.Weixin;
 using Weixin.IWeixin;
@@ -14,54 +17,71 @@ namespace ConTest
 {
     internal class Program
     {
-        private static void Main(string[] args)
+
+        delegate string MyDelegate(string name);
+
+        static void Main(string[] args)
         {
-            var date = DateTime.Now;
+            try
+            {
+                var obj = WeatherApi.Weather.GetWeather("beijing");
+                obj = obj.Replace("HeWeather data service 3.0", "HeWeather");
+                var ss = JsonConvert.DeserializeObject<WeatherModel.HeWeather>(obj);
+            }
+            catch (Exception e)
+            {
 
-
-            //var token = "QzIvNahpmUbfRotF43xuZdUnNEnERBtTbCuo29ouxVdRn5tZv4JRYoPVDUKvJz6EJ9VbJ-ANbopSKdg3Vyy7jZpBQthzvVAL7H67RAqwyOkYTJaAGAFAQ";
-            //var url = "https://api.weixin.qq.com/cgi-bin/menu/get?access_token=" + token;
-            //var menu = HttpHelper.GetResponse<MenuListJson>(url);
-            //var mm = HttpHelper.GetResponse(url);
-            //var s = JsonConvert.SerializeObject(menu);
-            //Console.WriteLine(s);
-            //var mm=new MenuInfo("buttonname",ButtonType.click,"sss",null);
-
-            //            var xml = @"<xml><ToUserName><![CDATA[gh_2461d20dda43]]></ToUserName>
-            //<FromUserName><![CDATA[o9WULuDOA1s5S9dagWTvLpeit4aY]]></FromUserName>
-            //<CreateTime>1451401800</CreateTime>
-            //<MsgType><![CDATA[text]]></MsgType>
-            //<Content><![CDATA[1234566]]></Content>
-            //<MsgId>6233723264757904295</MsgId>
-            //</xml>";
-            //            BaseMessage bm = new BaseMessage();
-            //            //bm.MsgType = "type";
-            //            //bm.ToUserName = "me";
-            //            //bm.FromUserName = "you";
-            //            var p = new object[] { bm };
-
-            //            RequestEvent evEvent = new RequestEvent(bm);
-            //            //Assembly assembly = Assembly.GetExecutingAssembly(); // 获取当前程序集 
-            //            Assembly assembly = Assembly.Load("Weixin");
-
-
-            //            Type type = assembly.GetType("Weixin.Model.Request.RequestText");
-            //            var mySerializer = new XmlSerializer(type);
-            //            using (var stream = new MemoryStream(Encoding.UTF8.GetBytes(xml)))
-            //            {
-            //                var tt = mySerializer.Deserialize(stream);
-            //            }
-            //            object obj = assembly.CreateInstance("Weixin.Model.Request.RequestEvent", true, BindingFlags.Default, null, p, null, null); //类的完全限定名（即包括命名空间）
-            //            string n = "grayworm";
-            //            Type t = n.GetType();
-            //            foreach (MemberInfo mi in t.GetMembers())
-            //            {
-            //                Console.WriteLine("{0}      {1}", mi.MemberType, mi.Name);
-            //            }
-            var s = Common.GetAccessToken("wx2647e739be267f22", "d4624c36b6795d1d99dcf0547af5443d");
+                Console.WriteLine(e.ToString());
+            }
 
             Console.ReadKey();
         }
+
+        static string Hello(string name)
+        {
+            ThreadMessage("Async Thread");
+            Thread.Sleep(2000);             //模拟异步操作
+            return "\nHello " + name;
+        }
+
+        static void Completed(IAsyncResult result)
+        {
+            ThreadMessage("Async Completed");
+
+            //获取委托对象，调用EndInvoke方法获取运行结果
+            AsyncResult _result = (AsyncResult)result;
+            Console.WriteLine(_result.AsyncDelegate.ToString());
+            Console.WriteLine(_result.IsCompleted);
+            Console.WriteLine(_result.EndInvokeCalled);
+            MyDelegate myDelegate = (MyDelegate)_result.AsyncDelegate;
+            string data = myDelegate.EndInvoke(_result);
+            var s = _result.AsyncState;
+            Console.WriteLine(s);
+            Console.WriteLine(data);
+        }
+
+        static void ThreadMessage(string data)
+        {
+            string message = string.Format("{0}\n  ThreadId is:{1}",
+                   data, Thread.CurrentThread.ManagedThreadId);
+            Console.WriteLine(message);
+        }
+        public class Message
+        {
+            public void ShowMessage()
+            {
+                string message = string.Format("Async threadId is :{0}",
+                                                Thread.CurrentThread.ManagedThreadId);
+                Console.WriteLine(message);
+
+                for (int n = 0; n < 10; n++)
+                {
+                    Thread.Sleep(300);
+                    Console.WriteLine("The number is:" + n.ToString());
+                }
+            }
+        }
+
 
 
         public static string GetPage(string posturl)
@@ -101,7 +121,7 @@ namespace ConTest
             var posstr =
                 "<xml><URL><![CDATA[http://wang494014418.6655.la/Ashx/weixin.ashx]]></URL><ToUserName><![CDATA[gh_2461d20dda43]]></ToUserName><FromUserName><![CDATA[o9WULuDOA1s5S9dagWTvLpeit4aY]]></FromUserName><CreateTime>1451140425</CreateTime><MsgType><![CDATA[text]]></MsgType><Content><![CDATA[这是个测试]]></Content><MsgId>123456765</MsgId></xml>";
 
-            var xlSerializer = new XmlSerializer(typeof (BaseMessage));
+            var xlSerializer = new XmlSerializer(typeof(BaseMessage));
             var reader = new StreamReader(new MemoryStream(Encoding.UTF8.GetBytes(posstr)), Encoding.UTF8);
             var inof = xlSerializer.Deserialize(reader) as BaseMessage;
             var info = XmlSerializerHelper.XmlToObject<BaseMessage>(posstr);

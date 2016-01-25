@@ -172,8 +172,13 @@ namespace Weixin.Model.Common
     /// </summary>
     public class GetListUserJson
     {
+        public Language _lang = Language.zh_CN;
         public string openid { get; set; }
 
-        public Language lang { get; set; }
+        public Language lang
+        {
+            get { return _lang; }
+            set { _lang = value; }
+        }
     }
 }

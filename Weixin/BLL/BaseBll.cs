@@ -121,18 +121,18 @@ namespace Weixin.BLL
         {
             if (string.Empty == _connectionString)
             {
-                //if (
-                //    !string.IsNullOrEmpty(
-                //        ConfigurationManager.ConnectionStrings["WeixinConnectionString"].ConnectionString))
-                //{
-                //    ConnectionString = ConfigurationManager.ConnectionStrings["WeixinConnectionString"].ConnectionString;
-                //    _dataContext = new WeixinDataContext(ConnectionString);
-                //}
-                //else
-                //{
-                //    _dataContext = new WeixinDataContext();
-                //}
-                _dataContext = new WeixinDataContext("Data Source=DEAN;Initial Catalog=Weixin;Integrated Security=True");
+                if (
+                    !string.IsNullOrEmpty(ConfigurationManager.AppSettings["ConnectionString"]))
+                {
+                    ConnectionString = ConfigurationManager.AppSettings["ConnectionString"];
+                    _dataContext = new WeixinDataContext(ConnectionString);
+                }
+                else
+                {
+                    _dataContext = new WeixinDataContext();
+                }
+                //_dataContext = new WeixinDataContext("Data Source=DEAN;Initial Catalog=Weixin;Integrated Security=True");
+                //_dataContext = new WeixinDataContext("server=192.168.1.103;uid=dean;pwd=123456;database=Weixin");
             }
             else
             {
