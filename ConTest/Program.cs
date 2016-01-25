@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Collections.Generic;
 using System.IO;
 using System.Net;
 using System.Runtime.Remoting.Messaging;
@@ -25,8 +26,8 @@ namespace ConTest
             try
             {
                 var obj = WeatherApi.Weather.GetWeather("beijing");
-                obj = obj.Replace("HeWeather data service 3.0", "HeWeather");
-                var ss = JsonConvert.DeserializeObject<WeatherModel.HeWeather>(obj);
+                obj = obj.Replace("HeWeather data service 3.0", "HeWeatherList");
+                var ss = JsonConvert.DeserializeObject(obj, typeof(WeatherModel.HeWeatherResult)) as WeatherModel.HeWeatherResult;
             }
             catch (Exception e)
             {

@@ -4052,6 +4052,12 @@
       <DependentUpon>WeixinDB.dbml</DependentUpon>
     </None>
   </ItemGroup>
+  <ItemGroup>
+    <ProjectReference Include="..\WeatherApi\WeatherApi.csproj">
+      <Project>{E9898FAB-765E-4A73-9F2F-4AFB9AA6CFF9}</Project>
+      <Name>WeatherApi</Name>
+    </ProjectReference>
+  </ItemGroup>
   <Import Project="$(MSBuildBinPath)\Microsoft.CSharp.targets" />
   <Import Project="$(MSBuildExtensionsPath32)\Microsoft\VisualStudio\v10.0\WebApplications\Microsoft.WebApplication.targets" />
   <ProjectExtensions>

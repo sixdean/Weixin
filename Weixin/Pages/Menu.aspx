@@ -30,7 +30,7 @@
                                                     url: 'Ashx/GetData.ashx?type=GetParentRows',
                                                     valueField: 'MenuId',
                                                     textField: 'Name',
-                                                    required: true,
+                                                    
                                                     method: 'get'
                                                 }
                                             }

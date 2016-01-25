@@ -1,4 +1,6 @@
 ﻿using System;
+using System.Linq;
+using System.Text;
 using Newtonsoft.Json;
 using Weixin.BLL.Common;
 using Weixin.IWeixin;
@@ -31,7 +33,46 @@ namespace Weixin.BLL.Weixin
                     if (requestType == RequestMsgType.text.ToString())
                     {
                         var info = XmlSerializerHelper.XmlToObject<RequestText>(postStr);
-                        response.Content = JsonConvert.SerializeObject(info);
+                        if (info.Content.StartsWith("天气#") && info.Content.Split('#').Count() > 1)
+                        {
+                            var param = info.Content.Split('#')[1].Trim();
+                            var weatherResult = WeatherApi.Weather.GetWeatherResult(param);
+                            if (weatherResult != null && weatherResult.HeWeatherList != null &&
+                                weatherResult.HeWeatherList.Count > 0 && weatherResult.HeWeatherList[0].status == "ok")
+                            {
+                                var weather = weatherResult.HeWeatherList[0];
+                                var sb = new StringBuilder();
+                                sb.Append("地点:" + weather.basic.city + Environment.NewLine);
+                                sb.Append("当前时间:" + weather.basic.update.loc + Environment.NewLine);
+                                sb.Append("天气状况:" + weather.now.cond.txt + Environment.NewLine);
+                                sb.Append("当前温度:" + weather.now.tmp + Environment.NewLine);
+                                sb.Append("当前风向:" + weather.now.wind.dir + Environment.NewLine);
+                                sb.Append("当前风力:" + weather.now.wind.sc + Environment.NewLine);
+                                if (weather.aqi != null)
+                                {
+
+                                    sb.Append("空气质量:" + weather.aqi.city.qlty + Environment.NewLine);
+                                    sb.Append("PM2.5值:" + weather.aqi.city.pm25 + Environment.NewLine);
+                                }
+                                if (weather.suggestion != null)
+                                {
+
+                                    sb.Append("舒适度:" + weather.suggestion.comf.brf + Environment.NewLine);
+                                    sb.Append(weather.suggestion.comf.txt + Environment.NewLine);
+                                }
+                                response.Content = sb.ToString();
+                            }
+                            else
+                            {
+                                if (weatherResult != null)
+                                    if (weatherResult.HeWeatherList != null)
+                                        response.Content = "Sorry,获取天气失败:" + weatherResult.HeWeatherList[0].status + Environment.NewLine + "请重试!";
+                            }
+                        }
+                        else
+                        {
+                            response.Content = JsonConvert.SerializeObject(info);
+                        }
                     } //图片消息
                     else if (requestType == RequestMsgType.image.ToString())
                     {
@@ -75,10 +116,12 @@ namespace Weixin.BLL.Weixin
                         {
                             //用户未关注时，进行关注后的事件推送
                             var info = XmlSerializerHelper.XmlToObject<RequestEventScanUnSubscribe>(postStr);
-                            if (info.Ticket == "" && info.EventKey == "")
+                            if (string.IsNullOrEmpty(info.Ticket) && string.IsNullOrEmpty(info.EventKey))
                             {
                                 //订阅事件
                                 var info1 = XmlSerializerHelper.XmlToObject<RequestEventSubscribe>(postStr);
+                                response.Content = "多谢关注六六测试账号~~";
+
                             }
                             else
                             {
@@ -106,6 +149,18 @@ namespace Weixin.BLL.Weixin
                         else if (eventTyep == RequestEventType.CLICK.ToString())
                         {
                             var info = XmlSerializerHelper.XmlToObject<RequestEventClick>(postStr);
+                            if (info.EventKey == "v_weather_select")
+                            {
+                                response.Content = "查询天气请用:天气#城市名称(国内城市支持中英文，国际城市支持英文)";
+                            }
+                            else if (info.EventKey == "test")
+                            {
+                                response.Content = "这只是个测试~~";
+                            }
+                            else
+                            {
+                                response.Content = "还在coding...";
+                            }
                         } //点击菜单跳转链接时的事件推送
                         else if (eventTyep == RequestEventType.VIEW.ToString())
                         {
@@ -143,7 +198,7 @@ namespace Weixin.BLL.Weixin
                         TextLogHelper.WriteLog("没有该处理事件,MsgType:" + baseInfo.MsgType);
                         response.Content = baseInfo.MsgType;
                     }
-                    response.Content = "您好,你发送的信息为:" + response.Content;
+                    //response.Content = "您好,你发送的信息为:" + response.Content;
                     return XmlSerializerHelper.ObjectToXml(response);
                 }
                 TextLogHelper.WriteLog("post信息为空!");

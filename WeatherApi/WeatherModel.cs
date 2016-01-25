@@ -4,6 +4,10 @@ namespace WeatherApi
 {
     public class WeatherModel
     {
+        public class HeWeatherResult
+        {
+            public List<HeWeather> HeWeatherList { get; set; }
+        }
         public class HeWeather
         {
             /// <summary>
@@ -52,13 +56,12 @@ namespace WeatherApi
             public string pop { get; set; }
             public string pres { get; set; }
             public string tmp { get; set; }
-            public string max { get; set; }
             public wind wind { get; set; }
 
         }
         public class conds
         {
-            public string cond_d { get; set; }
+            public string code_d { get; set; }
             public string code_n { get; set; }
             public string txt_d { get; set; }
             public string txt_n { get; set; }

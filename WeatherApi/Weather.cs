@@ -3,15 +3,17 @@ using System.Configuration;
 using System.IO;
 using System.Net;
 using System.Text;
+using Newtonsoft.Json;
 
 namespace WeatherApi
 {
     public static class Weather
     {
-        public static string GetWeather(string city, string cityid = null, string cityip = null)
+        public static WeatherModel.HeWeatherResult GetWeatherResult(string city, string cityid = null,
+            string cityip = null)
         {
             var apiUrl = ConfigurationManager.AppSettings["WeatherApiWork"];
-            var apiKey = ConfigurationManager.AppSettings["apikey"];
+            var weatherReplaceString = ConfigurationManager.AppSettings["weatherReplaceString"];
             var param = "";
             if (!string.IsNullOrEmpty(city))
             {
@@ -32,6 +34,14 @@ namespace WeatherApi
                 }
             }
             var url = apiUrl + '?' + param;
+            var str = GetWeather(url).Replace(weatherReplaceString, "HeWeatherList");
+            var result = JsonConvert.DeserializeObject(str, typeof(WeatherModel.HeWeatherResult)) as WeatherModel.HeWeatherResult;
+            return result;
+        }
+
+        public static string GetWeather(string url)
+        {
+            var apiKey = ConfigurationManager.AppSettings["apikey"];
             var request = (HttpWebRequest)WebRequest.Create(url);
             request.Method = "GET";
             request.Headers.Add("apikey", apiKey);
