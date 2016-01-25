@@ -1,33 +1,22 @@
 ﻿using System;
-using System.Collections.Generic;
 using System.IO;
-using System.Linq;
 using System.Net;
-using System.Reflection;
 using System.Text;
-using System.Xml;
 using System.Xml.Serialization;
 using Newtonsoft.Json;
-using Weixin.BLL;
-using Weixin.Common;
-using Weixin.DAL;
+using Weixin.BLL.Common;
+using Weixin.BLL.Weixin;
 using Weixin.IWeixin;
-using Weixin.Model;
 using Weixin.Model.Common;
-using Weixin.Model.Enum;
 using Weixin.Model.Response;
-using Weixin.Weixin;
-using Weixin.Model.Request;
+
 namespace ConTest
 {
-    class Program
+    internal class Program
     {
-        static void Main(string[] args)
+        private static void Main(string[] args)
         {
-
-
             var date = DateTime.Now;
-
 
 
             //var token = "QzIvNahpmUbfRotF43xuZdUnNEnERBtTbCuo29ouxVdRn5tZv4JRYoPVDUKvJz6EJ9VbJ-ANbopSKdg3Vyy7jZpBQthzvVAL7H67RAqwyOkYTJaAGAFAQ";
@@ -69,41 +58,21 @@ namespace ConTest
             //            {
             //                Console.WriteLine("{0}      {1}", mi.MemberType, mi.Name);
             //            }
+            var s = Common.GetAccessToken("wx2647e739be267f22", "d4624c36b6795d1d99dcf0547af5443d");
 
-            Menu menu = new Menu
-            {
-                Id = "id",
-                Key = "key",
-                Type = "type",
-                CreateDate = DateTime.Now,
-                UpdateDate = DateTime.Now,
-                CreateUser = "666",
-                ID = ""
-            };
-            foreach (PropertyInfo property in typeof(Menu).GetProperties())
-            {
-                var name = property.Name;
-                var value = property.GetValue(menu, null);
-                if (property.PropertyType.IsValueType || property.PropertyType.Name.StartsWith("String"))
-                {
-                    Console.WriteLine(string.Format("{0}:{1},type:{2}", name, value, property.PropertyType.Name));
-                }
-            }
-            FactoryBll<MenuBll>.Instance.UpdateMenu(menu);
-            Console.ReadLine();
-
+            Console.ReadKey();
         }
 
 
         public static string GetPage(string posturl)
         {
-            Encoding encoding = Encoding.UTF8;
+            var encoding = Encoding.UTF8;
             // 准备请求...
             try
             {
                 // 设置参数
                 var request = WebRequest.Create(posturl) as HttpWebRequest;
-                CookieContainer cookieContainer = new CookieContainer();
+                var cookieContainer = new CookieContainer();
                 request.CookieContainer = cookieContainer;
                 request.AllowAutoRedirect = true;
                 request.Method = "GET";
@@ -114,91 +83,81 @@ namespace ConTest
                 var instream = response.GetResponseStream();
                 var sr = new StreamReader(instream, encoding);
                 //返回结果网页（html）代码
-                string content = sr.ReadToEnd();
-                string err = string.Empty;
+                var content = sr.ReadToEnd();
+                var err = string.Empty;
                 var s = JsonConvert.DeserializeObject<MenuInfo>(content);
                 Console.WriteLine(content);
                 return content;
             }
             catch (Exception ex)
             {
-                string err = ex.Message;
+                var err = ex.Message;
                 return string.Empty;
             }
         }
+
         public static void requesttext()
         {
             var posstr =
-               "<xml><URL><![CDATA[http://wang494014418.6655.la/Ashx/weixin.ashx]]></URL><ToUserName><![CDATA[gh_2461d20dda43]]></ToUserName><FromUserName><![CDATA[o9WULuDOA1s5S9dagWTvLpeit4aY]]></FromUserName><CreateTime>1451140425</CreateTime><MsgType><![CDATA[text]]></MsgType><Content><![CDATA[这是个测试]]></Content><MsgId>123456765</MsgId></xml>";
+                "<xml><URL><![CDATA[http://wang494014418.6655.la/Ashx/weixin.ashx]]></URL><ToUserName><![CDATA[gh_2461d20dda43]]></ToUserName><FromUserName><![CDATA[o9WULuDOA1s5S9dagWTvLpeit4aY]]></FromUserName><CreateTime>1451140425</CreateTime><MsgType><![CDATA[text]]></MsgType><Content><![CDATA[这是个测试]]></Content><MsgId>123456765</MsgId></xml>";
 
-            XmlSerializer xlSerializer = new XmlSerializer(typeof(BaseMessage));
-            StreamReader reader = new StreamReader(new MemoryStream(Encoding.UTF8.GetBytes(posstr)), Encoding.UTF8);
-            BaseMessage inof = xlSerializer.Deserialize(reader) as BaseMessage;
-            BaseMessage info = XmlSerializerHelper.XmlToObject<BaseMessage>(posstr);
+            var xlSerializer = new XmlSerializer(typeof (BaseMessage));
+            var reader = new StreamReader(new MemoryStream(Encoding.UTF8.GetBytes(posstr)), Encoding.UTF8);
+            var inof = xlSerializer.Deserialize(reader) as BaseMessage;
+            var info = XmlSerializerHelper.XmlToObject<BaseMessage>(posstr);
 
             var s = XmlSerializerHelper.ObjectToXml(info);
-            var ss = XmlSerializerHelper.ObjectToXml<BaseMessage>(info);
+            var ss = XmlSerializerHelper.ObjectToXml(info);
         }
 
         public static void responsetest()
         {
             try
             {
-
-
                 var posstr =
-                  "<xml><URL><![CDATA[http://wang494014418.6655.la/Ashx/weixin.ashx]]></URL><ToUserName><![CDATA[gh_2461d20dda43]]></ToUserName><FromUserName><![CDATA[o9WULuDOA1s5S9dagWTvLpeit4aY]]></FromUserName><CreateTime>1451140425</CreateTime><MsgType><![CDATA[text]]></MsgType><Content><![CDATA[这是个测试]]></Content><MsgId>123456765</MsgId></xml>";
+                    "<xml><URL><![CDATA[http://wang494014418.6655.la/Ashx/weixin.ashx]]></URL><ToUserName><![CDATA[gh_2461d20dda43]]></ToUserName><FromUserName><![CDATA[o9WULuDOA1s5S9dagWTvLpeit4aY]]></FromUserName><CreateTime>1451140425</CreateTime><MsgType><![CDATA[text]]></MsgType><Content><![CDATA[这是个测试]]></Content><MsgId>123456765</MsgId></xml>";
                 IWeixinAction weixinAction = new WeixinAction();
-                BaseMessage info = XmlSerializerHelper.XmlToObject<BaseMessage>(posstr);
+                var info = XmlSerializerHelper.XmlToObject<BaseMessage>(posstr);
 
-                string responseContent = weixinAction.Handle(posstr);
-                ResponseText repResponseText = new ResponseText(info);
+                var responseContent = weixinAction.Handle(posstr);
+                var repResponseText = new ResponseText(info);
                 repResponseText.Content = responseContent;
                 repResponseText.ToXml();
             }
             catch (Exception e)
             {
-
                 var s = e.Message;
             }
         }
     }
-    class Test
-    {
-        private string _strId;
-        public string ID
-        {
-            get { return _strId; }
-            set { _strId = value; }
-        }
 
+    internal class Test
+    {
         public Test()
         {
-            this._strId = "666";
+            ID = "666";
         }
 
         public Test(string s)
         {
-            this._strId = s;
-        }
-    }
-    class Test1
-    {
-        private string _strId;
-        public string ID
-        {
-            get { return _strId; }
-            set { _strId = value; }
+            ID = s;
         }
 
+        public string ID { get; set; }
+    }
+
+    internal class Test1
+    {
         public Test1()
         {
-            this._strId = "666";
+            ID = "666";
         }
 
         public Test1(string s)
         {
-            this._strId = s;
+            ID = s;
         }
+
+        public string ID { get; set; }
     }
 }

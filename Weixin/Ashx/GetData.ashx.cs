@@ -34,10 +34,31 @@ namespace Weixin.Ashx
                 case "GetMenu":
                     {
                         var listMenu = FactoryBll<MenuBll>.Instance.GetMenus();
-                        object obj = new { total = listMenu.Count(), rows = listMenu };
-                        result = JsonConvert.SerializeObject(obj);
+                        result = BLL.Common.Common.GetDatagridJsonString<object>(listMenu.ToList());
                     }
                     break;
+                case "GetParentRows":
+                    {
+                        var list = FactoryBll<MenuBll>.Instance.GetParentRows(id);
+                        result = JsonConvert.SerializeObject(list);
+                    }
+                    break;
+                case "GetGroupDataGrid":
+                    {
+                        var list = FactoryBll<GroupInfoBll>.Instance.GetGouptInfos();
+                        result = BLL.Common.Common.GetDatagridJsonString<GroupInfo>(list.ToList());
+
+                    }
+                    break;
+                case "GetUsersDataGrid":
+                    {
+                        var a = new { id = "fdal" };
+                        var list=new List<object>();
+                        list.Add(a);
+                        result = BLL.Common.Common.GetDatagridJsonString<object>(list);
+                    }
+                    break;
+
             }
             context.Response.Write(result);
         }

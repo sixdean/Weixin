@@ -6,9 +6,10 @@ using System.Web;
 using System.Web.Configuration;
 using System.Web.Security;
 using System.Web.UI.WebControls;
-using Weixin.Common;
+using Weixin.BLL.Common;
+using Weixin.BLL.Weixin;
 using Weixin.IWeixin;
-using Weixin.Weixin;
+
 
 namespace Weixin.Ashx
 {

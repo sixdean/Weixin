@@ -1,0 +1,226 @@
+﻿body
+{
+    margin: 0;
+    padding: 0;
+    font-family: "微软雅黑";
+}
+
+a:link, a:visited
+{
+    /*color: #727274;*/
+    text-decoration: none;
+}
+
+.color_b
+{
+    color: #1570b7;
+}
+.color_r
+{
+    color: #e62a3b;
+}
+.color_g
+{
+    color: #82bf00;
+}
+.color_gray
+{
+    color: #333;
+}
+.color_o
+{
+    color: #f60;
+}
+
+.color_cdcdcd
+{
+    color: #cdcdcd;
+}
+
+.color_fff
+{
+    color: #fff;
+    font-size: 14px;
+}
+
+.color_ff7f00
+{
+    color: #FF7F00;
+}
+.color_cdcd00
+{
+    color: #CDCD00;
+}
+.color_76ee00
+{
+    color: #76EE00;
+}
+
+.color_69b3f2
+{
+    color: #69b3f2;
+}
+
+.color_fff
+{
+    color: #fff;
+}
+.color_727274
+{
+    color: #727274;
+}
+
+.left_15
+{
+    margin-left: 15px;
+}
+
+.left_60
+{
+    margin-left: 60px;
+}
+
+.left_90
+{
+    margin-left: 90px;
+}
+
+.float_left
+{
+    float: left;
+}
+
+.gvTable_Overflow_Scroll
+{
+    overflow-y: scroll;
+}
+.gvTable_Overflow_Hidden
+{
+    overflow-y: hidden;
+}
+
+.date
+{
+}
+
+.hidden
+{
+    display: none;
+}
+
+.show
+{
+    display: inline-block;
+}
+
+.choose
+{
+    margin-top: 20px;
+    margin-left: 75px;
+    margin-bottom: 20px;
+    width: 80%;
+}
+
+.ta
+{
+    width: 600px;
+    height: 100px;
+}
+
+.ta_800_300
+{
+    width: 600px;
+    height: 300px;
+    border: 1px solid #dedede;
+}
+
+.ta_350_80
+{
+    width: 350px;
+    height: 80px;
+    border: 1px solid #dedede;
+}
+
+.clear
+{
+    clear: both;
+}
+ 
+.btn_a:link, .btn_a:visited
+{
+    display: inline-block;
+    color: #fff;
+    height: 30px; /*改*/
+    width: 55px;
+    border-width: 1px;
+    border-style: solid; /*background-color: #69B3F2;*/ /*改*/
+    background-color: #555;
+    text-align: center;
+    line-height: 30px;
+    color: White;
+    font-size: 14px;
+}
+
+.btn_a:hover
+{
+    border: 1px outset #ABD275;
+}
+
+.tb_underline
+{
+    border-width: 0px;
+    border-bottom: 1px solid #dedede;
+    padding-left: 5px;
+    font-size: 12px;
+    height: 20px;
+    line-height: 25px;
+    width: 250px;
+}
+
+.position
+{
+    margin-left: 10px;
+}
+
+.lb
+{
+    color: #727274;
+    margin-left: 1px;
+}
+
+.tb
+{
+    margin-top: 2px;
+    width: 30px;
+    height: 18px;
+    border: 1px inset #ABD275;
+    padding: 0px 10px;
+}
+
+.font
+{
+    font-size: 14px;
+    font-family: "Microsoft Yahei" , "Hiragino Sans GB" ,sans-serif;
+}
+.btn:hover
+{
+    border: 1px outset #ABD275;
+}
+
+.btn1
+{
+    color: #fff;
+    height: 30px; /*改*/
+    width: 80px;
+    border-width: 1px;
+    border-style: solid; /* background-color: #69B3F2;*/ /*改*/
+    background-color: #61849e;
+}
+
+.btn1:hover
+{
+    border: 1px outset #ABD275;
+}
+.dataGrid {
+	BORDER-BOTTOM: #c8dbf8 1px solid; BORDER-LEFT: #c8dbf8 1px solid; MARGIN-BOTTOM: 5px; OVERFLOW: hidden; BORDER-TOP: #c8dbf8 1px solid; BORDER-RIGHT: #c8dbf8 1px solid
+}

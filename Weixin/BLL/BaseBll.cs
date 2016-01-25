@@ -53,6 +53,11 @@ namespace Weixin.BLL
 
         public abstract T GetById(string id);
 
+        public virtual IQueryable<T> GetAll()
+        {
+            return DataContext.GetTable<T>();
+        }
+
         /// <summary>
         ///     新增
         /// </summary>
@@ -74,13 +79,19 @@ namespace Weixin.BLL
             DataContext.SubmitChanges();
         }
 
-
-        public virtual void Update(T entity)
+        public virtual void Update()
         {
-            DataContext.GetTable<T>().Attach(entity);
             DataContext.SubmitChanges();
         }
 
+        public virtual void UpdateDbEntity(T dbEntity, T entity)
+        {
+            foreach (var property in typeof(T).GetProperties().Where(property => property.PropertyType.IsValueType || property.PropertyType.Name.StartsWith("String")))
+            {
+                property.SetValue(dbEntity, property.GetValue(entity, null), null);
+            }
+            DataContext.SubmitChanges();
+        }
 
         public virtual void Delete(T entity)
         {
@@ -96,6 +107,11 @@ namespace Weixin.BLL
                 table.DeleteOnSubmit(entity);
             }
             DataContext.SubmitChanges();
+        }
+
+        public virtual void DeleteAll<K>() where K : class
+        {
+            DataContext.ExecuteCommand(string.Format(@"delete from {0}", DataContext.GetTable<K>().Context.Mapping.GetTable(typeof(K)).TableName));
         }
 
         /// <summary>

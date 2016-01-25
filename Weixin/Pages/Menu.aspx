@@ -16,18 +16,25 @@
                 columns: [
                     [
                         { field: 'Id', checkbox: true },
-                        {
-                            field: 'ParentId',
-                            title: '父菜单',
-                            editor: {
-                                type: 'combobox',
-                                options: {
-                                    valueField: 'ParentId',
-                                    textField: 'ParentId',
-                                    required: true
-                                }
-                            }
-                        },
+                        { field: 'MenuId', hidden: true },
+                                        {
+                                            field: 'ParentId',
+                                            title: '父菜单',
+                                            width: 30,
+                                            formatter: function (value, rowData, rowIndex) {
+                                                return rowData["ParentName"];
+                                            },
+                                            editor: {
+                                                type: 'combobox',
+                                                options: {
+                                                    url: 'Ashx/GetData.ashx?type=GetParentRows',
+                                                    valueField: 'MenuId',
+                                                    textField: 'Name',
+                                                    required: true,
+                                                    method: 'get'
+                                                }
+                                            }
+                                        },
                         { field: 'Name', title: '名称', editor: 'text' },
                         { field: 'Type', title: '菜单类型', editor: 'text' },
                         { field: 'Key', title: '菜单KEY值', editor: 'text' },
@@ -68,7 +75,7 @@
                         }
                     }, '-', {
                         iconCls: 'icon-save',
-                        text: '保存数据',
+                        text: '<a href="#" title="将新增或修改的数据保存到本地" class="easyui-tooltip">保存</a>',
                         handler: function () {
                             save();
                         }
@@ -81,10 +88,17 @@
                         }
 
                     }, '-', {
-                        iconCls: 'icon-save',
-                        text: '更新微信菜单',
+                        iconCls: 'icon-hamburg-publish',
+                        text: '<a href="#" title="将本地的数据更新到微信服务器,并修改本地数据状态" class="easyui-tooltip">更新数据</a>',
                         handler: function () {
                             updateWeixinMenu();
+                        }
+
+                    }, '-', {
+                        iconCls: 'icon-hamburg-down',
+                        text: '<a href="#" title="从微信服务器上获取数据更新到本地,并删除本地原来数据" class="easyui-tooltip">同步数据</a>',
+                        handler: function () {
+                            GetWeixinMenu();
                         }
 
                     }, '-'
@@ -99,10 +113,13 @@
                         $('#mainDataGrid').datagrid('checkRow', i);
                     }
                 },
-                selectOnCheck: false
+                selectOnCheck: false,
+                onLoadSuccess: function (d) {
+
+                }
+
             });
         });
-
 
 
 
@@ -119,6 +136,7 @@
                 return false;
             }
         }
+
         function onClickRow(index) {
             if (editIndex != index) {
                 if (endEditing()) {
@@ -217,52 +235,36 @@
         function save() {
             if (editIndex != undefined) {
                 if ($('#mainDataGrid').datagrid('validateRow', editIndex)) {
-
                     $('#mainDataGrid').datagrid('acceptChanges');
+                    $.ajax({
+                        type: "Post",
+                        url: "Pages/Menu.aspx/SaveWeixinMenu",
+                        data: "{d:'" + JSON.stringify($('#mainDataGrid').datagrid('getChecked')[0]) + "'}",
+                        contentType: "application/json;charset=utf-8",
+                        dataType: "json",
+                        async: false,
+                        success: function (result) {
+                            console.info("1");
+                            console.info(result.d);
+                            $('#mainDataGrid').datagrid('endEdit', editIndex);
 
-                    var data = $('#mainDataGrid').datagrid('getChecked');
-                    if (data.length != 0) {
-                        var obj = {};
-                        obj.d = JSON.stringify(data[0]);
-                        console.info(obj);
-                        //                        $.ajax({
-                        //                            type: 'post',
-                        //                            url: 'Pages/Menu.aspx/SaveWeixinMenu',
-                        //                            dataType: 'json',
-                        //                            data: { d: "2" },
-                        //                            contentType: "application/json;charset=utf-8",
-                        //                            success: function (result) {
-                        //                                console.info("1");
-                        //                                console.info(result.d);
-                        //                                $('#mainDataGrid').datagrid('endEdit', editIndex);
-
-                        //                                $('#mainDataGrid').datagrid('acceptChanges');
-                        //                                editIndex = undefined;
-                        //                            },
-                        //                            error: function (msg) {
-                        //                                console.info(msg);
-                        //                                console.info("2");
-                        //                            }
-                        //                        });
-
-                        var url = "Pages/Menu.aspx/SaveWeixinMenu";
-                        var params = [["d", JSON.stringify(data[0])]];
-                        var str = self_ajax(url, params);
-                        console.info(str);
-                    }
-
+                            $('#mainDataGrid').datagrid('acceptChanges');
+                            editIndex = undefined;
+                        },
+                        error: function (msg) {
+                            console.info(msg);
+                            console.info("2");
+                        }
+                    });
                 } else {
-                    $('#mainDataGrid').datagrid('acceptChanges');
-
                     $.messager.alert('Warning', '请将数据填写完整再保存!');
-
                 }
 
             }
         }
 
         function updateWeixinMenu() {
-            $.messager.confirm('更新微信菜单', '确定要将菜单提交到微信服务器吗?', function (action) {
+            $.messager.confirm('更新数据', '确定要将本地微信菜单数据更新到微信服务器上吗?', function (action) {
                 if (action) {
                     $.ajax({
                         type: 'post',
@@ -281,6 +283,27 @@
                 }
             });
         }
+
+        function GetWeixinMenu() {
+            $.messager.confirm('同步数据', '确定要删除本地数据重新从微信服务器上获取菜单数据吗?', function (action) {
+                if (action) {
+                    $.ajax({
+                        type: 'post',
+                        url: 'Pages/Menu.aspx/GetWeixinMenu',
+                        dataType: 'json',
+                        contentType: "application/json;charset=utf-8",
+                        success: function (result) {
+                            console.info($.parseJSON(result.d));
+                            $('#mainDataGrid').datagrid('loadData', $.parseJSON(result.d));
+                        },
+                        error: function (msg) {
+                            console.info(msg);
+                            console.info("2");
+                        }
+                    });
+                }
+            });
+        }
         //取消
         function cancel() {
             $('#mainDataGrid').datagrid('rejectChanges');
@@ -289,7 +312,7 @@
 
         //刷新
         function reload() {
-            $('#mainDataGrid').datagrid('load', {
+            $('#mainDataGrid').datagrid('reload', {
         });
         editIndex = undefined;
     }

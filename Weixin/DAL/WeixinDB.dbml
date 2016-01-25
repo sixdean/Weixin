@@ -1,5 +1,16 @@
 ﻿<?xml version="1.0" encoding="utf-8"?><Database Name="Weixin" Class="WeixinDataContext" xmlns="http://schemas.microsoft.com/linqtosql/dbml/2007">
   <Connection Mode="WebSettings" ConnectionString="Data Source=DEAN;Initial Catalog=Weixin;Integrated Security=True" SettingsObjectName="System.Configuration.ConfigurationManager.ConnectionStrings" SettingsPropertyName="WeixinConnectionString" Provider="System.Data.SqlClient" />
+  <Table Name="dbo.SysMenu" Member="SysMenu">
+    <Type Name="SysMenu">
+      <Column Name="id" Type="System.String" DbType="NVarChar(50) NOT NULL" IsPrimaryKey="true" CanBeNull="false" />
+      <Column Name="SysMenuId" Type="System.String" DbType="NVarChar(50) NOT NULL" CanBeNull="false" />
+      <Column Name="text" Type="System.String" DbType="NVarChar(50)" CanBeNull="true" />
+      <Column Name="iconCls" Type="System.String" DbType="NVarChar(50)" CanBeNull="true" />
+      <Column Name="Url" Type="System.String" DbType="NVarChar(50)" CanBeNull="true" />
+      <Column Name="ParentId" Type="System.String" DbType="NVarChar(50)" CanBeNull="true" />
+      <Column Name="state" Type="System.String" DbType="NVarChar(50)" CanBeNull="true" />
+    </Type>
+  </Table>
   <Table Name="dbo.SysUser" Member="SysUser">
     <Type Name="SysUser">
       <Column Name="Id" Type="System.String" DbType="NVarChar(50) NOT NULL" IsPrimaryKey="true" CanBeNull="false" />
@@ -10,30 +21,50 @@
       <Column Name="CreateDate" Type="System.DateTime" DbType="DateTime" CanBeNull="true" />
     </Type>
   </Table>
-  <Table Name="dbo.SysMenu" Member="SysMenu">
-    <Type Name="SysMenu">
-      <Column Name="id" Type="System.String" DbType="NVarChar(50) NOT NULL" IsPrimaryKey="true" CanBeNull="false" />
-      <Column Name="text" Type="System.String" DbType="NVarChar(50)" CanBeNull="true" />
-      <Column Name="iconCls" Type="System.String" DbType="NVarChar(50)" CanBeNull="true" />
-      <Column Name="Url" Type="System.String" DbType="NVarChar(50)" CanBeNull="true" />
-      <Column Name="ParentId" Type="System.String" DbType="NVarChar(50)" CanBeNull="true" />
-      <Column Name="state" Type="System.String" DbType="NVarChar(50)" CanBeNull="true" />
-    </Type>
-  </Table>
   <Table Name="dbo.Menu" Member="Menu">
     <Type Name="Menu">
       <Column Name="Id" Type="System.String" DbType="NVarChar(50) NOT NULL" IsPrimaryKey="true" CanBeNull="false" />
+      <Column Name="MenuId" Type="System.String" DbType="NVarChar(50) NOT NULL" CanBeNull="false" />
       <Column Name="Name" Type="System.String" DbType="NVarChar(50) NOT NULL" CanBeNull="false" />
       <Column Name="Type" Type="System.String" DbType="NVarChar(50)" CanBeNull="true" />
       <Column Name="[Key]" Member="Key" Type="System.String" DbType="NVarChar(50)" CanBeNull="true" />
       <Column Name="Url" Type="System.String" DbType="NVarChar(255)" CanBeNull="true" />
       <Column Name="Media_id" Type="System.String" DbType="NVarChar(50)" CanBeNull="true" />
-      <Column Name="ParentId" Type="System.String" DbType="NVarChar(50) NOT NULL" CanBeNull="false" />
+      <Column Name="ParentId" Type="System.String" DbType="NVarChar(50)" CanBeNull="true" />
       <Column Name="Sort" Type="System.String" DbType="NChar(10)" CanBeNull="true" />
       <Column Name="UpdateUser" Type="System.String" DbType="NVarChar(50)" CanBeNull="true" />
       <Column Name="UpdateDate" Type="System.DateTime" DbType="DateTime" CanBeNull="true" />
       <Column Name="CreateUser" Type="System.String" DbType="NVarChar(50)" CanBeNull="true" />
       <Column Name="CreateDate" Type="System.DateTime" DbType="DateTime" CanBeNull="true" />
+    </Type>
+  </Table>
+  <Table Name="dbo.UserInfo" Member="UserInfo">
+    <Type Name="UserInfo">
+      <Column Name="openid" Type="System.String" DbType="NVarChar(50) NOT NULL" CanBeNull="false" />
+      <Column Name="subscribe" Type="System.String" DbType="NChar(10) NOT NULL" CanBeNull="false" />
+      <Column Name="nickname" Type="System.String" DbType="NVarChar(50)" CanBeNull="true" />
+      <Column Name="sex" Type="System.String" DbType="NChar(10)" CanBeNull="true" />
+      <Column Name="city" Type="System.String" DbType="NVarChar(50)" CanBeNull="true" />
+      <Column Name="country" Type="System.String" DbType="NVarChar(50)" CanBeNull="true" />
+      <Column Name="province" Type="System.String" DbType="NVarChar(50)" CanBeNull="true" />
+      <Column Name="language" Type="System.String" DbType="NVarChar(50)" CanBeNull="true" />
+      <Column Name="headimgurl" Type="System.String" DbType="NVarChar(255)" CanBeNull="true" />
+      <Column Name="subscribe_time" Type="System.String" DbType="NVarChar(50)" CanBeNull="true" />
+      <Column Name="unionid" Type="System.String" DbType="NVarChar(50)" CanBeNull="true" />
+      <Column Name="remark" Type="System.String" DbType="NVarChar(50)" CanBeNull="true" />
+      <Column Name="groupid" Type="System.String" DbType="NVarChar(50)" CanBeNull="true" />
+    </Type>
+  </Table>
+  <Table Name="dbo.GroupInfo" Member="GroupInfo">
+    <Type Name="GroupInfo">
+      <Column Name="id" Type="System.String" DbType="NVarChar(50) NOT NULL" IsPrimaryKey="true" CanBeNull="false" />
+      <Column Name="groupId" Type="System.Int32" DbType="Int" CanBeNull="true" />
+      <Column Name="name" Type="System.String" DbType="NVarChar(50) NOT NULL" CanBeNull="false" />
+      <Column Name="count" Type="System.Int16" DbType="SmallInt" CanBeNull="true" />
+      <Column Name="IsDelete" Type="System.Int16" DbType="SmallInt NOT NULL" CanBeNull="false" />
+      <Column Name="IsUpdate" Type="System.Int16" DbType="SmallInt NOT NULL" CanBeNull="false" />
+      <Column Name="IsAdd" Type="System.Int16" DbType="SmallInt NOT NULL" CanBeNull="false" />
+      <Column Name="IsSync" Type="System.Int16" DbType="SmallInt NOT NULL" CanBeNull="false" />
     </Type>
   </Table>
 </Database>

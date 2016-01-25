@@ -54,3 +54,34 @@ function self_ajax(url, params) {
                     });
     return data;
 }
+
+//获取form所有空间数据转换为json格式;
+function getFormJson(form) {
+    var o = {};
+    var a = $(form).serializeArray();
+    $.each(a, function () {
+        if (o[this.name] !== undefined) {
+            if (!o[this.name].push) {
+                o[this.name] = [o[this.name]];
+            }
+            o[this.name].push(this.value || '');
+        } else {
+            o[this.name] = this.value || '';
+        }
+    });
+    return o;
+}
+
+function messagerShowTop(title, msg) {
+    $.messager.show({
+        title: title,
+        msg: msg,
+        showType: 'slide',
+        timeout: 3000,
+        style: {
+            right: '',
+            top: document.body.scrollTop + document.documentElement.scrollTop,
+            bottom: ''
+        }
+    });
+}
