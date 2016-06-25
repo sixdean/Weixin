@@ -24,6 +24,7 @@ namespace Weixin.BLL.Weixin
             {
                 var baseInfo = XmlSerializerHelper.XmlToObject<BaseMessage>(postStr);
                 var response = new ResponseText(baseInfo);
+                var weixin = new Weixin();
                 if (baseInfo != null)
                 {
                     //消息类型
@@ -35,39 +36,8 @@ namespace Weixin.BLL.Weixin
                         var info = XmlSerializerHelper.XmlToObject<RequestText>(postStr);
                         if (info.Content.StartsWith("天气#") && info.Content.Split('#').Count() > 1)
                         {
-                            var param = info.Content.Split('#')[1].Trim();
-                            var weatherResult = WeatherApi.Weather.GetWeatherResult(param);
-                            if (weatherResult != null && weatherResult.HeWeatherList != null &&
-                                weatherResult.HeWeatherList.Count > 0 && weatherResult.HeWeatherList[0].status == "ok")
-                            {
-                                var weather = weatherResult.HeWeatherList[0];
-                                var sb = new StringBuilder();
-                                sb.Append("地点:" + weather.basic.city + Environment.NewLine);
-                                sb.Append("当前时间:" + weather.basic.update.loc + Environment.NewLine);
-                                sb.Append("天气状况:" + weather.now.cond.txt + Environment.NewLine);
-                                sb.Append("当前温度:" + weather.now.tmp + Environment.NewLine);
-                                sb.Append("当前风向:" + weather.now.wind.dir + Environment.NewLine);
-                                sb.Append("当前风力:" + weather.now.wind.sc + Environment.NewLine);
-                                if (weather.aqi != null)
-                                {
-
-                                    sb.Append("空气质量:" + weather.aqi.city.qlty + Environment.NewLine);
-                                    sb.Append("PM2.5值:" + weather.aqi.city.pm25 + Environment.NewLine);
-                                }
-                                if (weather.suggestion != null)
-                                {
-
-                                    sb.Append("舒适度:" + weather.suggestion.comf.brf + Environment.NewLine);
-                                    sb.Append(weather.suggestion.comf.txt + Environment.NewLine);
-                                }
-                                response.Content = sb.ToString();
-                            }
-                            else
-                            {
-                                if (weatherResult != null)
-                                    if (weatherResult.HeWeatherList != null)
-                                        response.Content = "Sorry,获取天气失败:" + weatherResult.HeWeatherList[0].status + Environment.NewLine + "请重试!";
-                            }
+                            var cityName = info.Content.Split('#')[1].Trim();
+                            response.Content = weixin.ShowWeather(cityName);
                         }
                         else
                         {

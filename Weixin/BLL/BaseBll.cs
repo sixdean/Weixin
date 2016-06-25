@@ -10,37 +10,33 @@ namespace Weixin.BLL
 {
     public abstract class BaseBll<T> where T : class
     {
+        #region Merber Variables
+
+
         //数据库连接串
         private string _connectionString = string.Empty;
         // DataContext
         private WeixinDataContext _dataContext;
 
+        #endregion
 
-        /// <summary>
-        ///     构造函数
-        /// </summary>
+        #region Constructors
         public BaseBll()
         {
         }
-
-        /// <summary>
-        ///     构造函数
-        /// </summary>
-        /// <param name="dataContext"></param>
         public BaseBll(WeixinDataContext dataContext)
         {
             _dataContext = dataContext;
         }
+        #endregion
 
+        #region Property
         public string ConnectionString
         {
             get { return _connectionString; }
             set { _connectionString = value; }
         }
 
-        /// <summary>
-        ///     DataContext
-        /// </summary>
         public WeixinDataContext DataContext
         {
             get
@@ -50,7 +46,9 @@ namespace Weixin.BLL
                 return _dataContext;
             }
         }
+        #endregion
 
+        #region Methods
         public abstract T GetById(string id);
 
         public virtual IQueryable<T> GetAll()
@@ -64,7 +62,7 @@ namespace Weixin.BLL
         /// <param name="entity"></param>
         public virtual void Add(T entity)
         {
-            
+
             DataContext.GetTable<T>().InsertOnSubmit(entity);
             DataContext.SubmitChanges();
         }
@@ -109,9 +107,9 @@ namespace Weixin.BLL
             DataContext.SubmitChanges();
         }
 
-        public virtual void DeleteAll<K>() where K : class
+        public virtual void DeleteAll<TK>() where TK : class
         {
-            DataContext.ExecuteCommand(string.Format(@"delete from {0}", DataContext.GetTable<K>().Context.Mapping.GetTable(typeof(K)).TableName));
+            DataContext.ExecuteCommand(string.Format(@"delete from {0}", DataContext.GetTable<TK>().Context.Mapping.GetTable(typeof(TK)).TableName));
         }
 
         /// <summary>
@@ -144,6 +142,84 @@ namespace Weixin.BLL
         {
             return Guid.NewGuid().ToString();
         }
+        #endregion
+
+    }
+    public abstract class BaseBll
+    {
+        #region Member Variables
+        private string _connectionString = string.Empty;
+        private WeixinDataContext _dataContext;
+        #endregion
+
+        #region Constructors
+        public BaseBll()
+        {
+        }
+
+
+        public BaseBll(WeixinDataContext dataContext)
+        {
+            _dataContext = dataContext;
+        }
+        #endregion
+
+
+        #region Property
+        public string ConnectionString
+        {
+            get { return _connectionString; }
+            set { _connectionString = value; }
+        }
+
+        /// <summary>
+        ///  DataContext
+        /// </summary>
+        public WeixinDataContext DataContext
+        {
+            get
+            {
+                if (null == _dataContext)
+                    InitializeDataContext();
+                return _dataContext;
+            }
+        }
+        #endregion
+
+        #region Methods
+
+        /// <summary>
+        /// 初始化DataContext
+        /// </summary>
+        private void InitializeDataContext()
+        {
+            if (string.Empty == _connectionString)
+            {
+                if (
+                    !string.IsNullOrEmpty(ConfigurationManager.AppSettings["ConnectionString"]))
+                {
+                    ConnectionString = ConfigurationManager.AppSettings["ConnectionString"];
+                    _dataContext = new WeixinDataContext(ConnectionString);
+                }
+                else
+                {
+                    _dataContext = new WeixinDataContext();
+                }
+                //_dataContext = new WeixinDataContext("Data Source=DEAN;Initial Catalog=Weixin;Integrated Security=True");
+                //_dataContext = new WeixinDataContext("server=192.168.1.103;uid=dean;pwd=123456;database=Weixin");
+            }
+            else
+            {
+                _dataContext = new WeixinDataContext(_connectionString);
+            }
+        }
+
+        protected virtual string CreateEntityId()
+        {
+            return Guid.NewGuid().ToString();
+        }
+        #endregion
+
     }
 }
 

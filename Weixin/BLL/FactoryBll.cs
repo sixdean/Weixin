@@ -4,7 +4,7 @@
     {
         public static T Instance
         {
-            get { return new T(); }
+            get { return new T(); }      
         }
     }
 }

@@ -116,6 +116,14 @@ namespace Weixin.DAL
 				return this.GetTable<UserInfo>();
 			}
 		}
+		
+		public System.Data.Linq.Table<SysSetting> SysSetting
+		{
+			get
+			{
+				return this.GetTable<SysSetting>();
+			}
+		}
 	}
 	
 	[global::System.Data.Linq.Mapping.TableAttribute(Name="dbo.SysMenu")]
@@ -1456,6 +1464,123 @@ namespace Weixin.DAL
 			if ((this.PropertyChanged != null))
 			{
 				this.PropertyChanged(this, new PropertyChangedEventArgs(propertyName));
+			}
+		}
+	}
+	
+	[global::System.Data.Linq.Mapping.TableAttribute(Name="dbo.SysSetting")]
+	public partial class SysSetting
+	{
+		
+		private string _Id;
+		
+		private string _Name;
+		
+		private string _Value;
+		
+		private string _Type;
+		
+		private System.Nullable<short> _IsDelete;
+		
+		private System.Nullable<short> _IsUse;
+		
+		public SysSetting()
+		{
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_Id", DbType="NVarChar(50) NOT NULL", CanBeNull=false)]
+		public string Id
+		{
+			get
+			{
+				return this._Id;
+			}
+			set
+			{
+				if ((this._Id != value))
+				{
+					this._Id = value;
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_Name", DbType="NVarChar(50)")]
+		public string Name
+		{
+			get
+			{
+				return this._Name;
+			}
+			set
+			{
+				if ((this._Name != value))
+				{
+					this._Name = value;
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_Value", DbType="NVarChar(50)")]
+		public string Value
+		{
+			get
+			{
+				return this._Value;
+			}
+			set
+			{
+				if ((this._Value != value))
+				{
+					this._Value = value;
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_Type", DbType="NVarChar(50)")]
+		public string Type
+		{
+			get
+			{
+				return this._Type;
+			}
+			set
+			{
+				if ((this._Type != value))
+				{
+					this._Type = value;
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_IsDelete", DbType="SmallInt")]
+		public System.Nullable<short> IsDelete
+		{
+			get
+			{
+				return this._IsDelete;
+			}
+			set
+			{
+				if ((this._IsDelete != value))
+				{
+					this._IsDelete = value;
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_IsUse", DbType="SmallInt")]
+		public System.Nullable<short> IsUse
+		{
+			get
+			{
+				return this._IsUse;
+			}
+			set
+			{
+				if ((this._IsUse != value))
+				{
+					this._IsUse = value;
+				}
 			}
 		}
 	}

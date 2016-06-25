@@ -59,12 +59,12 @@
   </ItemGroup>
   <ItemGroup>
     <Content Include="About.aspx" />
-    <Content Include="Account\ChangePassword.aspx" />
-    <Content Include="Account\ChangePasswordSuccess.aspx" />
-    <Content Include="Account\Login.aspx" />
-    <Content Include="Account\Register.aspx" />
+    <Content Include="ChangePassword.aspx" />
+    <Content Include="Login.aspx" />
+    <Content Include="Pages\HTMLPage1.htm" />
     <Content Include="Pages\Menu.aspx" />
     <Content Include="Pages\UserInfo.aspx" />
+    <Content Include="Register.aspx" />
     <Content Include="Scripts\Common.js" />
     <Content Include="Scripts\jquery-2.2.0.js" />
     <Content Include="Scripts\jquery-2.2.0.min.js" />
@@ -3830,6 +3830,7 @@
     <Content Include="Styles\icons\jeasyui.icons.munich.js" />
     <Content Include="Styles\icons\jeasyui.icons.standard.js" />
     <Content Include="Styles\icons\jeasyui.icons.woocons.js" />
+    <Content Include="Styles\Images\login_bg.png" />
     <Content Include="Styles\Site.css" />
     <Content Include="Default.aspx" />
     <Content Include="Global.asax" />
@@ -3845,6 +3846,7 @@
     <Content Include="Web.Release.config">
       <DependentUpon>Web.config</DependentUpon>
     </Content>
+    <Content Include="WebForm1.aspx" />
   </ItemGroup>
   <ItemGroup>
     <Compile Include="About.aspx.cs">
@@ -3853,34 +3855,6 @@
     </Compile>
     <Compile Include="About.aspx.designer.cs">
       <DependentUpon>About.aspx</DependentUpon>
-    </Compile>
-    <Compile Include="Account\ChangePassword.aspx.cs">
-      <DependentUpon>ChangePassword.aspx</DependentUpon>
-      <SubType>ASPXCodeBehind</SubType>
-    </Compile>
-    <Compile Include="Account\ChangePassword.aspx.designer.cs">
-      <DependentUpon>ChangePassword.aspx</DependentUpon>
-    </Compile>
-    <Compile Include="Account\ChangePasswordSuccess.aspx.cs">
-      <DependentUpon>ChangePasswordSuccess.aspx</DependentUpon>
-      <SubType>ASPXCodeBehind</SubType>
-    </Compile>
-    <Compile Include="Account\ChangePasswordSuccess.aspx.designer.cs">
-      <DependentUpon>ChangePasswordSuccess.aspx</DependentUpon>
-    </Compile>
-    <Compile Include="Account\Login.aspx.cs">
-      <DependentUpon>Login.aspx</DependentUpon>
-      <SubType>ASPXCodeBehind</SubType>
-    </Compile>
-    <Compile Include="Account\Login.aspx.designer.cs">
-      <DependentUpon>Login.aspx</DependentUpon>
-    </Compile>
-    <Compile Include="Account\Register.aspx.cs">
-      <DependentUpon>Register.aspx</DependentUpon>
-      <SubType>ASPXCodeBehind</SubType>
-    </Compile>
-    <Compile Include="Account\Register.aspx.designer.cs">
-      <DependentUpon>Register.aspx</DependentUpon>
     </Compile>
     <Compile Include="Ashx\GetData.ashx.cs">
       <DependentUpon>GetData.ashx</DependentUpon>
@@ -3892,6 +3866,11 @@
       <DependentUpon>WeiXin.ashx</DependentUpon>
     </Compile>
     <Compile Include="BLL\BaseBll.cs" />
+    <Compile Include="BLL\Common\AjaxResultKeys.cs" />
+    <Compile Include="BLL\Common\BusinessException.cs" />
+    <Compile Include="BLL\Common\SecurityManager.cs" />
+    <Compile Include="BLL\Common\SessionKeys.cs" />
+    <Compile Include="BLL\Common\SessionManager.cs" />
     <Compile Include="BLL\FactoryBll.cs" />
     <Compile Include="BLL\GroupInfoBll.cs" />
     <Compile Include="BLL\MenuBll.cs" />
@@ -3905,6 +3884,13 @@
     <Compile Include="BLL\Common\JsonHelper.cs" />
     <Compile Include="BLL\Common\TextLogHelper.cs" />
     <Compile Include="BLL\Common\XmlSerializerHelper.cs" />
+    <Compile Include="ChangePassword.aspx.cs">
+      <DependentUpon>ChangePassword.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="ChangePassword.aspx.designer.cs">
+      <DependentUpon>ChangePassword.aspx</DependentUpon>
+    </Compile>
     <Compile Include="DAL\WeixinDB.cs">
       <DependentUpon>WeixinDB.dbml</DependentUpon>
     </Compile>
@@ -3927,10 +3913,18 @@
     <Compile Include="IWeixin\IMenuApi.cs" />
     <Compile Include="IWeixin\IUserApi.cs" />
     <Compile Include="IWeixin\IWeixinAction.cs" />
+    <Compile Include="Login.aspx.cs">
+      <DependentUpon>Login.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="Login.aspx.designer.cs">
+      <DependentUpon>Login.aspx</DependentUpon>
+    </Compile>
     <Compile Include="Model\Common\AccessToken.cs" />
     <Compile Include="Model\Common\AjaxResult.cs" />
     <Compile Include="Model\Common\BaseEntity.cs" />
     <Compile Include="Model\Common\UserInfo.cs" />
+    <Compile Include="Model\Common\UserProfiles.cs" />
     <Compile Include="Model\Enum\ButtonType.cs" />
     <Compile Include="Model\Common\ErrorJsonResult.cs" />
     <Compile Include="Model\Enum\Language.cs" />
@@ -3973,6 +3967,13 @@
       <DependentUpon>UserInfo.aspx</DependentUpon>
     </Compile>
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="Register.aspx.cs">
+      <DependentUpon>Register.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="Register.aspx.designer.cs">
+      <DependentUpon>Register.aspx</DependentUpon>
+    </Compile>
     <Compile Include="Site.Master.cs">
       <DependentUpon>Site.Master</DependentUpon>
       <SubType>ASPXCodeBehind</SubType>
@@ -3995,6 +3996,13 @@
     <Compile Include="Model\Response\ResponseText.cs" />
     <Compile Include="BLL\Weixin\Weixin.cs" />
     <Compile Include="BLL\Weixin\WeixinAction.cs" />
+    <Compile Include="WebForm1.aspx.cs">
+      <DependentUpon>WebForm1.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="WebForm1.aspx.designer.cs">
+      <DependentUpon>WebForm1.aspx</DependentUpon>
+    </Compile>
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
@@ -4003,7 +4011,6 @@
     <Folder Include="Model\System\" />
   </ItemGroup>
   <ItemGroup>
-    <Content Include="Account\Web.config" />
     <Content Include="Site.Master" />
   </ItemGroup>
   <ItemGroup>

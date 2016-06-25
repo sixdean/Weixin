@@ -9,7 +9,59 @@ namespace Weixin.BLL.Weixin
     public class Weixin
     {
 
-         WeixinDataContext wxContext=new WeixinDataContext();
+        /// <summary>
+        /// 显示天气信息
+        /// </summary>
+        /// <param name="city"></param>
+        /// <param name="cityid"></param>
+        /// <param name="cityip"></param>
+        /// <returns></returns>
+        public string ShowWeather(string city, string cityid = null, string cityip = null)
+        {
+            var result = "";
+            try
+            {
+                var weatherResult = WeatherApi.Weather.GetWeatherResult(city);
+                if (weatherResult != null && weatherResult.HeWeatherList != null &&
+                    weatherResult.HeWeatherList.Count > 0 && weatherResult.HeWeatherList[0].status == "ok")
+                {
+                    var weather = weatherResult.HeWeatherList[0];
+                    var sb = new StringBuilder();
+                    sb.Append("地点:" + weather.basic.city + Environment.NewLine);
+                    sb.Append("当前时间:" + weather.basic.update.loc + Environment.NewLine);
+                    sb.Append("天气状况:" + weather.now.cond.txt + Environment.NewLine);
+                    sb.Append("当前温度:" + weather.now.tmp + Environment.NewLine);
+                    sb.Append("当前风向:" + weather.now.wind.dir + Environment.NewLine);
+                    sb.Append("当前风力:" + weather.now.wind.sc + Environment.NewLine);
+                    if (weather.aqi != null)
+                    {
+
+                        sb.Append("空气质量:" + weather.aqi.city.qlty + Environment.NewLine);
+                        sb.Append("PM2.5值:" + weather.aqi.city.pm25 + Environment.NewLine);
+                    }
+                    if (weather.suggestion != null)
+                    {
+
+                        sb.Append("舒适度:" + weather.suggestion.comf.brf + Environment.NewLine);
+                        sb.Append(weather.suggestion.comf.txt + Environment.NewLine);
+                    }
+                    result = sb.ToString();
+
+                }
+                else
+                {
+                    if (weatherResult != null)
+                        if (weatherResult.HeWeatherList != null)
+                            result = "Sorry,获取天气失败:" + weatherResult.HeWeatherList[0].status + Environment.NewLine + "请重试!";
+                }
+            }
+            catch (Exception e)
+            {
+
+                result = e.Message;
+            }
+            return result;
+        }
 
 
         ///// <summary>
@@ -78,45 +130,45 @@ namespace Weixin.BLL.Weixin
         //    return ToJsonContent(result);
         //}
 
-         /// <summary>
-         /// 生成微信菜单的Json数据
-         /// </summary>
-         /// <returns></returns>
-         //private MenuListJson GetWeixinMenu()
-         //{
-         //    MenuListJson menuJson = new MenuListJson();
+        /// <summary>
+        /// 生成微信菜单的Json数据
+        /// </summary>
+        /// <returns></returns>
+        //private MenuListJson GetWeixinMenu()
+        //{
+        //    MenuListJson menuJson = new MenuListJson();
 
-         //    List<MenuNodeInfo> menuList = BLLFactory<Menu>.Instance.GetTree();
-         //    foreach (MenuNodeInfo info in menuList)
-         //    {
-         //        ButtonType type = (info.Type == "click") ? ButtonType.click : ButtonType.view;
-         //        string value = (type == ButtonType.click) ? info.Key : info.Url;
+        //    List<MenuNodeInfo> menuList = BLLFactory<Menu>.Instance.GetTree();
+        //    foreach (MenuNodeInfo info in menuList)
+        //    {
+        //        ButtonType type = (info.Type == "click") ? ButtonType.click : ButtonType.view;
+        //        string value = (type == ButtonType.click) ? info.Key : info.Url;
 
-         //        MenuJson weiInfo = new MenuJson(info.Name, type, value);
-         //        AddSubMenuButton(weiInfo, info.Children);
+        //        MenuJson weiInfo = new MenuJson(info.Name, type, value);
+        //        AddSubMenuButton(weiInfo, info.Children);
 
-         //        menuJson.button.Add(weiInfo);
-         //    }
-         //    return menuJson;
-         //}
+        //        menuJson.button.Add(weiInfo);
+        //    }
+        //    return menuJson;
+        //}
 
-         //private void AddSubMenuButton(MenuJson menu, List<MenuNodeInfo> menuList)
-         //{
-         //    if (menuList.Count > 0)
-         //    {
-         //        menu.sub_button = new List<MenuJson>();
-         //    }
-         //    foreach (MenuNodeInfo info in menuList)
-         //    {
-         //        ButtonType type = (info.Type == "click") ? ButtonType.click : ButtonType.view;
-         //        string value = (type == ButtonType.click) ? info.Key : info.Url;
+        //private void AddSubMenuButton(MenuJson menu, List<MenuNodeInfo> menuList)
+        //{
+        //    if (menuList.Count > 0)
+        //    {
+        //        menu.sub_button = new List<MenuJson>();
+        //    }
+        //    foreach (MenuNodeInfo info in menuList)
+        //    {
+        //        ButtonType type = (info.Type == "click") ? ButtonType.click : ButtonType.view;
+        //        string value = (type == ButtonType.click) ? info.Key : info.Url;
 
-         //        MenuJson weiInfo = new MenuJson(info.Name, type, value);
-         //        menu.sub_button.Add(weiInfo);
+        //        MenuJson weiInfo = new MenuJson(info.Name, type, value);
+        //        menu.sub_button.Add(weiInfo);
 
-         //        AddSubMenuButton(weiInfo, info.Children);
-         //    }
-         //}
+        //        AddSubMenuButton(weiInfo, info.Children);
+        //    }
+        //}
 
 
         ///// <summary>
@@ -325,7 +377,7 @@ namespace Weixin.BLL.Weixin
                 return string.Empty;
             }
         }
-        
+
         //public string GetPage(string posturl)
         //{
         //    Stream instream = null;
@@ -362,20 +414,20 @@ namespace Weixin.BLL.Weixin
         //}
 
 
-//        using System.IO;      日志功能
+        //        using System.IO;      日志功能
 
- 
 
-//NorthwindDataContext ctx = new NorthwindDataContext("server=xxx;database=Northwind;uid=xxx;pwd=xxx");
 
-//StreamWriter sw = new StreamWriter(Server.MapPath("log.txt"), true); // Append
+        //NorthwindDataContext ctx = new NorthwindDataContext("server=xxx;database=Northwind;uid=xxx;pwd=xxx");
 
-//ctx.Log = sw;
+        //StreamWriter sw = new StreamWriter(Server.MapPath("log.txt"), true); // Append
 
-//GridView1.DataSource = from c in ctx.Customers where c.CustomerID.StartsWith("A") select new { 顾客ID = c.CustomerID, 顾客名 = c.Name, 城市 = c.City };
+        //ctx.Log = sw;
 
-//GridView1.DataBind();
+        //GridView1.DataSource = from c in ctx.Customers where c.CustomerID.StartsWith("A") select new { 顾客ID = c.CustomerID, 顾客名 = c.Name, 城市 = c.City };
 
-//sw.Close();
+        //GridView1.DataBind();
+
+        //sw.Close();
     }
 }

@@ -1,5 +1,5 @@
 ﻿<%@ Page Title="主页" Language="C#" MasterPageFile="~/Site.master" AutoEventWireup="true"
-    CodeBehind="Default.aspx.cs" Inherits="Weixin._Default" %>
+    CodeBehind="Default.aspx.cs" Inherits="Weixin.Default" %>
 
 <asp:Content ID="HeaderContent" runat="server" ContentPlaceHolderID="HeadContent">
 </asp:Content>

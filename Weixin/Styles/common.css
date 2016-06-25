@@ -145,7 +145,7 @@ a:link, a:visited
 {
     clear: both;
 }
- 
+
 .btn_a:link, .btn_a:visited
 {
     display: inline-block;
@@ -221,6 +221,48 @@ a:link, a:visited
 {
     border: 1px outset #ABD275;
 }
-.dataGrid {
-	BORDER-BOTTOM: #c8dbf8 1px solid; BORDER-LEFT: #c8dbf8 1px solid; MARGIN-BOTTOM: 5px; OVERFLOW: hidden; BORDER-TOP: #c8dbf8 1px solid; BORDER-RIGHT: #c8dbf8 1px solid
+.dataGrid
+{
+    border-bottom: #c8dbf8 1px solid;
+    border-left: #c8dbf8 1px solid;
+    margin-bottom: 5px;
+    overflow: hidden;
+    border-top: #c8dbf8 1px solid;
+    border-right: #c8dbf8 1px solid;
+}
+
+.color_bg
+{
+    background: #f4f4f4;
+}
+.login_center
+{
+    width: 1000px;
+    margin: 0 auto;
+}
+.login_bg
+{
+    background: #f4f4f4 url('Images/login_bg.png') no-repeat top center;
+}
+.loginin
+{
+    width: 1000px;
+    height: 600px;
+    margin-left: 40px;
+    margin-top: 120px;
+}
+
+.color_cdcdcd
+{
+    color: #cdcdcd;
+}
+.username_input
+{
+    width: 250px;
+    height: 30px;
+    line-height: 30px;
+    border: 0px solid #dedede;
+    padding: 0px 15px;
+    margin: 168px 0px 0px 349px;
+    *margin: 168px 0px 0px 309px;
 }

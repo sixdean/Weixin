@@ -68,4 +68,14 @@
       <Column Name="groupid" Type="System.String" DbType="NVarChar(50)" CanBeNull="true" />
     </Type>
   </Table>
+  <Table Name="dbo.SysSetting" Member="SysSetting">
+    <Type Name="SysSetting">
+      <Column Name="Id" Type="System.String" DbType="NVarChar(50) NOT NULL" CanBeNull="false" />
+      <Column Name="Name" Type="System.String" DbType="NVarChar(50)" CanBeNull="true" />
+      <Column Name="Value" Type="System.String" DbType="NVarChar(50)" CanBeNull="true" />
+      <Column Name="Type" Type="System.String" DbType="NVarChar(50)" CanBeNull="true" />
+      <Column Name="IsDelete" Type="System.Int16" DbType="SmallInt" CanBeNull="true" />
+      <Column Name="IsUse" Type="System.Int16" DbType="SmallInt" CanBeNull="true" />
+    </Type>
+  </Table>
 </Database>

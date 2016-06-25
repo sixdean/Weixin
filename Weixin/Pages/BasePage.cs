@@ -1,6 +1,8 @@
 ﻿using System.Configuration;
 using System.Runtime.Caching;
 using System.Web.UI;
+using Weixin.BLL.Common;
+using Weixin.Model.Common;
 
 namespace Weixin.Pages
 {
@@ -22,6 +24,14 @@ namespace Weixin.Pages
             }
         }
 
+        public UserProfiles CurUserProfiles
+        {
+            get
+            {
+                SessionManager sm = new SessionManager();
+                return sm.CurUserProfiles;
+            }
+        }
 
 
     }

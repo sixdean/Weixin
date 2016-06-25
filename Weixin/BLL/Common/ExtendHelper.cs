@@ -30,5 +30,15 @@ namespace Weixin.BLL.Common
         {
             return Convert.ToInt32((date.ToUniversalTime().Ticks - 621355968000000000) / 10000000);
         }
+
+        /// <summary>
+        /// md5加密
+        /// </summary>
+        /// <param name="str"></param>
+        /// <returns></returns>
+        public static string Md5(this string str)
+        {
+            return System.Web.Security.FormsAuthentication.HashPasswordForStoringInConfigFile(str, "MD5");
+        }
     }
 }

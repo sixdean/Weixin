@@ -25,9 +25,59 @@ namespace ConTest
         {
             try
             {
-                var obj = WeatherApi.Weather.GetWeather("beijing");
-                obj = obj.Replace("HeWeather data service 3.0", "HeWeatherList");
-                var ss = JsonConvert.DeserializeObject(obj, typeof(WeatherModel.HeWeatherResult)) as WeatherModel.HeWeatherResult;
+                var url =
+                    "https://api.weixin.qq.com/cgi-bin/message/template/send?access_token=bUNnQJss_KdtrGvtsQnly27zATLOVSlydBLf4ybU9GbaBXR6ZSq43XegA05YVnxIl3rub6ar01GDi0VisBRl_6jf2gFyc5TfB2h8Ngw5iUETNRhAJANHL";
+                var postdata = new
+                {
+                    template_id_short = "TM00015"
+                };
+                var dd = new
+                {
+                    touser = "o9WULuDOA1s5S9dagWTvLpeit4aY",
+                    template_id = "SiTMK79C3UZQnSmz7dSsqXnkyrCD1jxsq_ao4JKYEH0",
+                    url = "http://wang494014418.6655.la/Pages/HTMLPage1.htm",
+                    data = new
+                    {
+                        first = new
+                        {
+                            value = "天气情况",
+                            color = "#173177"
+                        },
+                        city = new
+                        {
+                            value = "深圳",
+                            color = "#173177"
+                        },
+                        txt = new
+                        {
+                            value = "不错",
+                            color = "#173177"
+                        },
+                        loc = new
+                        {
+                            value = DateTime.Now.ToString(),
+                            color = "#173177"
+                        },
+                        tmp = new
+                        {
+                            value = "6",
+                            color = "#173177"
+                        },
+                        dir = new
+                        {
+                            value = "北",
+                            color = "#173177"
+                        },
+                        sc = new
+                        {
+                            value = "4-5",
+                            color = "#173177"
+                        }
+                    }
+                };
+                var d = dd.ToJson();
+                var s = Helper.GetExecuteResult(url, d);
+
             }
             catch (Exception e)
             {

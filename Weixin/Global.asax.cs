@@ -13,24 +13,27 @@ namespace Weixin
         void Application_Start(object sender, EventArgs e)
         {
             // 在应用程序启动时运行的代码
-
+            var aa = "";
         }
 
         void Application_End(object sender, EventArgs e)
         {
             //  在应用程序关闭时运行的代码
+            var aa = "";
 
         }
 
         void Application_Error(object sender, EventArgs e)
         {
             // 在出现未处理的错误时运行的代码
+            var aa = Server.GetLastError();
 
         }
 
         void Session_Start(object sender, EventArgs e)
         {
             // 在新会话启动时运行的代码
+            var aa = "";
 
         }
 

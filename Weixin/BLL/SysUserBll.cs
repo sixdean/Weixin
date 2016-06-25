@@ -2,6 +2,7 @@
 using System.Linq;
 using System.Web.Configuration;
 using System.Web.Security;
+using Weixin.BLL.Common;
 using Weixin.DAL;
 
 namespace Weixin.BLL
@@ -23,20 +24,23 @@ namespace Weixin.BLL
             Add(sysUser);
         }
 
-        public bool CheckLogin(string name, string passWord)
+        public bool CheckUserId(string userId)
+        {
+            return DataContext.SysUser.Any(s => s.UserId == userId);
+        }
+        public bool CheckLogin(string userId, string passWord)
         {
             return
                 DataContext.SysUser.Any(
                     s =>
-                        s.Name == name &&
-                        s.Password ==
-                        FormsAuthentication.HashPasswordForStoringInConfigFile(passWord, FormsAuthPasswordFormat.MD5.ToString()));
+                        s.UserId == userId &&
+                        s.Password == passWord.Md5());
         }
         #endregion
         #region 私有
 
         #endregion
 
-       
+
     }
 }
